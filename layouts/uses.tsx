@@ -15,7 +15,7 @@ export default function UsesLayout({ children }) {
           Most of these have been accumulated over the past few years, with a
           recent office upgrade in 2020.
         </p>
-        <div className="prose dark:prose-dark w-full">{children}</div>
+        <div className="prose dark:prose-invert w-full">{children}</div>
       </article>
     </Container>
   );

@@ -10,11 +10,9 @@
   },
   "dependencies": {
     "@prisma/client": "^3.6.0",
-    "@tailwindcss/typography": "0.5.0",
     "big.js": "6.1.1",
     "contentlayer": "^0.0.33",
     "date-fns": "2.27.0",
-    "fathom-client": "3.2.0",
     "googleapis": "48.0.0",
     "motion": "^10.4.0",
     "next": "^12.0.7",
@@ -24,18 +22,18 @@
     "preact": "10.5.15",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "swr": "1.1.0",
-    "tailwindcss": "3.0.0",
+    "swr": "1.1.2-beta.0",
     "unsplash-js": "6.3.0",
     "use-delayed-render": "^0.0.7"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.0",
     "@types/react": "^17.0.37",
     "autoprefixer": "10.4.0",
     "eslint": "8.4.1",
     "eslint-config-next": "^12.0.7",
     "globby": "12.0.2",
-    "postcss": "^8.4.4",
+    "postcss": "^8.4.5",
     "prettier": "2.5.1",
     "prisma": "3.6.0",
     "reading-time": "^1.4.0",
@@ -46,7 +44,8 @@
     "rehype-slug": "5.0.0",
     "remark-gfm": "^3.0.1",
     "rss": "1.2.2",
-    "typescript": "^4.5.2"
+    "tailwindcss": "^3.0.7",
+    "typescript": "^4.5.4"
   },
   "resolutions": {
     "preact": "10.5.15"

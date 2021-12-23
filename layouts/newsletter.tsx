@@ -39,7 +39,7 @@ export default function NewsletterLayout({
             {newsletter.readingTime.text}
           </p>
         </div>
-        <div className="w-full prose dark:prose-dark">{children}</div>
+        <div className="w-full prose dark:prose-invert">{children}</div>
         <div className="mt-8">
           <Subscribe />
         </div>

@@ -23,7 +23,7 @@ export default function Newsletter({ newsletters }) {
         <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
           Archive
         </h3>
-        <div className="prose dark:prose-dark">
+        <div className="prose dark:prose-invert">
           <ul>
             {newsletters
               .sort(
