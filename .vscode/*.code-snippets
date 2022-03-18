@@ -1,0 +1,21 @@
+{
+  "day file scaffold": {
+    "prefix": [
+      "newpost",
+    ],
+    "body": [
+      "---",
+      "title: '${1:title}'",
+      "publishedAt: '$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE'",
+      "summary: '${2:summary}'",
+      "image: '/static/images/$TM_FILENAME_BASE/banner.png'",
+      "category: '${3|Flutter,Raspberry Pi,Xamarin|}'",
+      "---",
+      "",
+      "${4:content}",
+      "",
+
+    ],
+    "description": "new blog post"
+  },
+}

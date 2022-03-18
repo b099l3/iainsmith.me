@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/fonts/ibm-plex-sans-var.woff2",
+      "source": "/fonts/VictorMono-Regular.woff2",
       "headers": [
         {
           "key": "Cache-Control",
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/fonts/ibm-plex-sans-var-italic.woff2",
+      "source": "/fonts/Outfit-VariableFont_wght.ttf",
       "headers": [
         {
           "key": "Cache-Control",
@@ -23,7 +23,7 @@
   ],
   "redirects": [
     {
-      "source": "/LeeRobinson.pdf",
+      "source": "/IainSmith.pdf",
       "destination": "/robinson-resume-2019.pdf"
     },
     {
@@ -37,18 +37,6 @@
     {
       "source": "/projects",
       "destination": "/about"
-    },
-    {
-      "source": "/blog/now-env-variables-size-limit",
-      "destination": "/blog/vercel-env-variables-size-limit"
-    },
-    {
-      "source": "/blog/going-serverless-next-firebase-now",
-      "destination": "/blog/nextjs-firebase-serverless"
-    },
-    {
-      "source": "/blog/my-essential-software-hardware-list",
-      "destination": "/uses"
     },
     {
       "source": "/blog/vercel-env-variables-size-limit",
@@ -69,6 +57,22 @@
     {
       "source": "/live",
       "destination": "https://www.youtube.com/channel/UCZMli3czZnd1uoc1ShTouQw/live"
+    },
+    {
+      "source": "/linkedin",
+      "destination": "https://www.linkedin.com/in/iainsmithmobile/"
+    },
+    {
+      "source": "/stackoverflow",
+      "destination": "https://stackoverflow.com/users/1107580/iain-smith"
+    },
+    {
+      "source": "/github",
+      "destination": "https://github.com/b099l3"
+    },
+    {
+      "source": "/strava",
+      "destination": "https://www.strava.com/athletes/23360470"
     }
   ]
 }

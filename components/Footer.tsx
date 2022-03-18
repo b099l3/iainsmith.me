@@ -1,6 +1,6 @@
+import NowPlaying from 'components/NowPlaying';
 import Link from 'next/link';
 
-import NowPlaying from 'components/NowPlaying';
 
 const ExternalLink = ({ href, children }) => (
   <a
@@ -35,22 +35,17 @@ export default function Footer() {
           </Link>
         </div>
         <div className="flex flex-col space-y-4">
-          <ExternalLink href="https://twitter.com/leeerob">
+          <ExternalLink href="https://twitter.com/b099l3">
             Twitter
           </ExternalLink>
-          <ExternalLink href="https://github.com/leerob">GitHub</ExternalLink>
-          <ExternalLink href="https://www.youtube.com/channel/UCZMli3czZnd1uoc1ShTouQw">
-            YouTube
+          <ExternalLink href="https://github.com/b099l3">GitHub</ExternalLink>
+          <ExternalLink href="https://stackoverflow.com/users/1107580/iain-smith">
+            StackOverflow
           </ExternalLink>
         </div>
         <div className="flex flex-col space-y-4">
           <Link href="/uses">
-            <a className="text-gray-500 hover:text-gray-600 transition">Uses</a>
-          </Link>
-          <Link href="/guestbook">
-            <a className="text-gray-500 hover:text-gray-600 transition">
-              Guestbook
-            </a>
+            <a className="text-gray-500 hover:text-gray-600 transition">Setup</a>
           </Link>
           <Link href="/snippets">
             <a className="text-gray-500 hover:text-gray-600 transition">

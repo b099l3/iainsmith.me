@@ -1,11 +1,13 @@
-import Link from 'next/link';
-import useSWR from 'swr';
 import cn from 'classnames';
-
 import fetcher from 'lib/fetcher';
 import { Views } from 'lib/types';
+import Link from 'next/link';
+import useSWR from 'swr';
+import Category from './Category';
 
-export default function BlogPostCard({ title, slug, gradient }) {
+
+
+export default function BlogPostCard({ title, category, slug, gradient }) {
   const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
   const views = data?.total;
 
@@ -23,6 +25,10 @@ export default function BlogPostCard({ title, slug, gradient }) {
             <h4 className="text-lg md:text-lg font-medium mb-6 sm:mb-10 w-full text-gray-900 dark:text-gray-100 tracking-tight">
               {title}
             </h4>
+          </div>
+          <div className="flex flex-col justify-between">
+          <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
+          <Category category={category}/>
           </div>
           <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
             <svg
@@ -49,6 +55,7 @@ export default function BlogPostCard({ title, slug, gradient }) {
               {views ? new Number(views).toLocaleString() : '–––'}
             </span>
           </div>
+        </div>
         </div>
       </a>
     </Link>

@@ -1,0 +1,71 @@
+---
+title: 'Flutter Hackathon #Hack20'
+publishedAt: '2020-07-17'
+summary: 'Julio, Rich and I took part in this year''s Flutter Hackathon, #Hack20. Here is a recap of the event and the app we submitted.'
+image: '/static/images/flutter-hackathon-hack20/banner.png'
+category: 'Flutter'
+---
+
+## What is #Hack20?
+\#Hack20 took place on June 27th-28th this year and was the second [Flutter Hackathon](https://flutterhackathon.com) organised by the Community. Previous years had seen local Flutter communities hosting events to take part, but due to COVID-19, the hackathon was all online. As part of the new format, the organisers hosted [six live stream sessions](https://www.youtube.com/playlist?list=PL4dBIh1xps-H4J3js_id4fnM8BcDqaRcV) ranging from tutorials, Q&As and ceremonies. The first session was the opening ceremony, detailing the rules of the hackathon. Teams had the choice of two topics:
+- 🌎 Saving the planet/Eco/Pandemic
+- 👾 Retro/Cyberpunk future
+
+After a Team had selected a theme, they had the weekend to build and submit a Flutter app. Voting commenced the following week. The top 20 were announced on Friday 3rd of July.
+
+My Team consisted of myself and two of my friends/work colleagues: [Rich Kinsella](https://twitter.com/RKTypeDesign) and [Julio Ernesto Rodríguez Cabañas](https://twitter.com/ernestoyaquello). Before we started, we selected the Cyberpunk theme and came up with a rough idea:
+
+>"A puzzle game where you are a cyberpunk trying to bring down the government... or something."
+
+With this, we then started to brainstorm some ideas.
+
+## 🧠 Brainstorming
+![header](https://iainsmith.me/content/images/2020/07/header.jpg)
+
+Julio and I have been playing [Shenzhen I/O](http://www.zachtronics.com/shenzhen-io/) for a couple of weeks and liked solving electronic puzzles. We thought we could make a similar game. After some deliberation, we decided that a Shenzhen clone was too ambitious for a weekend and simplified the approach to a game with logic gates. Here is one of the initial designs:
+
+![53a254dd-9f34-4826-b592-fd3ca1bd39d2](https://iainsmith.me/content/images/2020/07/53a254dd-9f34-4826-b592-fd3ca1bd39d2.jpg)
+
+This idea was further developed into only using [NAND logic](https://en.wikipedia.org/wiki/NAND_logic) to solve the problems. Then we started to realise, there would be issues with the inputs on the logic gates, i.e. What side of the square would be input or output? You can see from the image above the input is on the bottom and output on the left.
+
+As Julio and I were coming up with more absurd ideas on how this would work, Rich mentioned how this idea reminded him of the [Spiderman hacking game](https://youtu.be/5MRiYFL6Kxk):
+
+![idea2](https://iainsmith.me/content/images/2020/07/idea2.png)
+
+Inspired by the simplicity of this game, we decided to switch to only arithmetic operations. This solved a lot of our implementation issues, as we would only have one input, operation and output per component. It also solved another problem we had, of connecting the blocks, by using connector blocks to create the circuit.
+
+![e2c8cf8b-d03d-49fa-b138-bb90ddf9ecb0](https://iainsmith.me/content/images/2020/07/e2c8cf8b-d03d-49fa-b138-bb90ddf9ecb0.jpg)
+
+With this idea, we had a solid plan and started to look at the coding side, while Rich worked on the design.
+
+## 🤓 Hacking Time!
+![2020-07-14-13_25_54-Window](https://iainsmith.me/content/images/2020/07/2020-07-14-13_25_54-Window.png)
+
+We decided that we could save a lot of time if we found a game engine that integrated nicely with Flutter. I had heard about [Flame](https://github.com/flame-engine/flame) but didn't know enough about it. We decided, if Flame could meet these criteria, then we would use it:
+- Gesture support - Drag and Drop
+- Audio support - sound effects and looping background music
+- Integration with Flutter components - Buttons, etc outside of the engine
+- Animation support - Rive or simple animations
+
+After some research we came across [tutorials](https://jap.alekhin.io/setup-widget-tree-flame-flutter-game) from [JapAlekhin](https://jap.alekhin.io/) - they are amazing. One of the tutorial's conclusions highlighted how easy it was going to be to integrate with Flutter.
+
+>"Based on my experience developing games using Flame and Flutter, I have found out that having a regular widget tree in a game is generally good practice.
+>
+>Buttons, text, dialog boxes, text input, and other UI elements become significantly easier to create.
+>
+>There’s no set-back on performance and the only thing tricky to set up is the communication between the game and the UI class." 
+>\- [**Japa Alekhin Llemos**](https://jap.alekhin.io/setup-widget-tree-flame-flutter-game)
+
+Other research involved looking at open source Flame games, e.g. [BGUG](https://github.com/fireslime/bgug). We managed to check off all the criteria we needed to push on with Flame as our chosen engine.
+
+Julio had created a script, which can find [here](https://github.com/Float-like-a-dash-Sting-like-a-dart/GhostRigger/blob/master/ghost_rigger/Script.txt), which allowed us to divide the work in such a way that we never had conflicts or overlapping tasks, i.e., 
+- Rich - Design, video and descriptions
+- Julio - Wireframes, Flame and puzzle design
+- Iain - Flutter navigation/screens, communication between Flutter and Flame, Voiceover, Music.
+
+This allowed us to be very efficient, another key to our success.
+
+We also had to consider text scrolling, to display some of the dialogue in the game. We found the package [Animated Text Kit](https://pub.dev/packages/animated_text_kit) but it didn't quite work the way we wanted. We modified the original "Typewriter" to allow for multi-lines and delays between the lines.
+
+While this was going on, Rich had finished the designs, even a couple of different options on some screens! The game was starting to take shape:
+

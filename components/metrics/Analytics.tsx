@@ -1,14 +1,14 @@
-import useSWR from 'swr';
-
+import MetricCard from 'components/metrics/Card';
 import fetcher from 'lib/fetcher';
 import { Views } from 'lib/types';
-import MetricCard from 'components/metrics/Card';
+import useSWR from 'swr';
+
 
 export default function AnalyticsCard() {
   const { data } = useSWR<Views>('/api/views', fetcher);
 
   const pageViews = new Number(data?.total);
-  const link = 'https://leerob.io';
+  const link = 'https://iainsmith.me';
 
   return (
     <MetricCard

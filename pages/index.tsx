@@ -1,67 +1,63 @@
-import Image from 'next/image';
 import Link from 'next/link';
-
-import Container from '../components/Container';
 import BlogPostCard from '../components/BlogPostCard';
+import Container from '../components/Container';
+import ImageWithTheme from '../components/ImageWithTheme';
 import Subscribe from '../components/Subscribe';
-import VideoCard from '../components/VideoCard';
+
 
 export default function Home({ videos }) {
   return (
     <Container>
-      <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16">
-        <div className="flex flex-col-reverse sm:flex-row items-start">
+      <div className="flex flex-col items-start justify-center max-w-2xl pb-16 mx-auto border-gray-200 dark:border-gray-700">
+        <div className="flex flex-col-reverse items-start sm:flex-row">
           <div className="flex flex-col pr-8">
-            <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-1 text-black dark:text-white">
-              Lee Robinson
-            </h1>
-            <h2 className="text-gray-700 dark:text-gray-200 mb-4">
-              Director of Developer Relations at{' '}
-              <span className="font-semibold">Vercel</span>
+          <ImageWithTheme
+            alt={`Iain Smith`}
+            light={`/logo-light.svg`}
+            dark={`/logo-dark.svg`}
+            width={1627 / 2}
+            height={700 / 2}
+          />
+
+        <h2 className="mb-12 tracking-tight text-center text-black text-l md:text-xl dark:text-white">
+            Helping developers build apps efficiently. 
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-16">
-              Helping developers build a faster web. Teaching about web
-              development, serverless, and React / Next.js.
-            </p>
-          </div>
-          <div className="w-[80px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto">
-            <Image
-              alt="Lee Robinson"
-              height={176}
-              width={176}
-              src="/avatar.jpg"
-              className="rounded-full filter grayscale"
-            />
           </div>
         </div>
-        <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
+        <h3 className="mb-3 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
           Featured Posts
         </h3>
-        <div className="flex gap-6 flex-col md:flex-row">
+        <h2 className="tracking-tight text-black mb-9 text-l md:text-xl dark:text-white">
+            Blogging about mobile development, productivity, and Flutter.
+            </h2>
+        <div className="flex flex-col gap-6 md:flex-row">
           <BlogPostCard
             title="Everything I Know About Style Guides, Design Systems, and Component Libraries"
+            category="Flutter"
             slug="style-guides-component-libraries-design-systems"
             gradient="from-[#D8B4FE] to-[#818CF8]"
           />
           <BlogPostCard
             title="Rust Is The Future of JavaScript Infrastructure"
+            category="Flutter"
             slug="rust"
             gradient="from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"
           />
           <BlogPostCard
             title="Past, Present, and Future of React State Management"
+            category="Flutter"
             slug="react-state-management"
             gradient="from-[#FDE68A] via-[#FCA5A5] to-[#FECACA]"
           />
         </div>
         <Link href="/blog">
-          <a className="flex mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
+          <a className="flex h-6 mt-8 leading-7 text-gray-600 transition-all rounded-lg dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
             Read all posts
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="h-6 w-6 ml-1"
+              className="w-6 h-6 ml-1"
             >
               <path
                 stroke="currentColor"
@@ -73,10 +69,10 @@ export default function Home({ videos }) {
             </svg>
           </a>
         </Link>
-        <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+        {/* <h3 className="mt-16 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
           Learn React & Next.js
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="mb-4 text-gray-600 dark:text-gray-400">
           Build and deploy a modern SaaS application using the most popular
           open-source software. This course is 12 hours long and is completely
           live streamed.
@@ -109,14 +105,14 @@ export default function Home({ videos }) {
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.youtube.com/playlist?list=PL6bwFJ82M6FXgctyoWXqj7H0GK8_YIeF1"
-          className="flex mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6"
+          className="flex h-6 mt-8 leading-7 text-gray-600 transition-all rounded-lg dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
         >
           Watch all videos
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            className="h-6 w-6 ml-1"
+            className="w-6 h-6 ml-1"
           >
             <path
               stroke="currentColor"
@@ -126,7 +122,7 @@ export default function Home({ videos }) {
               d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
             />
           </svg>
-        </a>
+        </a> */}
         <span className="h-16" />
         <Subscribe />
       </div>

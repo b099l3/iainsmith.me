@@ -1,17 +1,18 @@
-import Image from 'next/image';
-import { parseISO, format } from 'date-fns';
-
+import Category from 'components/Category';
 import Container from 'components/Container';
 import Subscribe from 'components/Subscribe';
 import ViewCounter from 'components/ViewCounter';
-import type { PropsWithChildren } from 'react';
 import type { Blog } from 'contentlayer/generated';
+import { format, parseISO } from 'date-fns';
+import Image from 'next/image';
+import type { PropsWithChildren } from 'react';
+
 
 const editUrl = (slug) =>
-  `https://github.com/leerob/leerob.io/edit/main/data/blog/${slug}.mdx`;
+  `https://github.com/b099l3/iainsmith.me/edit/main/data/blog/${slug}.mdx`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://leerob.io/blog/${slug}`
+    `https://iainsmith.me/blog/${slug}`
   )}`;
 
 export default function BlogLayout({
@@ -20,9 +21,10 @@ export default function BlogLayout({
 }: PropsWithChildren<{ post: Blog }>) {
   return (
     <Container
-      title={`${post.title} – Lee Robinson`}
+      title={`${post.title} – Iain Smith`}
+      category={post.category}
       description={post.summary}
-      image={`https://leerob.io${post.image}`}
+      image={`https://iainsmith.me${post.image}`}
       date={new Date(post.publishedAt).toISOString()}
       type="article"
     >
@@ -30,17 +32,18 @@ export default function BlogLayout({
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           {post.title}
         </h1>
+        <Category category={post.category}/>
         <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center">
           <div className="flex items-center">
             <Image
-              alt="Lee Robinson"
+              alt="Iain Smith"
               height={24}
               width={24}
               src="/avatar.jpg"
               className="rounded-full"
             />
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {'Lee Robinson / '}
+              {'Iain Smith / '}
               {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
             </p>
           </div>
@@ -53,7 +56,7 @@ export default function BlogLayout({
         <div className="w-full mt-4 prose dark:prose-dark max-w-none">
           {children}
         </div>
-        <div className="mt-8">
+        <div className="w-full mt-8">
           <Subscribe />
         </div>
         <div className="text-sm text-gray-700 dark:text-gray-300">
@@ -64,7 +67,7 @@ export default function BlogLayout({
           >
             {'Discuss on Twitter'}
           </a>
-          {` • `}
+          {`  🍻  `}
           <a
             href={editUrl(post.slug)}
             target="_blank"

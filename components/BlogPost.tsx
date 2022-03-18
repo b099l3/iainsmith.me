@@ -1,15 +1,17 @@
-import Link from 'next/link';
-import useSWR from 'swr';
-
+import type { Blog } from 'contentlayer/generated';
 import fetcher from 'lib/fetcher';
 import { Views } from 'lib/types';
-import type { Blog } from 'contentlayer/generated';
+import Link from 'next/link';
+import useSWR from 'swr';
+import Category from './Category';
+
 
 export default function BlogPost({
   title,
+  category,
   summary,
   slug
-}: Pick<Blog, 'title' | 'summary' | 'slug'>) {
+}: Pick<Blog, 'title' | 'category' | 'summary' | 'slug'>) {
   const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
   const views = data?.total;
 
@@ -25,6 +27,7 @@ export default function BlogPost({
               {`${views ? new Number(views).toLocaleString() : '–––'} views`}
             </p>
           </div>
+          <Category category={category}/>
           <p className="text-gray-600 dark:text-gray-400">{summary}</p>
         </div>
       </a>

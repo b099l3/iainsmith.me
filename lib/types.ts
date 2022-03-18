@@ -42,6 +42,15 @@ export type YouTube = {
   viewCount: number;
 };
 
+export type Strava = {
+  recentRuns: number;
+  recentDistance: number;
+  ytdRuns: number;
+  ytdDistance: number;
+  totalRuns: number;
+  totalDistance: number;
+};
+
 export type GitHub = {
   stars: number;
 };

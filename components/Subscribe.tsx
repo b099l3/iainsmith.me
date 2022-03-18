@@ -1,13 +1,13 @@
-import { useState, useRef } from 'react';
-import Link from 'next/link';
-import useSWR from 'swr';
-import { trackGoal } from 'fathom-client';
-
-import fetcher from 'lib/fetcher';
-import { Form, FormState, Subscribers } from 'lib/types';
-import SuccessMessage from 'components/SuccessMessage';
 import ErrorMessage from 'components/ErrorMessage';
 import LoadingSpinner from 'components/LoadingSpinner';
+import SuccessMessage from 'components/SuccessMessage';
+import fetcher from 'lib/fetcher';
+import { event } from 'lib/gtag';
+import { Form, FormState, Subscribers } from 'lib/types';
+import Link from 'next/link';
+import { useRef, useState } from 'react';
+import useSWR from 'swr';
+
 
 export default function Subscribe() {
   const [form, setForm] = useState<FormState>({ state: Form.Initial });
@@ -38,7 +38,12 @@ export default function Subscribe() {
       return;
     }
 
-    trackGoal('JYFUFMSF', 0);
+    event({
+      action: 'signup_newletter',
+      category: 'Newsletter',
+      label: 'SignUp',
+      value: 1
+    })
     inputEl.current.value = '';
     setForm({
       state: Form.Success,
@@ -47,26 +52,25 @@ export default function Subscribe() {
   };
 
   return (
-    <div className="border border-blue-200 rounded p-6 my-4 w-full dark:border-gray-800 bg-blue-50 dark:bg-blue-opaque">
-      <p className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
+    <div className="w-full p-6 my-4 border border-gray-200 rounded-xl dark:border-gray-800 bg-gradient-to-r from-emerald-500/40 via-blue-500/40 to-purple-500/40">
+      <p className="text-lg font-bold text-gray-900 md:text-xl dark:text-gray-100">
         Subscribe to the newsletter
       </p>
       <p className="my-1 text-gray-800 dark:text-gray-200">
-        Get emails from me about web development, tech, and early access to new
-        articles.
+        Get emails from me about mobile development, tech, and more.
       </p>
       <form className="relative my-4" onSubmit={subscribe}>
         <input
           ref={inputEl}
           aria-label="Email for newsletter"
-          placeholder="tim@apple.com"
+          placeholder="eric.seidel@google.com"
           type="email"
           autoComplete="email"
           required
-          className="px-4 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 pr-32"
+          className="block w-full px-4 py-2 pr-32 mt-1 text-gray-900 border-gray-300 rounded-md bg-white/50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800/50 dark:text-gray-100"
         />
         <button
-          className="flex items-center justify-center absolute right-1 top-1 px-4 pt-1 font-medium h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
+          className="absolute flex items-center justify-center h-8 px-4 font-medium text-gray-900 rounded bg-gray-100/80 right-1 top-1 dark:bg-gray-800/90 dark:text-gray-100 w-28"
           type="submit"
         >
           {form.state === Form.Loading ? <LoadingSpinner /> : 'Subscribe'}

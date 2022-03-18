@@ -1,23 +1,43 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import * as gtag from 'lib/gtag';
+import { Head, Html, Main, NextScript } from 'next/document';
 
 export default function Document(props) {
+  let gaTagManagerScript;
+  let gaStartScript;
+  if (process.env.NODE_ENV === 'production') {
+    gaTagManagerScript = 
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+    />
+    
+    gaStartScript = 
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${gtag.GA_TRACKING_ID}', {
+          page_path: window.location.pathname,
+          });
+        `
+      }}
+    />
+  }
+
   return (
     <Html lang="en">
       <Head>
         <link
           rel="preload"
-          href="/fonts/ibm-plex-sans-var.woff2"
+          href="/fonts/Outfit-VariableFont_wght.ttf"
           as="font"
-          type="font/woff2"
+          type="font/ttf"
           crossOrigin="anonymous"
         />
         <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
         <link href="/static/favicons/site.webmanifest" rel="manifest" />
-        <link
-          rel="preconnect"
-          href="https://cdn.usefathom.com"
-          crossOrigin=""
-        />
         <link
           href="/static/favicons/apple-touch-icon.png"
           rel="apple-touch-icon"
@@ -46,13 +66,11 @@ export default function Document(props) {
           content="/static/favicons/browserconfig.xml"
           name="msapplication-config"
         />
-        <meta content="14d2e73487fa6c71" name="yandex-verification" />
-        <meta
-          content="eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw"
-          name="google-site-verification"
-        />
+        <meta content="7081e8ebb22b592f" name="yandex-verification" />
+        {gaTagManagerScript}
+        {gaStartScript}
       </Head>
-      <body className="bg-white dark:bg-black text-white dark:text-black">
+      <body className="text-white bg-white dark:bg-red dark:text-black">
         <Main />
         <NextScript />
       </body>

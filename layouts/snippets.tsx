@@ -1,8 +1,8 @@
-import Image from 'next/image';
-
 import Container from 'components/Container';
-import type { PropsWithChildren } from 'react';
 import type { Snippet } from 'contentlayer/generated';
+import Image from 'next/image';
+import type { PropsWithChildren } from 'react';
+
 
 export default function SnippetLayout({
   children,
@@ -11,7 +11,7 @@ export default function SnippetLayout({
   return (
     <Container
       title={`${snippet.title} - Code Snippet`}
-      description="A collection of code snippets – including serverless functions, Node.js scripts, and CSS tricks."
+      description="A collection of code snippets."
     >
       <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">
         <div className="flex justify-between w-full mb-8">

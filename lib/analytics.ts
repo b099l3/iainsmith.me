@@ -1,20 +1,15 @@
+import * as gtag from 'lib/gtag';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import * as Fathom from 'fathom-client';
 
 export const useAnalytics = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID, {
-        includedDomains: ['leerob.io']
-      });
-    }
 
-    function onRouteChangeComplete() {
-      Fathom.trackPageview();
-    }
+    const onRouteChangeComplete = (url: URL) => {
+      gtag.pageview(url);
+    };
 
     router.events.on('routeChangeComplete', onRouteChangeComplete);
 

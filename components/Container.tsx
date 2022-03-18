@@ -1,12 +1,12 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
-import NextLink from 'next/link';
 import cn from 'classnames';
-
 import Footer from 'components/Footer';
 import MobileMenu from 'components/MobileMenu';
+import { useTheme } from 'next-themes';
+import Head from 'next/head';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
 
 function NavItem({ href, text }) {
   const router = useRouter();
@@ -38,9 +38,9 @@ export default function Container(props) {
   const { children, ...customMeta } = props;
   const router = useRouter();
   const meta = {
-    title: 'Lee Robinson – Developer, writer, creator.',
+    title: 'Iain Smith – Developer, writer, creator.',
     description: `Front-end developer, JavaScript enthusiast, and course creator.`,
-    image: 'https://leerob.io/static/images/banner.png',
+    image: 'https://iainsmith.me/static/images/banner.png',
     type: 'website',
     ...customMeta
   };
@@ -51,15 +51,15 @@ export default function Container(props) {
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
         <meta content={meta.description} name="description" />
-        <meta property="og:url" content={`https://leerob.io${router.asPath}`} />
-        <link rel="canonical" href={`https://leerob.io${router.asPath}`} />
+        <meta property="og:url" content={`https://iainsmith.me${router.asPath}`} />
+        <link rel="canonical" href={`https://iainsmith.me${router.asPath}`} />
         <meta property="og:type" content={meta.type} />
-        <meta property="og:site_name" content="Lee Robinson" />
+        <meta property="og:site_name" content="Iain Smith" />
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.image} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@leeerob" />
+        <meta name="twitter:site" content="@b099l3" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
@@ -75,9 +75,8 @@ export default function Container(props) {
           <div className="ml-[-0.60rem]">
             <MobileMenu />
             <NavItem href="/" text="Home" />
-            <NavItem href="/guestbook" text="Guestbook" />
-            <NavItem href="/dashboard" text="Dashboard" />
             <NavItem href="/blog" text="Blog" />
+            <NavItem href="/dashboard" text="Dashboard" />
             <NavItem href="/snippets" text="Snippets" />
           </div>
           <button
