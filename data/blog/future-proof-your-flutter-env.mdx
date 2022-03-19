@@ -34,10 +34,12 @@ In this article, I will dive into each one and compare their pros and cons, and 
   caption={`I hope you are a Back to the Future fan; there will be more.`}
 />
 
-<Alert
-  type={`warn`}
-  message={`Don't install each environment on top of each other, as you will have installed Flutter three times. I recommend only installing one solution.`}
-/>
+<Alert type={`warn`}>
+
+Don't install each environment on top of each other, as you will have
+installed Flutter three times. I recommend only installing one solution.
+
+</Alert>
 
 ## 🌱 Working with one tool version
 
@@ -122,12 +124,15 @@ Next, we have to setup our IDE to use the FVM selected version of Flutter. I wou
 
 As you can see, this sets the Flutter SDK path to the symlinked version of Flutter we have in the project, located at `.fvm/flutter_sdk` .
 
-<Alert
-  type={`info`}
-  title={'Manual version switching'}
-  message={`You can set up manual version switching by setting "dart.flutterSdkPaths":
-  ["/Users/[Your User]/fvm/versions"]`}
-/>
+<Alert type={`info`} title={'Manual version switching'}>
+
+You can set up manual version switching by setting
+
+```json
+"dart.flutterSdkPaths": ["/Users/[Your User]/fvm/versions"]
+```
+
+</Alert>
 
 We need to install a version of Flutter first to get this folder. The following commands will install the current stable version of Flutter. If you are doing this for a project, I recommend using a specific version, i.e. 2.8.1, not "stable", as stable will change every couple of months. Commands to install and use a Flutter version using FVM:
 
@@ -317,14 +322,27 @@ Now here comes the magic part, when you run the command `flutter`, your machine 
 
 Using asdf is the final evolution. This setup solves most of the cases developers will encounter when using or installing different versions of tools. Asdf can accommodate new tools with its plugin structure whilst keeping a consistent command structure. The only advancement I can see happening is the move to rust like [frum](https://github.com/tako8ki/frum) for performance benefits, but it is minor even then.
 
-<AlertWithImage
+<Alert
   type={`info`}
   title={`VSCode Error`}
-  image={'/static/images/future-proof-your-flutter-env/vscode-error.png'}
-  message={`If you are using VSCode and see this error, you can set the FLUTTER_ROOT environment variable:
-  <br/>
-  <code>export FLUTTER_ROOT="$(asdf where flutter)</code>"`}
+>
+
+If you are using VSCode and see this error:
+
+<ImageCenter
+  alt={`A future-proof dev environment, finally!`}
+  src={`/static/images/future-proof-your-flutter-env/vscode-error.png`}
+  width={1316}
+  height={319}
 />
+You can set the `FLUTTER_ROOT` environment variable in your dot file, e.g. `.zshrc`
+like this:
+
+```bash
+export FLUTTER_ROOT="$(asdf where flutter)
+```
+
+</Alert>
 
 ## 👨‍🌾 Final thoughts and recommendations
 

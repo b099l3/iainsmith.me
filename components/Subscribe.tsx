@@ -2,7 +2,6 @@ import ErrorMessage from 'components/ErrorMessage';
 import LoadingSpinner from 'components/LoadingSpinner';
 import SuccessMessage from 'components/SuccessMessage';
 import fetcher from 'lib/fetcher';
-import { event } from 'lib/gtag';
 import { Form, FormState, Subscribers } from 'lib/types';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
@@ -38,12 +37,6 @@ export default function Subscribe() {
       return;
     }
 
-    event({
-      action: 'signup_newletter',
-      category: 'Newsletter',
-      label: 'SignUp',
-      value: 1
-    })
     inputEl.current.value = '';
     setForm({
       state: Form.Success,

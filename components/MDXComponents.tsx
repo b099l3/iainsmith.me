@@ -1,5 +1,4 @@
 import Alert from 'components/Alert';
-import AlertWithImage from 'components/AlertWithImage';
 import Caption from 'components/Caption';
 import ConsCard from 'components/ConsCard';
 import ImageCenter from 'components/ImageCenter';
@@ -39,7 +38,6 @@ const MDXComponents = {
   a: CustomLink,
   Analytics,
   Alert,
-  AlertWithImage,
   ConsCard,
   ProsCard,
   Step,
