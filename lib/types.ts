@@ -14,8 +14,19 @@ export type Subscribers = {
   count: number;
 };
 
+
+
+export type TopViews = {
+  slug: string;
+  views: string;
+};
+
 export type Views = {
   total: number;
+};
+
+export type TopPostViews = {
+  topViews: TopViews[];
 };
 
 export type Song = {

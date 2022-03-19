@@ -10,7 +10,7 @@ export default function BlogPost({
   title,
   category,
   summary,
-  slug
+  slug,
 }: Pick<Blog, 'title' | 'category' | 'summary' | 'slug'>) {
   const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
   const views = data?.total;
