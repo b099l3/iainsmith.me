@@ -1,6 +1,6 @@
-export default function MetricCard({ header, link, metric, isCurrency, isRunDistance }) {
+export default function MetricCard({ header, link, metric, isCurrency, isRunDistance = false }) {
   return (
-    <div className="metric-card bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4 max-w-72 w-full">
+    <div className="w-full p-4 bg-white border border-gray-200 rounded-lg metric-card dark:bg-gray-900 dark:border-gray-800 max-w-72">
       <a
         aria-label={header}
         target="_blank"
@@ -10,7 +10,7 @@ export default function MetricCard({ header, link, metric, isCurrency, isRunDist
         <div className="flex items-center text-gray-900 dark:text-gray-100">
           {header}
           <svg
-            className="h-4 w-4 ml-1"
+            className="w-4 h-4 ml-1"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -25,7 +25,7 @@ export default function MetricCard({ header, link, metric, isCurrency, isRunDist
           </svg>
         </div>
       </a>
-      <p className="mt-2 text-3xl font-bold spacing-sm text-black dark:text-white">
+      <p className="mt-2 text-3xl font-bold text-black spacing-sm dark:text-white">
         {metric > 0 && isCurrency && '$'}
         {metric > 0 ? metric.toLocaleString() : '-'}
         {metric > 0 && isRunDistance && ' mi'}
