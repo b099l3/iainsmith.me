@@ -52,11 +52,11 @@
     },
     {
       "source": "/youtube",
-      "destination": "https://www.youtube.com/channel/UCZMli3czZnd1uoc1ShTouQw"
+      "destination": "https://www.youtube.com/channel/UCo5dBfzoOjAtuSo5Hr6P9YA"
     },
     {
       "source": "/live",
-      "destination": "https://www.youtube.com/channel/UCZMli3czZnd1uoc1ShTouQw/live"
+      "destination": "https://www.youtube.com/channel/UCo5dBfzoOjAtuSo5Hr6P9YA/live"
     },
     {
       "source": "/linkedin",
