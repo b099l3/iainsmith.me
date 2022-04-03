@@ -5,17 +5,13 @@
 - **Framework**: [Next.js](https://nextjs.org/)
 - **Database**: [PlanetScale](https://planetscale.com)
 - **ORM**: [Prisma](https://prisma.io/)
-- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
 - **Deployment**: [Vercel](https://vercel.com)
 - **Content**: [MDX](https://github.com/mdx-js/mdx)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 
 ## Learn More
 
-I've recorded two live streams walking through this repository and answering questions.
-
-- [Stream #1 – Jan 27, 2021 (1h 11min)](https://www.youtube.com/watch?v=xXQsF0q8KUg)
-- [Stream #2 – Nov 10, 2021 (1h 4min)](https://www.youtube.com/watch?v=WZZFW5xDjJ4)
+I was highly inspiared by [Lee Rob's blog](https://github.com/leerob/leerob.io) and used it as a starting point. I would reccomend having a look at his [site](https://leerob.io/) and [YouTube channel](https://www.youtube.com/channel/UCZMli3czZnd1uoc1ShTouQw)
 
 ## Overview
 
@@ -34,17 +30,17 @@ I've recorded two live streams walking through this repository and answering que
 ## Running Locally
 
 ```bash
-$ git clone https://github.com/leerob/iainsmith.me.git
+$ git clone https://github.com/b099l3/iainsmith.me.git
 $ cd iainsmith.me
 $ yarn
 $ yarn dev
 ```
 
-Create a `.env` file similar to [`.env.example`](https://github.com/leerob/iainsmith.me/blob/main/.env.example).
+Create a `.env` file similar to [`.env.example`](https://github.com/b099l3/iainsmith.me/blob/main/.env.example).
 
 ## Cloning / Forking
 
-Please review the [license](https://github.com/leerob/iainsmith.me/blob/main/LICENSE.txt) and remove all of my personal information (resume, blog posts, images, etc.).
+Please review the [license](https://github.com/b099l3/iainsmith.me/blob/main/LICENSE.txt) and remove all of my personal information (resume, blog posts, images, etc.).
 
 ## Making a new post?
 
