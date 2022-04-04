@@ -14,12 +14,12 @@
 - Added spinners
 - font bold on everything
 - Get most popular from data
+- deploy to prod
 
 # TODO
 
 - add old blog posts
 - add old goals posts
-- deploy to prod
 - move github repo
 - make code look like - https://www.fiqrychoerudin.dev/blog/tech/2021-12-21-react-simple-fetch
 - get featured from data
@@ -29,3 +29,6 @@
 - add a taps oan/aff integration
 
 - copy this guy github style https://github.com/fiqryq
+- add a now page similar to this - https://dawchihliou.github.io/now
+- integrate github https://vercel.com/docs/concepts/git/vercel-for-github
+- integration with github environments https://github.com/fiqryq/fiqrychoerudin.dev
