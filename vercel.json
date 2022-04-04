@@ -27,10 +27,6 @@
       "destination": "https://read.cv/iainsmith"
     },
     {
-      "source": "/projects",
-      "destination": "/about"
-    },
-    {
       "source": "/30",
       "destination": "https://calendly.com/iain-smith/30min"
     },
@@ -61,6 +57,14 @@
     {
       "source": "/strava",
       "destination": "https://www.strava.com/athletes/23360470"
+    },
+    {
+      "source": "/future-proof-your-flutter-env",
+      "destination": "blog/future-proof-your-flutter-env"
+    },
+    {
+      "source": "flutter-hackathon-hack20",
+      "destination": "blog/flutter-hackathon-hack20"
     }
-  ]
+    ]
 }
