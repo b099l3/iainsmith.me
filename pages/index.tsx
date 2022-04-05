@@ -32,15 +32,15 @@ export default function Home() {
             </h2>
         <div className="flex flex-col gap-6 md:flex-row">
           <BlogPostCard
-            title="Everything I Know About Style Guides, Design Systems, and Component Libraries"
+            title="The future-proof solution to manage your Flutter versions: global, FVM, or asdf-vm?"
             category="Flutter"
-            slug="style-guides-component-libraries-design-systems"
+            slug="future-proof-your-flutter-env"
             gradient="from-[#D8B4FE] to-[#818CF8]"
           />
           <BlogPostCard
-            title="Rust Is The Future of JavaScript Infrastructure"
+            title="Flutter Hackathon #Hack20"
             category="Flutter"
-            slug="rust"
+            slug="flutter-hackathon-hack20"
             gradient="from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"
           />
           <BlogPostCard
