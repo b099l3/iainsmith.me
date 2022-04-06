@@ -37,7 +37,6 @@ module.exports = {
         sans: ['Outfit', ...fontFamily.sans],
         mono: ['Victor Mono', ...fontFamily.mono]
       },
-
       fontSize: {
         xs: ['1.1rem', { lineHeight: '1.6rem' }],
         sm: ['1.2rem', { lineHeight: '1.8rem' }],
@@ -157,7 +156,22 @@ module.exports = {
             }
           }
         }
-      })
+      }),
+      'animation': {
+        'text':'text 5s ease infinite',
+    },
+    'keyframes': {
+        'text': {
+            '0%, 100%': {
+               'background-size':'200% 200%',
+                'background-position': 'left center'
+            },
+            '50%': {
+               'background-size':'200% 200%',
+                'background-position': 'right center'
+            }
+        },
+    }
     }
   },
   variants: {

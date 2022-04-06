@@ -44,9 +44,9 @@ export default function Home() {
             gradient="from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"
           />
           <BlogPostCard
-            title="Past, Present, and Future of React State Management"
+            title="Flutter - a modern declarative UI toolkit"
             category="Flutter"
-            slug="react-state-management"
+            slug="flutter-declarative-ui-toolkit"
             gradient="from-[#FDE68A] via-[#FCA5A5] to-[#FECACA]"
           />
         </div>

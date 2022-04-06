@@ -19,6 +19,7 @@
 
 # TODO
 
+- make blog post cards
 - add old blog posts
 - add old goals posts
 - move github repo

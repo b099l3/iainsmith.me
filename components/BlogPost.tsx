@@ -17,8 +17,8 @@ export default function BlogPost({
 
   return (
     <Link href={`/blog/${slug}`}>
-      <a className="w-full">
-        <div className="w-full mb-8">
+      <a className="p-3 mb-8 bg-white rounded-md shadow-sm dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-800 dark:hover:ring-teal-500 hover:ring-teal-500 hover:shadow-md group ring-1 dark:ring-slate-600 ring-slate-200">
+        <div className="w-full">
           <div className="flex flex-col justify-between md:flex-row">
             <h4 className="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
               {title}

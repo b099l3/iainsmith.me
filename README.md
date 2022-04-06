@@ -27,6 +27,7 @@ I was highly inspired by [Lee Rob's blog](https://github.com/leerob/leerob.io) a
 - Changed Cons component to have a cross icon
 - Changed font to Outfit
 - Changed "Most Popular" to come from data
+- Changed all Assets to webp
 
 ## Overview
 
