@@ -1,0 +1,343 @@
+---
+title: 'Flutter - a modern declarative UI toolkit'
+publishedAt: '2020-12-09'
+summary: 'What does that mean? What caused this paradigm shift? Does it change the way we build mobile apps?'
+image: '/static/images/flutter-declarative-ui-toolkit/banner.webp'
+category: 'Flutter'
+---
+
+<Image
+  alt={`Future-proofing`}
+  src={`/static/images/flutter-declarative-ui-toolkit/banner.webp`}
+  width={1000}
+  height={563}
+  priority
+/>
+
+## 🤨 What is this about?
+
+I have been a mobile developer for well over ten years, roughly from when the first iPhone came out. Nothing has changed in the way we build apps over this time. Yes, there have been improvements to the toolkits, but nothing that has made me stop and think:
+
+> "Why are we doing it this way?!"
+
+And if you know me, you'll know, sometimes I like to overthink things.
+
+Recently, I have been learning [Flutter](https://flutter.dev/), Google's UI toolkit for building cross-platform apps. I'm not going to go into the basics of Flutter, you can read more about it [here](https://flutter.dev/). Instead, I want to discuss the declarative UI approach this toolkit has adopted and how it is influencing mobile development. I won't go into the origins of this paradigm in this post but will blog about it in a follow-up post.
+
+Before we begin, I would like to add that I am looking at this from a native and cross-platform mobile development perspective. Also, I have programmed in an imperative object-orientated programming manner. Still, I thought it would be useful for others looking into declarative UI toolkits, e.g., Flutter, Jetpack Compose or SwiftUI, to see where this all came from and to share my thoughts and learnings.
+
+To start with, we first must understand declarative programming, and this is where I began my investigation.
+
+## 😐 What is Declarative UI?
+
+If you google ["what is declarative programming?"](https://www.google.com/search?q=what+is+declarative+programming) you will come across posts comparing it against imperative programming. Such as the article: ["Imperative vs Declarative Programming" by Tyler McGinnis](https://ui.dev/imperative-vs-declarative-programming/), and if you have the time, I would recommend reading it. This comparison is to aid understanding as a lot of programmers will program imperatively, especially in mobile.
+
+It is essential to understand what imperative programming is and how it differs from declarative, hence, I will start with a comparison between both programming approaches so you can understand the impact they have on UI toolkits.
+
+### 🧺 The washing machine
+
+I am going to use a washing machine analogy to highlight the core concepts in the hope that it is clearer to understand, as well as relating them to how Flutter works. You can also associate these concepts with JetpackCompose or SwiftUI, but I am only going to show examples in Flutter. Get ready to go for a spin!
+
+If you think about the operation of a washing machine, as a user, you have:
+
+- A bundle of clothes to be washed
+- A door to open and put the clothes in
+- A drawer to put the detergent in
+- A collection of settings that you can set before the wash starts
+- A button to start the washing
+
+<ImageCenter
+  alt={`"A Washing machine? What are you talking about Iain?!" - Don't worry, I won't leave you to hang out to dry!`}
+  src={`/static/images/flutter-declarative-ui-toolkit/gif1.webp`}
+  width={500}
+  height={230}
+/>
+<Caption
+  caption={`"A Washing machine? What are you talking about Iain?!" - Don't worry, I won't leave you to hang out to dry!`}
+/>
+
+Imagine the clothes are already in the machine and we want to wash them, the imperative approach would be:
+
+> Fill the machine with 5 litres of water
+> Heat the water to 30 degrees
+> Dispense detergent
+> Spin for 30 mins
+> Drain water
+> Fill the machine with 2 litres of water
+> Spin for 15 mins
+> Wait for 5 mins
+> Play very annoying beep noise to attract the user or if you are [lucky](https://www.youtube.com/watch?v=u1hnBv12-uk&ab_channel=AaronAttaboyMcAvoy)
+
+and the declarative approach:
+
+> I want my clothes washed on an Eco-Cycle
+
+Now, this is the part where I tell you:
+
+> "_imperative_ is **how** you do it, and _declarative_ is **what** you want to do."
+
+Clear? No? Yeah, it wasn't for me the first time either. Declarative programming, in its simplest form, lets the programmer express their **desired result** without describing the flow of method calls, sometimes referred to as control flow. Using the declarative approach, you don't have to define which methods to call or their order of execution, you simply express what you want, no need for implementation details.
+
+### ✨ No side effects
+
+The paradigm of declarative programming implies that there are **no side effects**. Side effects, in this context, are variables or state modified outside of the method's scope when returning the desired result, e.g., changing static or non-local variables which could impact subsequent calls of the method.
+
+The characteristic of no side effects then results in idempotent methods, i.e., if you run the method sequentially twice with the same parameters, the method produces the same result each time. There are no side effects which cause a different result inside the declarative UI toolkit. Remember we are only talking about the declarative UI toolkit here not the rest of your application.
+
+Imperative programming, on the other hand, has statements that directly change the state and is used to produce side effects, e.g., If I "Fill the machine with 5 litres of water" then do this again, I will have a side effect of wet feet.
+
+So, what does this mean for our washing machine? Well, when we wash our clothes with the Eco-Cycle setting, the result is clean clothes with efficient use of water and power. No matter how many times we run it, we get the same result.
+
+In Flutter, to create a UI with a textbox, you would write the following:
+
+```dart
+  Widget build(BuildContext context) {
+    return Text('Hello, World!');
+  }
+```
+
+From reviewing the code, we reveal one of the advantages of declarative - improved readability, as we can see the **desired result** is:
+
+> build Text 'Hello world'
+
+Again, if we run this code multiple times, all the results would be the same. No variables or global state is changing outside of the method calls. Now let's take a look at what other qualities declarative has to offer UI toolkits.
+
+### 🎭 Level of abstraction
+
+In the declarative approach, the first thing you may notice is the **level of abstraction** from how the washing machine works. You know that the Eco-Cycle will wash the clothes ecologically, but you don't know the finer details of how to carry out the laundry like the imperative approach describes. The Flutter example shows this too as we don't see how it builds the widget on the screen. In addition to the abstraction, there is also a **domain-specific language** (DSL), e.g., "Eco" and "Cycle" or `build` and `Text`, which hides the underlying imperative implementation behind the declarative one. DSLs tend to create short and intuitive instructions for doing what you _want_ in an easily readable form. Great when you want to create UIs quickly! or get that washing done.
+
+### 🥶 Immutability
+
+Once the washing machine has started, you can not change the input state - the clothes, cycle settings and detergent are fixed. The input **state is immutable**, and if you wanted to get a result with different inputs, you would need another run through the machine. You must do another wash if you fancied adding those socks you just found.
+
+This concept relates to the section on no side effects, but we are expanding on that with the idea of immutable data. If you can't change the data, then there are no side effects. This trait comes from both declarative and functional programming paradigms. Functional programming has no state changes or mutable data while declarative tries too minimise these changes. These two concepts make a powerful combination when trying to control the flow of data within a program.
+
+Flutter also applies the concept of immutability as you can see, the `Text` widget has the immutable input state of `"Hello World!"`, and if you wanted to change this, you would need to call the `build` method again with different input.
+
+<ImageCenter
+  alt={`Sorry, pal! Those are immutable clothes now!`}
+  src={`/static/images/flutter-declarative-ui-toolkit/gif2.webp`}
+  width={360}
+  height={450}
+/>
+<Caption caption={`Sorry, pal! Those are immutable clothes now!`} />
+
+Now you might be thinking:
+
+> Do we need to create all these widgets again if we want to change them?
+
+### 🥑 Basic simple objects
+
+Well, if you think about the clothes that we put in the washing machine, they are simple. You can easily throw them away and get new ones. Just like the widgets of Flutter, they are **simple, immutable objects that are quick to rebuild**. This simplistic approach moves the state control from the widget and into the application, thus not needing to sync the two states. Similar to how our clothes do not keep track of the detergent and cycle settings. In contrast, an imperative UI toolkit would allow the widget to manage its state, e.g., the `SetText` method on a TextField.
+
+To further expand on this, if we look at how UIKit's [UISwitch](https://developer.apple.com/documentation/uikit/uiswitch) and Flutter's [Switch](https://api.flutter.dev/flutter/material/Switch-class.html) manage their state, we can see UISwitch has a section in it's documentation "Setting the Off/On State" where we can get the state of the control with `isOn` and set the state with `setOn`. The UISwitch stores whether it is on or off. Whereas Flutter and other declarative UI toolkits leave it to the application to manage the state, not to the presentation layer. Flutter's Switch documentation also clarifies its state handling:
+
+> "The switch itself does not maintain any state. Instead, when the state of the switch changes, the widget calls the onChanged callback. Most widgets that use a switch will listen for the onChanged callback and rebuild the switch with a new value to update the visual appearance of the switch."
+
+We can see this in SwiftUI's [Toggle](https://developer.apple.com/documentation/swiftui/toggle) view or Jetpack Compose's [Switch](https://foso.github.io/Jetpack-Compose-Playground/material/switch/) too, where the application controls the state, not the UI control. The significant point to see here is that widgets/views/controls are simple objects in declarative UI toolkits.
+
+Now, who controls the state if the widget doesn't?
+
+### 💡 Single source of truth
+
+The app state is the only one that can change the state of the `Text` or `Switch` widget. In programming terms, we would say the app state is the **single source of truth** as it is the only place where the state is controlled.
+
+There is no way to set the text on the `Text` widget like you would do in an imperative UI toolkit, i.e.,
+
+```csharp
+var textFeild = new Text("Hello World!");
+textFeild.SetText("This is imperative");
+```
+
+The code above highlights a concern with imperative UI toolkits, where you have to keep the UI state plus the app state in sync, .i.e., the text property on the UI control and the text in your app state (View Model or another pattern you are using). You have to keep calling `SetText` with your app state when updates happen.
+
+Also, if you are familiar with iOS programming, you may have used `setneedsdisplay`, `setneedslayout` or `layoutIfNeeded` at some point to _"fix"_ the view state, this is not a good thing. We now know the benefits of immutable state and that to change a widget in a declarative UI toolkit, we need to call the `build` method again.
+
+With immutable data and a single source of truth, we will now look at how the toolkits control their data flow.
+
+### 🤯 Reactive
+
+Many of the declarative UI toolkits are build on the concept of **reactive** programming.
+
+> Reactive programming is when an object is dependant on the state of another object; the state object will send updates that can be received by dependant objects. In other words, the dependant object will **_react_** to the changes of the state object.
+
+Sounds simple, but can be tricky to get your head around it. A typical example is a spreadsheet, where cells can be dependant on the data in another cell and update accordingly when the data changes.
+
+<ImageCenter
+  alt={`reactive spreadsheet`}
+  src={`/static/images/flutter-declarative-ui-toolkit/gif3.webp`}
+  width={355}
+  height={131}
+/>
+
+You can use events, data streams, observables, messages or anything that can send data over time to accomplish a reactive strategy, as they all are tools that facilitate the flow of automatic propagation of data.
+
+The opposite of reactive is passive, where the state object is responsible for updating the dependant object. The manual getting and setting of the data prevents data changes from flowing through the application. An example of this would be this method on the state object:
+
+```csharp
+UpdateState(State stateChange){
+    DependantObject1.Update(stateChange)
+    DependantObject2.Update(stateChange)
+}
+```
+
+When there is an update, the state object updates the dependant objects.
+
+Whereas in a reactive approach, you could listen to an `onUpdateState` event, from the state object, and react to this in the dependant object:
+
+```csharp
+StateObject.onUpdateState(State stateChange){
+    self.update(stateChange);
+});
+```
+
+This allows for the state changes to flow through the app.
+
+Flutter has reactive widgets, as they emit events for others to listen too and the consumer is responsible for listening to the changes an performing the update. They are _not_ accountable for their state and don't have getters for accessing the result. Getters for mutable state will cause problems because they give you the current value without ensuring you respond to the changes.
+
+An excellent example to show the contrast of reactive styles is Flutter's [Slider](https://api.flutter.dev/flutter/material/Slider-class.html) widget and UIKit's [UISlider](https://developer.apple.com/documentation/uikit/uislider) control. UIKit is iOS's built-in imperative UI toolkit and to create a UISlider and listen to the changes, we would do the following:
+
+```swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+    let view = UIView()
+    let mySlider = UISlider(frame:CGRect(x: 0, y: 0, width: 300, height: 20))
+    mySlider.center = self.view.center
+    mySlider.minimumValue = 0
+    mySlider.maximumValue = 100
+    mySlider.isContinuous = true
+    mySlider.addTarget(self, action: #selector(self.sliderValueDidChange(_:)), for: .valueChanged)
+
+    view.addSubview(mySlider)
+    self.view = view
+}
+
+@objc func sliderValueDidChange(_ sender:UISlider!)
+{
+    let step: Float = 5.0
+    // This code below snaps the slider's value to 5 increments, e.g., 0,5,10,15,...
+    let roundedStepValue = round(sender.value / step) * step
+    sender.value = roundedStepValue
+}
+```
+
+This is great as the events can act reactively thanks to the event `sliderValueDidChange()`. But what if we accessed the slider's value, not through the event but like this?:
+
+```swift
+mySlider.value = 10;
+let APropertyThatIsDependantOnSliderValue = mySlider.value;
+mySlider.value = 20;
+```
+
+Using the getter on the mutable state of the slider only sets the current value and not any others that may happen over time, i.e. `APropertyThatIsDependantOnSliderValue` won't know the slider has changed to 20.
+
+Flutter's Slider on the other hand would use the following code:
+
+```dart
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  double _currentSliderValue = 20;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slider(
+      value: _currentSliderValue,
+      min: 0,
+      max: 100,
+      divisions: 5,
+      label: _currentSliderValue.round().toString(),
+      onChanged: (double value) {
+        setState(() {
+          _currentSliderValue = value;
+        });
+      },
+    );
+  }
+}
+```
+
+Because widgets are immutable, there are no setters for the slider's value.
+The crucial part to pay attention to is how the control or widget handles the value changing. In Flutter, a slider publishes the `onChanged` event to notify changes, but the parent sets the value on a rebuild. From the Flutter slider docs:
+
+> "The slider passes the new value to the callback but does not change state until the parent widget rebuilds the slider with the new value."
+
+In contrast, UIKit's UISlider has an event after setting the value on the UI control, `valueChanged`. The premature setting of this value then leads to the lines:
+
+```swift
+// This code below snaps the slider's value to 5 increments, e.g., 0,5,10,15,...
+let roundedStepValue = round(sender.value / step) * step
+sender.value = roundedStepValue
+```
+
+Here, the developer had to set the value back to what they wanted rather than how the control's state logic intended. The key difference here is the data flow in declarative UI toolkits flows continuously with immutable data.
+
+Now, if you remember, I mentioned there are benefits for using immutable state in your UI widgets. Well, if the only way to update a widget is to rebuild it, then the data flow is said to be **uni-directional**. This technique helps make the data flow structured, predictable and reproducible. A widget will fire an event, and this can cause a redraw, and create a new widget. So there is never any two-way data binding to the widget where it would update itself and use the same instance.
+
+<ImageCenter
+  alt={`Why isn't it called one direction-al data flow? ah copyright`}
+  src={`/static/images/flutter-declarative-ui-toolkit/gif4.webp`}
+  width={500}
+  height={200}
+/>
+<Caption
+  caption={`Why isn't it called one direction-al data flow? ah copyright`}
+/>
+
+Finally, to summarise, declarative UI toolkits have the following characteristics:
+
+- No side effects
+- Level of abstraction
+- Domain-Specific-Language
+- Immutable State
+- Single source of truth
+- Simple, immutable objects that are quick to rebuild
+- Reactive
+- Uni-directional data flow
+
+I also want to draw your attention to the fact that the concepts I have highlighted are inside the declarative UI toolkit and exposed to the developer to interpret them in any manner they require. You could still try to put in place programming paradigms contradictory of these if you are more comfortable with them. Even so, this would be working against the toolkit and are counter-intuitive.
+
+Now that we know the characteristics of declarative UI toolkits, we can start to look into why we are using them.
+
+## ☝️ Why are we doing declarative UI?
+
+The imperative mobile UI toolkits have been around for a long time. Apple released iOS's UIKit in 2007, and Android's UI toolkit has been about since 2008. Both were developed with the devices of their time in consideration when making design choices for the toolkits.
+
+<ImageCenter
+  alt={`htc-dream-1`}
+  src={`/static/images/flutter-declarative-ui-toolkit/image1.webp`}
+  width={264}
+  height={372}
+/>
+Some devices only had 256MB of RAM compared to modern devices which have 4GB or more.
+These UI toolkits were designed to be performant on low memory and slow GPU devices.
+The older toolkits have also gained interesting nuances, over time, from legacy code,
+have a look at this [video](https://youtu.be/VsStyq4Lzxo?t=281) which talks about
+the spinner class of Android. It highlights just one of many issues that have been
+created in the long history of the toolkits.
+
+UIKit also has its regrets; it is somewhat opinionated with MVC principles at the core of its design, a popular data flow design pattern at the time. It is safe to say that these toolkits are dated and don't play to the strengths of modern devices.
+
+Declarative UI toolkits look to solve a lot of the problems of the past and build on existing solutions that have worked in other development areas such as front end web development.
+
+## 🧰 How does this influence my development?
+
+I feel like I may be late to the declarative UI party, but this paradigm seems to be building traction. I would not be surprised if in a couple of years we will all be using react inspired declarative UI approaches for all UI development.
+
+If you are like me, you have only programmed in a couple of paradigms. Changing to a new paradigm is a significant change, as it changes the rules and structures that you have learned. In this [video](https://youtu.be/U_NgcAg7jyY), [Venkat Subramaniam](https://twitter.com/venkat_s) talks about his journey from functional to reactive programming. He mentions how the most challenging thing he has faced in his 30-year career was paradigm shifts, and how he has faced about six of them. The first one being how to program, which builds a foundation and structure that can help or hinder the next time you shift. He mentions how each time a shift happens, it made him have to rethink how to solve problems as the rules had changed.
+
+You can think of a paradigm shift, like learning a spoken language. You start off learning your native tongue then could learn the language of a different language family. This shift would change the way you have previously thought about sentence structure because the rules have changed, but you would have the foundation knowledge of letters and words.
+
+As programmers, we are likely to encounter a paradigm shift at one point in our careers. Declarative UI is a shift that I can see becoming more and more popular, to the point it will be the norm for UI development.
+
+I am still learning about these paradigms, and I am sure there will be more to come. I hope this has been a useful read and look forward to any comments.
+
+<ImageCenter
+  alt={`Now I know what declarative UI is... Oh! But what about my washing?!!!`}
+  src={`/static/images/flutter-declarative-ui-toolkit/gif5.webp`}
+  width={400}
+  height={225}
+/>
+<Caption
+  caption={`Now I know what declarative UI is... Oh! But what about my washing?!!!`}
+/>
+
+I recently did a talk at Flutter Scotland on this topic, here is the [link](https://www.youtube.com/watch?v=fhc12MCRv3E)

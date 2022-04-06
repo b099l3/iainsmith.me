@@ -15,6 +15,7 @@
 - font bold on everything
 - Get most popular from data
 - deploy to prod
+- add a now page similar to this - https://dawchihliou.github.io/now
 
 # TODO
 
@@ -29,6 +30,5 @@
 - add a taps oan/aff integration
 
 - copy this guy github style https://github.com/fiqryq
-- add a now page similar to this - https://dawchihliou.github.io/now
 - integrate github https://vercel.com/docs/concepts/git/vercel-for-github
 - integration with github environments https://github.com/fiqryq/fiqrychoerudin.dev

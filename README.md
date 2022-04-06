@@ -1,4 +1,4 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fleerob%2Fiainsmith.me)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fb099l3%2Fiainsmith.me)
 
 # iainsmith.me
 
@@ -11,7 +11,22 @@
 
 ## Learn More
 
-I was highly inspiared by [Lee Rob's blog](https://github.com/leerob/leerob.io) and used it as a starting point. I would reccomend having a look at his [site](https://leerob.io/) and [YouTube channel](https://www.youtube.com/channel/UCZMli3czZnd1uoc1ShTouQw)
+I was highly inspired by [Lee Rob's blog](https://github.com/leerob/leerob.io) and used it as a starting point. I would recommend having a look at his [site](https://leerob.io/) and [YouTube channel](https://www.youtube.com/channel/UCZMli3czZnd1uoc1ShTouQw)
+
+### Differences from lee's blog
+
+- Added categories, e.g., Flutter, How to
+- Added Strava integration to dashboard
+- Added spinners to dashboard
+- Added categories, title, and summary to search
+- Added center image component
+- Added caption image component
+- Added info/warning/success/failure components
+- Added Google Analytics
+- Added a [now page](https://nownownow.com/about) - https://dawchihliou.github.io/now
+- Changed Cons component to have a cross icon
+- Changed font to Outfit
+- Changed "Most Popular" to come from data
 
 ## Overview
 
@@ -52,9 +67,10 @@ Please review the [license](https://github.com/b099l3/iainsmith.me/blob/main/LIC
   title: 'The future-proof solution to manage your Flutter versions: global, FVM, or asdf-vm?'
   publishedAt: '2022-01-26'
   summary: 'Want to try the latest Flutter version but don't want your existing projects to break? Want to have a consistent environment across the dev team? Want to future-proof your dev environment? Let me show you how...'
-  image: '/static/images/future-proof-your-flutter-env/banner.png'
+  image: '/static/images/future-proof-your-flutter-env/banner.webp'
   category: 'Flutter'
   ---
 ```
 
-- add banner image to /static/images/<slug>/banner.png
+- add banner image to /static/images/<slug>/banner.webp
+  - If gif, png, jpg - use the [convert script](scripts/convert2webp.sh)

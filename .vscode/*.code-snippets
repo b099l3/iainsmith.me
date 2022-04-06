@@ -8,7 +8,7 @@
       "title: '${1:title}'",
       "publishedAt: '$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE'",
       "summary: '${2:summary}'",
-      "image: '/static/images/$TM_FILENAME_BASE/banner.png'",
+      "image: '/static/images/$TM_FILENAME_BASE/banner.webp'",
       "category: '${3|Flutter,Raspberry Pi,Xamarin|}'",
       "---",
       "",

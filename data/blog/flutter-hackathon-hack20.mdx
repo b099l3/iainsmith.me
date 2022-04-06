@@ -1,13 +1,23 @@
 ---
 title: 'Flutter Hackathon #Hack20'
 publishedAt: '2020-07-17'
-summary: 'Julio, Rich and I took part in this year''s Flutter Hackathon, #Hack20. Here is a recap of the event and the app we submitted.'
-image: '/static/images/flutter-hackathon-hack20/banner.png'
+summary: "Julio, Rich and I took part in this year's Flutter Hackathon, #Hack20. Here is a recap of the event and the app we submitted."
+image: '/static/images/flutter-hackathon-hack20/banner.webp'
 category: 'Flutter'
 ---
 
+<Image
+  alt={`Future-proofing`}
+  src={`/static/images/flutter-hackathon-hack20/banner.webp`}
+  width={1000}
+  height={500}
+  priority
+/>
+
 ## What is #Hack20?
+
 \#Hack20 took place on June 27th-28th this year and was the second [Flutter Hackathon](https://flutterhackathon.com) organised by the Community. Previous years had seen local Flutter communities hosting events to take part, but due to COVID-19, the hackathon was all online. As part of the new format, the organisers hosted [six live stream sessions](https://www.youtube.com/playlist?list=PL4dBIh1xps-H4J3js_id4fnM8BcDqaRcV) ranging from tutorials, Q&As and ceremonies. The first session was the opening ceremony, detailing the rules of the hackathon. Teams had the choice of two topics:
+
 - 🌎 Saving the planet/Eco/Pandemic
 - 👾 Retro/Cyberpunk future
 
@@ -15,33 +25,61 @@ After a Team had selected a theme, they had the weekend to build and submit a Fl
 
 My Team consisted of myself and two of my friends/work colleagues: [Rich Kinsella](https://twitter.com/RKTypeDesign) and [Julio Ernesto Rodríguez Cabañas](https://twitter.com/ernestoyaquello). Before we started, we selected the Cyberpunk theme and came up with a rough idea:
 
->"A puzzle game where you are a cyberpunk trying to bring down the government... or something."
+> "A puzzle game where you are a cyberpunk trying to bring down the government... or something."
 
 With this, we then started to brainstorm some ideas.
 
 ## 🧠 Brainstorming
-![header](https://iainsmith.me/content/images/2020/07/header.jpg)
+
+<ImageCenter
+  alt={`Shenzhen I/O`}
+  src={`/static/images/flutter-hackathon-hack20/image1.webp`}
+  width={460}
+  height={215}
+/>
 
 Julio and I have been playing [Shenzhen I/O](http://www.zachtronics.com/shenzhen-io/) for a couple of weeks and liked solving electronic puzzles. We thought we could make a similar game. After some deliberation, we decided that a Shenzhen clone was too ambitious for a weekend and simplified the approach to a game with logic gates. Here is one of the initial designs:
 
-![53a254dd-9f34-4826-b592-fd3ca1bd39d2](https://iainsmith.me/content/images/2020/07/53a254dd-9f34-4826-b592-fd3ca1bd39d2.jpg)
+<ImageCenter
+  alt={`idea1`}
+  src={`/static/images/flutter-hackathon-hack20/image2.webp`}
+  width={1360}
+  height={655}
+/>
 
 This idea was further developed into only using [NAND logic](https://en.wikipedia.org/wiki/NAND_logic) to solve the problems. Then we started to realise, there would be issues with the inputs on the logic gates, i.e. What side of the square would be input or output? You can see from the image above the input is on the bottom and output on the left.
 
 As Julio and I were coming up with more absurd ideas on how this would work, Rich mentioned how this idea reminded him of the [Spiderman hacking game](https://youtu.be/5MRiYFL6Kxk):
 
-![idea2](https://iainsmith.me/content/images/2020/07/idea2.png)
+<ImageCenter
+  alt={`Spiderman game`}
+  src={`/static/images/flutter-hackathon-hack20/image3.webp`}
+  width={1256}
+  height={672}
+/>
 
 Inspired by the simplicity of this game, we decided to switch to only arithmetic operations. This solved a lot of our implementation issues, as we would only have one input, operation and output per component. It also solved another problem we had, of connecting the blocks, by using connector blocks to create the circuit.
 
-![e2c8cf8b-d03d-49fa-b138-bb90ddf9ecb0](https://iainsmith.me/content/images/2020/07/e2c8cf8b-d03d-49fa-b138-bb90ddf9ecb0.jpg)
+<ImageCenter
+  alt={`idea2`}
+  src={`/static/images/flutter-hackathon-hack20/image4.webp`}
+  width={1600}
+  height={759}
+/>
 
 With this idea, we had a solid plan and started to look at the coding side, while Rich worked on the design.
 
 ## 🤓 Hacking Time!
-![2020-07-14-13_25_54-Window](https://iainsmith.me/content/images/2020/07/2020-07-14-13_25_54-Window.png)
+
+<ImageCenter
+  alt={`Flame`}
+  src={`/static/images/flutter-hackathon-hack20/image5.webp`}
+  width={573}
+  height={505}
+/>
 
 We decided that we could save a lot of time if we found a game engine that integrated nicely with Flutter. I had heard about [Flame](https://github.com/flame-engine/flame) but didn't know enough about it. We decided, if Flame could meet these criteria, then we would use it:
+
 - Gesture support - Drag and Drop
 - Audio support - sound effects and looping background music
 - Integration with Flutter components - Buttons, etc outside of the engine
@@ -49,16 +87,17 @@ We decided that we could save a lot of time if we found a game engine that integ
 
 After some research we came across [tutorials](https://jap.alekhin.io/setup-widget-tree-flame-flutter-game) from [JapAlekhin](https://jap.alekhin.io/) - they are amazing. One of the tutorial's conclusions highlighted how easy it was going to be to integrate with Flutter.
 
->"Based on my experience developing games using Flame and Flutter, I have found out that having a regular widget tree in a game is generally good practice.
+> "Based on my experience developing games using Flame and Flutter, I have found out that having a regular widget tree in a game is generally good practice.
 >
->Buttons, text, dialog boxes, text input, and other UI elements become significantly easier to create.
+> Buttons, text, dialog boxes, text input, and other UI elements become significantly easier to create.
 >
->There’s no set-back on performance and the only thing tricky to set up is the communication between the game and the UI class." 
->\- [**Japa Alekhin Llemos**](https://jap.alekhin.io/setup-widget-tree-flame-flutter-game)
+> There’s no set-back on performance and the only thing tricky to set up is the communication between the game and the UI class."
+> \- [**Japa Alekhin Llemos**](https://jap.alekhin.io/setup-widget-tree-flame-flutter-game)
 
 Other research involved looking at open source Flame games, e.g. [BGUG](https://github.com/fireslime/bgug). We managed to check off all the criteria we needed to push on with Flame as our chosen engine.
 
-Julio had created a script, which can find [here](https://github.com/Float-like-a-dash-Sting-like-a-dart/GhostRigger/blob/master/ghost_rigger/Script.txt), which allowed us to divide the work in such a way that we never had conflicts or overlapping tasks, i.e., 
+Julio had created a script, which can find [here](https://github.com/Float-like-a-dash-Sting-like-a-dart/GhostRigger/blob/master/ghost_rigger/Script.txt), which allowed us to divide the work in such a way that we never had conflicts or overlapping tasks, i.e.,
+
 - Rich - Design, video and descriptions
 - Julio - Wireframes, Flame and puzzle design
 - Iain - Flutter navigation/screens, communication between Flutter and Flame, Voiceover, Music.
@@ -69,3 +108,115 @@ We also had to consider text scrolling, to display some of the dialogue in the g
 
 While this was going on, Rich had finished the designs, even a couple of different options on some screens! The game was starting to take shape:
 
+<ImageCenter
+  alt={`screens1`}
+  src={`/static/images/flutter-hackathon-hack20/image6-1.webp`}
+  width={960}
+  height={480}
+/>
+<ImageCenter
+  alt={`screens2`}
+  src={`/static/images/flutter-hackathon-hack20/image6-2.webp`}
+  width={960}
+  height={480}
+/>
+<ImageCenter
+  alt={`screens3`}
+  src={`/static/images/flutter-hackathon-hack20/image6-3.webp`}
+  width={960}
+  height={480}
+/>
+<ImageCenter
+  alt={`screens4`}
+  src={`/static/images/flutter-hackathon-hack20/image6-4.webp`}
+  width={960}
+  height={480}
+/>
+<ImageCenter
+  alt={`screens5`}
+  src={`/static/images/flutter-hackathon-hack20/image6-5.webp`}
+  width={960}
+  height={480}
+/>
+<ImageCenter
+  alt={`screens6`}
+  src={`/static/images/flutter-hackathon-hack20/image6-6.webp`}
+  width={960}
+  height={480}
+/>
+<Caption caption={`Some screens of the final game`} />
+
+<ImageCenter
+  alt={`screens7`}
+  src={`/static/images/flutter-hackathon-hack20/image7-1.webp`}
+  width={672}
+  height={438}
+/>
+<ImageCenter
+  alt={`screens8`}
+  src={`/static/images/flutter-hackathon-hack20/image7-2.webp`}
+  width={1450}
+  height={921}
+/>
+<Caption
+  caption={`Above are the connector block wireframes (left) and final designs (right). We had to keep a 1-pixel overlap to make the lines connect.`}
+/>
+
+## 😅 Final Result
+
+Rich created the video, which was one of the main reasons for our success, it's awesome even with my voice over! We fixed some last-minute bugs and added a skip level button, as we were too tired to complete our own puzzles, we hadn't gone to bed! The project was complete! This is the end result and video that we submitted:
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/yOZAUicGDXc"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+We manage to place 10th! Which is amazing! I would urge you to [check out](https://flutterhackathon.com/#/) some of the other submitted apps, they are all great, open-sourced and have demo videos.
+
+<ImageCenter
+  alt={`screens8`}
+  src={`/static/images/flutter-hackathon-hack20/image9.webp`}
+  width={1081}
+  height={1096}
+/>
+
+Here is what the judges had to say:
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/AeFk1aBVh-Q?start=360"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+## 🤔 Final thoughts
+
+I had a great time at the hackathon, it was well organised and I learned a lot about Flutter and Flame in a short time. I got a real sense of what it is like to develope with Flutter, I had to quickly make screens and tweak certain layouts. Flutter is ideal for this quick development as the tools are not restrictive. One issue I came across was the dynamic typing where I thought an object would be this type but wasn't; this isn't a huge disadvantage as it allows for other language features, its just hard to debug.
+
+I got a sense of what the Flutter community is like, a great bunch of people happy to help one another. There are a lot of people in the community, ~2600 participants 😲.
+
+I want to thank the sponsors and organisers for creating a welcoming hackathon. It was also a pleasure to be making something with a talented Team.
+
+Next year we will definitely enter again as Team ["Float like a Dash, sting like a Dart"](https://github.com/Float-like-a-dash-Sting-like-a-dart). Hope to see you there too!
+
+If you have any comments or questions about the game, please don't hesitate to ask.
+
+### 🔗 Links
+
+- [GitHub Repo](https://github.com/Float-like-a-dash-Sting-like-a-dart/GhostRigger)
+- [Gameplay Video](https://www.youtube.com/watch?v=UAqDUd7meUQ)
+- [Submission Video](https://www.youtube.com/watch?v=yOZAUicGDXc)
+
+Team members:
+
+- Design [Rich Kinsella](https://twitter.com/rktypedesign?lang=en)
+- Development [Julio Ernesto Rodríguez Cabañas](https://julioernesto.me/)
+- Development [Iain Smith](https://iainsmith.me/)
