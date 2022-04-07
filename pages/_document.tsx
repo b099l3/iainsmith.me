@@ -70,7 +70,7 @@ export default function Document(props) {
         {gaTagManagerScript}
         {gaStartScript}
       </Head>
-      <body className="text-white bg-white dark:bg-red dark:text-black">
+      <body className="antialiased bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900">
         <Main />
         <NextScript />
       </body>
