@@ -6,7 +6,7 @@ export default function Category({category}) {
   switch (category) {
     case 'Flutter':
       return (
-        <h4 className="text-lg font-medium tracking-tight md:text-lg text-flutter-blue-500 dark:text-flutter-blue-500">
+        <h4 className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-tr from-flutter-blue-500 to-sky-50 animate-text">
           {category}
         </h4>
       );

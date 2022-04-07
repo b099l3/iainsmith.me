@@ -4,9 +4,10 @@ import ConsCard from 'components/ConsCard';
 import ImageCenter from 'components/ImageCenter';
 import ImageWithTheme from 'components/ImageWithTheme';
 import Analytics from 'components/metrics/Analytics';
-import YouTube from 'components/metrics/Youtube';
+import YouTubeCard from 'components/metrics/Youtube';
 import ProsCard from 'components/ProsCard';
 import Step from 'components/Step';
+import YouTube from 'components/YouTube';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -31,6 +32,10 @@ function RoundedImage(props) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
 
+function RoundedImageWithTheme(props) {
+  return <ImageWithTheme alt={props.alt} className="rounded-lg" {...props} />;
+}
+
 function Callout(props) {
   return (
     <div className="flex p-4 bg-gray-200 rounded-lg dark:bg-gray-800">
@@ -43,7 +48,7 @@ function Callout(props) {
 
 const MDXComponents = {
   Image: RoundedImage,
-  ImageWithTheme,
+  ImageWithTheme: RoundedImageWithTheme,
   ImageCenter,
   Callout,
   Caption,
@@ -53,6 +58,7 @@ const MDXComponents = {
   ConsCard,
   ProsCard,
   Step,
+  YouTubeCard,
   YouTube
 };
 
