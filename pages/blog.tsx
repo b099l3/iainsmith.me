@@ -32,7 +32,7 @@ export default function Blog({
         <p className="mb-4 text-gray-600 dark:text-gray-400">
           {`Hey! I'm Iain. Welcome to my blog. Here's every post I've ever written, mostly about mobile development.
             In total, I've written ${posts.length} articles on my blog.
-            Use the search below to filter by title.`}
+            Use the search below to filter by title, category or sub text.`}
         </p>
         <div className="relative w-full mb-4">
           <input
