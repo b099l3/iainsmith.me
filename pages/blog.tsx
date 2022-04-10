@@ -31,7 +31,7 @@ export default function Blog({
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-400">
           {`Hey! I'm Iain. Welcome to my blog. Here's every post I've ever written, mostly about mobile development.
-            In total, I've written ${posts.length} articles on my blog.
+            In total, I've written ${posts.length} articles on my blog. I write to share what I learned.
             Use the search below to filter by title, category or sub text.`}
         </p>
         <div className="relative w-full mb-4">
