@@ -13,12 +13,9 @@ export default function TopblogPosts() {
     return <LoadingSpinner/>;
   }
 
-  const topBlogPosts = allBlogs.filter((post) =>
-   data.topViews.some(
-      (topPost) => 
-        topPost.slug.toLowerCase() === post.slug.toLowerCase()
-    )
-  );
+  const topBlogPosts = data.topViews.map(topView => {
+    return allBlogs.find(blog => blog.slug.toLowerCase() === topView.slug.toLowerCase())
+  });
 
   return (
     <>
