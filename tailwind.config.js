@@ -100,7 +100,7 @@ module.exports = {
               },
               code: { color: theme('colors.blue.400') }
             },
-            'h2,h3,h4': {
+            'h1,h2,h3,h4': {
               'scroll-margin-top': spacing[32]
             },
             thead: {
@@ -127,7 +127,7 @@ module.exports = {
               borderLeftColor: theme('colors.gray.700'),
               color: theme('colors.gray.300')
             },
-            'h2,h3,h4': {
+            'h1,h2,h3,h4': {
               color: theme('colors.gray.100'),
               'scroll-margin-top': spacing[32]
             },
