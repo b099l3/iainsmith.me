@@ -40,7 +40,7 @@ export default function NewsletterLayout({
           </p>
         </div>
         <div className="w-full prose dark:prose-dark">{children}</div>
-        <div className="mt-8">
+        <div className="w-full mt-8">
           <Subscribe />
         </div>
       </article>

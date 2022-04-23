@@ -23,7 +23,7 @@ export default function BlogPost({
 
   return (
     <Link href={`/blog/${slug}`}>
-      <a className="p-3 mb-8 bg-white rounded-md shadow-sm dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-800 dark:hover:ring-teal-500 hover:ring-teal-500 hover:shadow-md group ring-1 dark:ring-slate-600 ring-slate-200">
+      <a className="p-3 mb-8 bg-white rounded-md shadow-sm dark:bg-slate-900 hover:from-white hover:to-white hover:via-slate-50 hover:bg-gradient-to-tl dark:hover:bg-gradient-to-tl dark:hover:from-slate-900 dark:hover:via-slate-800 dark:hover:to-slate-900 dark:hover:ring-slate-700 hover:ring-slate-200 hover:shadow-lg group ring-2 dark:ring-slate-700 ring-slate-200">
         <div className="w-full">
 
         <ImageWithTheme className="rounded-lg"
@@ -40,11 +40,11 @@ export default function BlogPost({
           <p className="mb-4 text-gray-600 dark:text-gray-400">{summary}</p>
           <div className="flex flex-col justify-between md:flex-row">
             
-            <p className="w-32 text-left text-gray-500 md:text-left md:mb-0">
+            <p className="w-64 text-left text-gray-500 md:text-left md:mb-0">
               {format(parseISO(postPublishedAt), 'MMMM dd, yyyy')}
             </p>
 
-            <p className="w-32 mb-2 text-left text-gray-500 md:text-right md:mb-0">
+            <p className="w-64 mb-2 text-left text-gray-500 md:text-right md:mb-0">
               {`${views ? new Number(views).toLocaleString() : '–––'} views`}
             </p>
           </div>
