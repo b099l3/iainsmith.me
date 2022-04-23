@@ -33,4 +33,8 @@ convertImages () {
   done
 }
 
-convertImages ../public/static/images
+if [[ $# > 0 ]]
+  then convertImages $1
+  else convertImages ../public/static/images
+fi
+
