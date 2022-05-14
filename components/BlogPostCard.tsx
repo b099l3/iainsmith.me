@@ -20,9 +20,9 @@ export default function BlogPostCard({ title, category, slug, gradient }) {
           gradient
         )}
       >
-        <div className="flex flex-col justify-between h-full bg-white dark:bg-gray-900 rounded-lg p-4">
-          <div className="flex flex-col md:flex-row justify-between">
-            <h4 className="text-lg md:text-lg font-medium mb-6 sm:mb-10 w-full text-gray-900 dark:text-gray-100 tracking-tight">
+        <div className="flex flex-col justify-between h-full p-4 bg-white rounded-lg dark:bg-gray-900">
+          <div className="flex flex-col justify-between md:flex-row">
+            <h4 className="w-full mb-6 text-lg font-medium tracking-tight text-gray-900 md:text-lg sm:mb-10 dark:text-gray-100">
               {title}
             </h4>
           </div>
@@ -31,29 +31,13 @@ export default function BlogPostCard({ title, category, slug, gradient }) {
           <Category category={category}/>
           </div>
           <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-              />
+            <span className="inline-flex items-center py-1 text-sm leading-none text-gray-800 dark:text-gray-200">
+            <svg className="w-4 h-4 mr-2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
             </svg>
-            <span className="ml-2 align-baseline capsize">
-              {views ? new Number(views).toLocaleString() : '–––'}
-            </span>
+            {views ? new Number(views).toLocaleString() : '–––'}
+          </span>
           </div>
         </div>
         </div>
