@@ -32,7 +32,7 @@ export default function BlogPostCard({ title, category, slug, gradient }) {
           </div>
           <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
             <span className="inline-flex items-center py-1 text-sm leading-none text-gray-800 dark:text-gray-200">
-            <svg className="w-4 h-4 mr-2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-2" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
