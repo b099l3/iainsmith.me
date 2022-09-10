@@ -4,7 +4,6 @@ import fetcher from 'lib/fetcher';
 import { Views } from 'lib/types';
 import Link from 'next/link';
 import useSWR from 'swr';
-import ImageWithTheme from '../components/ImageWithTheme';
 import Category from './Category';
 
 
@@ -26,13 +25,6 @@ export default function BlogPost({
       <a className="p-3 mb-8 bg-white rounded-md shadow-sm dark:bg-gray-900 hover:from-white hover:to-white hover:via-gray-50 hover:bg-gradient-to-tl dark:hover:bg-gradient-to-tl dark:hover:from-gray-900 dark:hover:via-gray-800 dark:hover:to-gray-900 dark:hover:ring-gray-700 hover:ring-gray-200 hover:shadow-lg group ring-2 dark:ring-gray-700 ring-gray-200">
         <div className="w-full">
 
-        <ImageWithTheme className="rounded-lg"
-            alt={`Iain Smith`}
-            light={`/static/images/${slug}/banner.webp`}
-            dark={`/static/images/${slug}/banner.webp`}
-            width={1000}
-            height={563}
-          />
           <Category category={category}/>
           <h4 className="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
               {title}
