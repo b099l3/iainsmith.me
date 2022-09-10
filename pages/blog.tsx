@@ -6,10 +6,6 @@ import { pick } from 'lib/utils';
 import { InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
 
-
-
-
-
 export default function Blog({
   posts
 }: InferGetStaticPropsType<typeof getStaticProps>) {
