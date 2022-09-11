@@ -1,6 +1,5 @@
 import Alert from 'components/Alert';
 import Caption from 'components/Caption';
-import CodeBlock from 'components/CodeBlock';
 import ConsCard from 'components/ConsCard';
 import ImageCenter from 'components/ImageCenter';
 import ImageWithTheme from 'components/ImageWithTheme';
@@ -61,7 +60,6 @@ const MDXComponents = {
   Step,
   YouTubeCard,
   YouTube,
-  pre:CodeBlock
 };
 
 export default MDXComponents;
