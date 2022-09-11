@@ -25,14 +25,14 @@ export default function BlogPost({
       <a className="p-3 mb-8 bg-white rounded-md shadow-sm dark:bg-gray-900 hover:from-white hover:to-white hover:via-gray-50 hover:bg-gradient-to-tl dark:hover:bg-gradient-to-tl dark:hover:from-gray-900 dark:hover:via-gray-800 dark:hover:to-gray-900 dark:hover:ring-gray-700 hover:ring-gray-200 hover:shadow-lg group ring-2 dark:ring-gray-700 ring-gray-200">
         <div className="w-full">
 
-          <Category category={category}/>
           <h4 className="w-full mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100">
               {title}
             </h4>
-          <p className="mb-4 text-gray-800 dark:text-gray-200">{summary}</p>
+          <Category category={category}/>
+          <p className="my-2 text-sm text-gray-800 dark:text-gray-200">{summary}</p>
           <div className="flex flex-col justify-between md:flex-row">
             
-            <p className="w-64 text-left text-gray-800 dark:text-gray-200 md:text-left md:mb-0">
+            <p className="w-64 text-sm text-left text-gray-800 dark:text-gray-200 md:text-left md:mb-0">
               {format(parseISO(postPublishedAt), 'MMMM dd, yyyy')}
             </p>
 
