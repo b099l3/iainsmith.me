@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^3.14.0",
+    "@prisma/client": "^4.3.1",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "0.5.2",
     "big.js": "6.1.1",
     "classnames": "^2.3.1",
     "contentlayer": "^0.2.8",
     "date-fns": "2.28.0",
-    "esbuild": "^0.15.7",
+    "esbuild": "^0.14.54",
     "googleapis": "48.0.0",
     "motion": "^10.8.1",
     "next": "^12.3.0",
