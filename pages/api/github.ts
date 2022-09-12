@@ -4,6 +4,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  try {
   const userResponse = await fetch('https://api.github.com/users/b099l3');
   const userReposResponse = await fetch(
     'https://api.github.com/users/b099l3/repos?per_page=100'
@@ -26,4 +27,7 @@ export default async function handler(
     followers: user.followers,
     stars
   });
+} catch (e) {
+  return res.status(500).json({ message: e.message });
+}
 }

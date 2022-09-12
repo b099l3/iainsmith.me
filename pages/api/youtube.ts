@@ -7,6 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  try {
   const auth = await googleAuth.getClient();
   const youtube = google.youtube({
     auth,
@@ -30,4 +31,7 @@ export default async function handler(
     subscriberCount,
     viewCount
   });
+} catch (e) {
+  return res.status(500).json({ message: e.message });
+}
 }

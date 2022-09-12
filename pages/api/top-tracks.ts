@@ -5,6 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  try {
   const response = await getTopTracks();
   const { items } = await response.json();
   
@@ -20,4 +21,7 @@ export default async function handler(
   );
 
   return res.status(200).json({ tracks });
+} catch (e) {
+  return res.status(500).json({ message: e.message });
+}
 }

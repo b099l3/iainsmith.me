@@ -4,6 +4,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  try {
   const { email } = req.body;
 
   if (!email) {
@@ -25,4 +26,7 @@ export default async function handler(
   }
 
   return res.status(201).json({ error: '' });
+} catch (e) {
+  return res.status(500).json({ message: e.message });
+}
 }

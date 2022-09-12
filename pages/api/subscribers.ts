@@ -4,6 +4,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  try {
   const result = await fetch('https://www.getrevue.co/api/v2/subscribers', {
     method: 'GET',
     headers: {
@@ -22,4 +23,7 @@ export default async function handler(
   );
 
   return res.status(200).json({ count: data.length });
+} catch (e) {
+  return res.status(500).json({ message: e.message });
+}
 }

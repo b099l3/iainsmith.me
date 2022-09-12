@@ -1,10 +1,11 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { getNowPlaying } from 'lib/spotify';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  try{
   const response = await getNowPlaying();
 
   if (response.status === 204 || response.status > 400) {
@@ -37,4 +38,7 @@ export default async function handler(
     songUrl,
     title
   });
+} catch (e) {
+  return res.status(500).json({ message: e.message });
+}
 }
