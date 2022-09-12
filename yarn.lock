@@ -1223,7 +1223,7 @@ content-type@^1.0.4:
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
 
-contentlayer@^0.2.5:
+contentlayer@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/contentlayer/-/contentlayer-0.2.8.tgz#878adf9041e7eda874101e11c205f068e05c1db8"
   integrity sha512-y+GBBHp59z3rbq9d7tFy0Byopby50Mxcfkbpdt34gYuB3JNaaAmLc+neviSXz7wZ8zsBKsRPAOkuDNio+uYapA==
@@ -1586,7 +1586,7 @@ esbuild-windows-arm64@0.15.7:
   resolved "https://registry.yarnpkg.com/esbuild-windows-arm64/-/esbuild-windows-arm64-0.15.7.tgz#7d5e9e060a7b454cb2f57f84a3f3c23c8f30b7d2"
   integrity sha512-R06nmqBlWjKHddhRJYlqDd3Fabx9LFdKcjoOy08YLimwmsswlFBJV4rXzZCxz/b7ZJXvrZgj8DDv1ewE9+StMw==
 
-"esbuild@^0.12.1 || 0.13.x || 0.14.x || 0.15.x":
+"esbuild@^0.12.1 || 0.13.x || 0.14.x || 0.15.x", esbuild@^0.15.7:
   version "0.15.7"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.15.7.tgz#8a1f1aff58671a3199dd24df95314122fc1ddee8"
   integrity sha512-7V8tzllIbAQV1M4QoE52ImKu8hT/NLGlGXkiDsbEU5PS6K8Mn09ZnYoS+dcmHxOS9CRsV4IRAMdT3I67IyUNXw==
