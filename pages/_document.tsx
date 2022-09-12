@@ -1,30 +1,30 @@
-// import * as gtag from 'lib/gtag';
+import * as gtag from 'lib/gtag';
 import { Head, Html, Main, NextScript } from 'next/document';
 
 export default function Document(props) {
-  // let gaTagManagerScript;
-  // let gaStartScript;
-  // if (process.env.NODE_ENV === 'production') {
-  //   gaTagManagerScript = 
-  //   <script
-  //     async
-  //     src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-  //   />
+  let gaTagManagerScript;
+  let gaStartScript;
+  if (process.env.NODE_ENV === 'production') {
+    gaTagManagerScript = 
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+    />
     
-  //   gaStartScript = 
-  //   <script
-  //     dangerouslySetInnerHTML={{
-  //       __html: `
-  //         window.dataLayer = window.dataLayer || [];
-  //         function gtag(){dataLayer.push(arguments);}
-  //         gtag('js', new Date());
-  //         gtag('config', '${gtag.GA_TRACKING_ID}', {
-  //         page_path: window.location.pathname,
-  //         });
-  //       `
-  //     }}
-  //   />
-  // }
+    gaStartScript = 
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${gtag.GA_TRACKING_ID}', {
+          page_path: window.location.pathname,
+          });
+        `
+      }}
+    />
+  }
 
   return (
     <Html lang="en">
@@ -67,8 +67,8 @@ export default function Document(props) {
           name="msapplication-config"
         />
         <meta content="7081e8ebb22b592f" name="yandex-verification" />
-        {/* {gaTagManagerScript}
-        {gaStartScript} */}
+        {gaTagManagerScript}
+        {gaStartScript}
       </Head>
       <body className="antialiased bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900">
         <Main />
