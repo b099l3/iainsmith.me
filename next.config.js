@@ -48,7 +48,7 @@ const ContentSecurityPolicy = `
     img-src * blob: data:;
     media-src 'none';
     connect-src *;
-    font-src 'self' *.slant.co;
+    font-src 'self' *.slant.co data:;
 `;
 
 const securityHeaders = [
