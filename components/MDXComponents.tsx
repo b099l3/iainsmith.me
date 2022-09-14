@@ -59,7 +59,7 @@ const MDXComponents = {
   ProsCard,
   Step,
   YouTubeCard,
-  YouTube,
+  YouTube
 };
 
 export default MDXComponents;
