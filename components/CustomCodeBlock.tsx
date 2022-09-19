@@ -30,6 +30,8 @@ function makeTimer(callback: () => void) {
 }
 
 const CustomCodeBlock = (props) => {
+  const [isCopied, setIsCopied] = useState(false);
+
   const { className, copy, children, showLineNumbers, wrapLongLines } = props;
 
   if(typeof children === 'string') {
@@ -41,12 +43,6 @@ const CustomCodeBlock = (props) => {
   : "dart";
 
   const code = getStringFromChildren(children);
-
-  if(copy) {
-
-  }
-
-  const [isCopied, setIsCopied] = useState(false);
 
   return (<div>
   { copy ? 
