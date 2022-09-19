@@ -60,32 +60,35 @@ module.exports = {
               fontSize: '1.2rem',
               lineHeight: '2.0rem',
             },
-
-
             p: {
               code: {
-                fontSize: '1.4rem',
+                fontSize: '1.2rem',
                 lineHeight: '1.8rem',
               },
             },
-            "pre code::before": {
-              "padding-left": "unset"
+            span: {
+              code: {
+                color: theme("colors.teal.100") 
+              }
             },
-            "pre code::after": {
-              "padding-right": "unset"
-            },
+            // "pre code::before": {
+            //   "padding-left": "unset"
+            // },
+            // "pre code::after": {
+            //   "padding-right": "unset"
+            // },
             code: {
-              backgroundColor: theme("colors.grey.100"),
+              //backgroundColor: theme("colors.grey.100"),
               color: "#DD1144",
               fontWeight: "400",
               "border-radius": "0.25rem"
             },
             "code::before": {
-              content: '""',
+              "display": "none",
               "padding-left": "0.25rem"
             },
             "code::after": {
-              content: '""',
+              "display": "none",
               "padding-right": "0.25rem"
             },
             code: { color: theme('colors.pink.500') },
@@ -105,6 +108,11 @@ module.exports = {
             },
             thead: {
               borderBottomColor: theme('colors.gray.200')
+            },
+            prose: {
+              pre: {
+                backgroundColor: theme("colors.red.400")
+              },
             },
             pre: {
               color: theme("colors.grey.1000"),
@@ -139,7 +147,7 @@ module.exports = {
             },
             ul: {
               li: {
-                '&:before': { backgroundColor: theme('colors.gray.500') }
+                // '&:before': { backgroundColor: theme('colors.gray.500') }
               }
             },
             strong: { color: theme('colors.gray.100') },

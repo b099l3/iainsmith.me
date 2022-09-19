@@ -1,6 +1,7 @@
 import Alert from 'components/Alert';
 import Caption from 'components/Caption';
 import ConsCard from 'components/ConsCard';
+import CustomCodeBlock from 'components/CustomCodeBlock';
 import ImageCenter from 'components/ImageCenter';
 import ImageWithTheme from 'components/ImageWithTheme';
 import Analytics from 'components/metrics/Analytics';
@@ -10,7 +11,6 @@ import Step from 'components/Step';
 import YouTube from 'components/YouTube';
 import Image from 'next/image';
 import Link from 'next/link';
-
 
 
 const CustomLink = (props) => {
@@ -45,13 +45,13 @@ function Callout(props) {
   );
 }
 
-
 const MDXComponents = {
   Image: RoundedImage,
   ImageWithTheme: RoundedImageWithTheme,
   ImageCenter,
   Callout,
   Caption,
+  pre: CustomCodeBlock,
   a: CustomLink,
   Analytics,
   Alert,

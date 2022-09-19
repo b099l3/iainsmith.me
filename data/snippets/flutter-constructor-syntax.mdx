@@ -1,0 +1,23 @@
+---
+title: 'Constructor syntax'
+description: 'Class with super, parameter setting and constructor method'
+logo: 'flutter.svg'
+---
+
+
+``` dart copy showLineNumbers
+class MyClass extends StatelessWidget {
+  late final int c;
+
+  MyClass(int cParam, {Key? key}) : c = cParam, super(key: key) {
+      // Do stuff for constructor here
+      print(c);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+```
+

@@ -5,10 +5,10 @@ import {
 } from 'contentlayer/source-files';
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
 
 const computedFields: ComputedFields = {
@@ -86,10 +86,12 @@ const contentLayerConfig = makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Newsletter, Snippet, OtherPage],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [
+      remarkMdxCodeMeta,
+      remarkGfm
+    ],
     rehypePlugins: [
       rehypeSlug,
-      rehypeCodeTitles,
       rehypePrism,
       [
         rehypeAutolinkHeadings,
