@@ -20,7 +20,6 @@
     "googleapis": "48.0.0",
     "motion": "^10.14.2",
     "next": "12.3.0",
-    "next-auth": "4.10.3",
     "next-contentlayer": "^0.2.8",
     "next-themes": "0.2.0",
     "react": "18.2.0",
