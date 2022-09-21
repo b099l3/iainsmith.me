@@ -13,29 +13,27 @@ logo: 'vscode.svg'
 
 1. Create a snippet file for your project or add it to your [global VSCode snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets)
 1. For project specific create the file: `.vscode/*.code-snippets`
-1. Add the code below
+1. Add the code below inside of some curly brackets `{}`
 1. Then type `stlsnamed` to add the snippet
 
-```json copy wrapLongLines showLineNumbers
-{
-	"StatelessWidget with filename": {
-		"prefix": [
-		  "stlsnamed"
-		],
-		"body": [
-			"import 'package:flutter/material.dart';",
-			"",
-			"class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} extends StatelessWidget {",
-      "  const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}({super.key});",
-			"",
-      "  @override",
-      "  Widget build(BuildContext context) {",
-      "    return ${1:Container()};",
-      "  }",
-      "}",
-			""
-		],
-		"description": "Creates StatelessWidget which shares the name of the file"
-	  },
-}
+```json copy wrapLongLines
+"StatelessWidget with filename": {
+  "prefix": [
+    "stlsnamed"
+  ],
+  "body": [
+    "import 'package:flutter/material.dart';",
+    "",
+    "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} extends StatelessWidget {",
+    "  const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}({super.key});",
+    "",
+    "  @override",
+    "  Widget build(BuildContext context) {",
+    "    return ${1:Container()};",
+    "  }",
+    "}",
+    ""
+  ],
+  "description": "Creates StatelessWidget which shares the name of the file"
+},
 ```
