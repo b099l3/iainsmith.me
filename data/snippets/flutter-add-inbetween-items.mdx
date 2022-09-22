@@ -1,0 +1,36 @@
+---
+title: 'Add items inbetween'
+description: 'Add items inbetween others in a list'
+logo: 'dart.svg'
+---
+
+This will add items inbetween items in a lists, e.g.:
+
+> ['1','x','1','x','1','x','1','x','1']
+
+Can be useful for adding spaces or seperators inbetween widgets.
+
+``` dart copy
+import 'package:collection/collection.dart';
+
+final items = ['1','1','1','1','1'];
+
+void main() {  
+  final itemsWith = items.expandIndexed(addInbetween).toList();
+  print(itemsWith);
+}
+
+Iterable<String> addInbetween(
+  int index, 
+  String item,
+  ) sync* {
+  yield item;
+
+  // Only add a space if there is more that one and
+  // it is not the last one
+  if (items.length > 1 && index != items.length - 1) {
+    yield 'x';
+  }
+}
+
+```
