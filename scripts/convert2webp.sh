@@ -1,4 +1,3 @@
-#!/usr/bin/zsh
 
 search_dir=../public/static/images
 
