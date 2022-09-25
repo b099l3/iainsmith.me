@@ -52,19 +52,19 @@ Most Flutter developers start with the standard install by following the officia
 
 These problems have a similar issue; managing the one version of Flutter. You may need to swap to different versions based on a project's setup rather than keeping on one version. Many developers stick with the one global version of Flutter and swap by using the commands below:
 
-```c
-// Upgrade your copy of Flutter
+```bash
+# Upgrade your copy of Flutter
 flutter upgrade
 
-// Downgrade Flutter to the last active version
-// for the current channel.
+# Downgrade Flutter to the last active version
+# for the current channel.
 flutter downgrade
 
-// List or switch Flutter channels.
+# List or switch Flutter channels.
 flutter channel [master, stable, beta]
 
-// When in your flutter install folder
-// little bit more hands-on
+# When in your flutter install folder
+# little bit more hands-on
 git checkout [flutter build version]
 ```
 
@@ -97,18 +97,18 @@ So with a Version Manager, you could easily swap between all the versions you wa
 
 To install FVM, you can follow the [getting started guide](https://fvm.app/docs/getting_started/installation) on the FVM site. I would follow the standalone setup, as recommended in the guide. I am going to run through how you install on macOS, start by installing FVM with these commands:
 
-```
+```bash copy
 brew tap leoafarias/fvm
 brew install fvm
 ```
 
 Some further setup steps are needed to start using FVM in a project. Firstly, add the flutter SDK folder that FVM uses for your project to the `.gitignore`
 
-> FVM will create a relative symlink in your project from .fvm/flutter_sdk to the cache of the selected version. Add it to your .gitignore
+> FVM will create a relative symlink in your project from `.fvm/flutter_sdk` to the cache of the selected version. Add it to your `.gitignore`
 
 Next, we have to setup our IDE to use the FVM selected version of Flutter. I would recommend automatic version switching rather than manual to keep things simple. For automatic version switching based on the project, we can set the `dart.flutterSdkPath` . Below are the settings for VSCode to set the flutter SDK path and remove the `.fvm` folder from VSCode's search and file watcher. (for Android Studio, check the FVM guide):
 
-```json
+```json copy
 {
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   // Remove .fvm files from search
@@ -128,7 +128,7 @@ As you can see, this sets the Flutter SDK path to the symlinked version of Flutt
 
 You can set up manual version switching by setting
 
-```json
+```json copy
 "dart.flutterSdkPaths": ["/Users/[Your User]/fvm/versions"]
 ```
 
@@ -136,16 +136,16 @@ You can set up manual version switching by setting
 
 We need to install a version of Flutter first to get this folder. The following commands will install the current stable version of Flutter. If you are doing this for a project, I recommend using a specific version, i.e. 2.8.1, not "stable", as stable will change every couple of months. Commands to install and use a Flutter version using FVM:
 
-```c
-// Show all available versions of Flutter
+```bash
+# Show all available versions of Flutter
 fvm releases
 
-// Downloads and Installs the version specified,
-// can use "stable" tag
+# Downloads and Installs the version specified,
+# can use "stable" tag
 fvm install 2.8.1
 
-// Once in the project folder,
-// sets the version of Flutter for the project
+# Once in the project folder,
+# sets the version of Flutter for the project
 fvm use 2.8.1
 ```
 
@@ -171,7 +171,7 @@ If I was to create another project, I could follow the same commands but select 
 
 The developer for FVM has also added some extra commands to suit other needs a Flutter developer might want. I won't go into details as I haven't needed to use them, but here is a list of all the commands FVM offers:
 
-```
+```markdown
 Available commands:
   config     Set configuration for FVM
   dart       Proxies Dart Commands
@@ -192,7 +192,7 @@ Available commands:
 
 Now you might be thinking, this is great, I don't need anything else! If you are only going to develop Flutter apps, you might be correct. But as a developer, you know things change, and there might come a time when you need to run Ruby or Node for a project. You could download a version manager for each of those tools and learn how to use them separately, e.g. here are the commands `rbenv`, a popular Ruby Version Manager offers:
 
-```
+```markdown
 Some useful rbenv commands are:
    commands    List all available rbenv commands
    local       Set or show the local
@@ -230,7 +230,7 @@ We want a standardised version manager that can easily add new tools/languages/f
 
 ### asdf-vm
 
-[Asdf](https://asdf-vm.com/) is similar to the version managers we have talked about but with one big difference. It can manage multiple tools runtime versions on a per-project basis. Asdf also uses shims to select the version you are using. Shims are lightweight executables that pass your command along to asdf. They are at the start of your PATH, so the command execution will search them first when running a command. Once we have installed Flutter through asdf, I will show how powerful shims can be.
+[Asdf](https://asdf-vm.com/) is similar to the version managers we have talked about but with one big difference. It can manage multiple tools runtime versions on a per-project basis. Asdf also uses shims to select the version you are using. Shims are lightweight executables that pass your command along to asdf. They are at the start of your `PATH`, so the command execution will search them first when running a command. Once we have installed Flutter through asdf, I will show how powerful shims can be.
 You first install asdf and then install a plugin for your selected tool. For example, I will set up Flutter to show the benefits asdf has over other solutions.
 
 <ImageCenter
@@ -243,58 +243,58 @@ You first install asdf and then install a plugin for your selected tool. For exa
 
 Asdf has a good [setup guide](http://asdf-vm.com/guide/getting-started.html#_1-install-dependencies), and like before; I will show the setup for macOS. Start by installing asdf with this command:
 
-```
+```bash copy
 brew install asdf
 ```
 
 The next steps depend on what shell you use. I use [Oh My Zsh](https://ohmyz.sh/), but if you use bash or other, you can check the steps in the [official guide](http://asdf-vm.com/guide/getting-started.html#_3-install-asdf). Add the following to your `.zshrc` file. The order is important:
 
-```c
-// Add this near the top of the file
-// This is to allow for auto-completion in the terminal
+``` bash copy
+# Add this near the top of the file
+# This is to allow for auto-completion in the terminal
 autoload -U +X bashcompinit && bashcompinit
 
-// Add asdf to the plugin list for OhMyZsh
-// I also had git here
+# Add asdf to the plugin list for OhMyZsh
+# I also had git here
 plugins=(asdf)
 
-//then add this at the end of the file
+# Then add this at the end of the file
 unset ASDF_DIR
 source $(brew --prefix asdf)/libexec/asdf.sh
 ```
 
 Now asdf is installed, we can add the [Flutter plugin](https://github.com/oae/asdf-flutter). This plugin includes both Flutter and Dart. There are plugins for most libraries or frameworks, and if there isn't, you can create a plugin. For Flutter, we need to run:
 
-```
+```bash copy
 asdf plugin-add flutter
 ```
 
 And now we need to install a version of Flutter with the following:
 
-```c
-// List all versions of Flutter that you can install
+```bash
+# List all versions of Flutter that you can install
 asdf list all flutter
 
-// Install a version of Flutter
-// asdf doesn't have channels
-// as this is a Flutter specific choice
-// but you can add an optional channel
-// to the end of the version like so
+# Install a version of Flutter
+# asdf doesn't have channels
+# as this is a Flutter specific choice
+# but you can add an optional channel
+# to the end of the version like so
 asdf install flutter 2.8.1-stable
 asdf install flutter 2.8.1
 
-// There is also a 'latest' keyword that
-// will install the latest stable version
+# There is also a 'latest' keyword that
+# will install the latest stable version
 asdf install flutter latest
 ```
 
 With a Flutter version installed, we can install a project-specific version and a global version. For the project-specific version, we need to change to the project directory and run the following:
 
-```c
-// to set this project to the latest stable
+```bash
+# to set this project to the latest stable
 asdf local flutter latest
 
-// Or setting a specific version
+# Or setting a specific version
 asdf local flutter 2.8.1-stable
 ```
 
@@ -304,9 +304,9 @@ After running this command, asdf will create a `.tool-versions` file to track th
 
 We can also set the global version of Flutter on the dev environment using this command:
 
-```c
-// This will set the global version
-// of Flutter for this machine
+```bash
+# This will set the global version
+# of Flutter for this machine
 asdf global flutter 2.8.1-stable
 ```
 
@@ -338,7 +338,7 @@ If you are using VSCode and see this error:
 You can set the `FLUTTER_ROOT` environment variable in your dot file, e.g., `.zshrc`
 like this:
 
-```bash
+```bash copy
 export FLUTTER_ROOT="$(asdf where flutter)
 ```
 

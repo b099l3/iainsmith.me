@@ -21,12 +21,18 @@ function getStringFromChildren(children: any) {
   }
 }
 
-
 function makeTimer(callback: () => void) {
   var myInterval = setInterval(function(){
     callback();
     clearInterval(myInterval);
 },650);
+}
+
+function getLanguage(className: string) : string {
+  return className?.match(/(?<=language-)(\w.*?)\b/) != null
+  ? className.match(/(?<=language-)(\w.*?)\b/)[0]
+  : null;
+
 }
 
 const CustomCodeBlock = (props) => {
@@ -38,9 +44,7 @@ const CustomCodeBlock = (props) => {
     return (<code>{children}</code>);
   } else {
 
-  const language = className?.match(/(?<=language-)(\w.*?)\b/) != null
-  ? className.match(/(?<=language-)(\w.*?)\b/)[0]
-  : "dart";
+  const language = getLanguage(className) ?? getLanguage(children.props.className);
 
   const code = getStringFromChildren(children);
 
