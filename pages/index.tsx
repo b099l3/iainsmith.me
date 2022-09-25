@@ -4,7 +4,6 @@ import Link from 'next/link';
 import BlogPostCard from '../components/BlogPostCard';
 import Container from '../components/Container';
 import ImageWithTheme from '../components/ImageWithTheme';
-import Subscribe from '../components/Subscribe';
 
 
 export default function Home() {
@@ -73,7 +72,9 @@ export default function Home() {
             </a>
           </Link>
           <span className="h-16" />
-          <Subscribe />
+
+        {/* Disabling this till I start a newsletter */}
+          {/* <Subscribe /> */}
         </div>
       </Container>
     </Suspense>

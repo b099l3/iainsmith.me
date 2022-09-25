@@ -1,6 +1,5 @@
 import Category from 'components/Category';
 import Container from 'components/Container';
-import Subscribe from 'components/Subscribe';
 import ViewCounter from 'components/ViewCounter';
 import type { Blog } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
@@ -56,9 +55,10 @@ export default function BlogLayout({
         <div className="w-full mt-4 prose dark:prose-dark max-w-none">
           {children}
         </div>
-        <div className="w-full mt-8">
+        {/* Disabling this till I start a newsletter */}
+        {/* <div className="w-full mt-8">
           <Subscribe />
-        </div>
+        </div> */}
         <div className="text-sm text-gray-700 dark:text-gray-300">
           <a
             href={discussUrl(post.slug)}
