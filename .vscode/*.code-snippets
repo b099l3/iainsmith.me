@@ -1,5 +1,5 @@
 {
-  "day file scaffold": {
+  "new blog post": {
     "prefix": [
       "newpost",
     ],
@@ -17,5 +17,21 @@
 
     ],
     "description": "new blog post"
+  },
+  "New code snippet": {
+    "prefix": [
+      "newsnippet",
+    ],
+    "body": [
+      "---",
+      "title: '${1:title}'",
+      "description: '${2:description}'",
+      "logo: '${3|flutter,dart,vscode|}.svg'",
+      "---",
+      "",
+      "${4:content}",
+      "",
+    ],
+    "description": "new code snippet"
   },
 }
