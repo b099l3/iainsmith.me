@@ -5,6 +5,7 @@ import type { Blog } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import type { PropsWithChildren } from 'react';
+import { BsArrowUpCircle } from "react-icons/bs";
 
 
 const editUrl = (slug) =>
@@ -59,22 +60,31 @@ export default function BlogLayout({
         {/* <div className="w-full mt-8">
           <Subscribe />
         </div> */}
-        <div className="text-sm text-gray-700 dark:text-gray-300">
-          <a
+        <div className="flex flex-row justify-between w-full my-16 text-sm text-gray-700 dark:text-gray-300">
+        <div><a
+            className="flex flex-row space-x-8"
             href={discussUrl(post.slug)}
             target="_blank"
             rel="noopener noreferrer"
           >
             {'Discuss on Twitter'}
           </a>
-          {`  🍻  `}
-          <a
+          </div>
+          <div>
+          <BsArrowUpCircle color="gray" fontSize="1.5em"
+            onClick={() => {
+              window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+            }}
+          /></div>
+          <div>
+          <a className="flex flex-row space-x-8"
             href={editUrl(post.slug)}
             target="_blank"
             rel="noopener noreferrer"
-          >
+            >
             {'Edit on GitHub'}
           </a>
+            </div>
         </div>
       </article>
     </Container>
