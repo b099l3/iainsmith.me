@@ -7,6 +7,9 @@ export default function ImageWithTheme(props) {
   return (
     <Image
       alt={props.alt}
+      height={props.height}
+      width={props.width}
+      priority={props.priority}
       src={resolvedTheme === 'light' ? props.light : props.dark}
       {...props}
     />

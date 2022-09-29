@@ -5,10 +5,12 @@ import BlogPostCard from '../components/BlogPostCard';
 import Container from '../components/Container';
 import ImageWithTheme from '../components/ImageWithTheme';
 
+import { FiArrowRight } from "react-icons/fi";
+
 
 export default function Home() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<div>loading...</div>}>
       <Container>
         <div className="flex flex-col items-start justify-center max-w-2xl pb-16 mx-auto border-gray-200 dark:border-gray-700">
           <div className="flex flex-col-reverse items-start sm:flex-row">
@@ -19,7 +21,9 @@ export default function Home() {
               dark={`/logo-dark.svg`}
               width={1627 / 2}
               height={700 / 2}
+              priority={true}
             />
+
 
           <h2 className="mb-12 tracking-tight text-center text-black text-l md:text-xl dark:text-white">
               Helping developers build apps efficiently. 
@@ -55,20 +59,11 @@ export default function Home() {
           <Link href="/blog">
             <a className="flex h-6 mt-8 leading-7 text-gray-600 transition-all rounded-lg dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
               Read all posts
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="w-6 h-6 ml-1"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17.5 12h-15m11.667-4l3.333 4-3.333-4zm3.333 4l-3.333 4 3.333-4z"
-                />
-              </svg>
+              
+          <FiArrowRight color="currentColor" fontSize="1.5em"
+            onClick={() => {
+              window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+            }}/>
             </a>
           </Link>
           <span className="h-16" />
