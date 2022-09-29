@@ -30,7 +30,7 @@ export default function Document(props) {
     <Html lang="en">
       <Head>
         <link
-          rel="preload"
+          rel="prefetch"
           href="/fonts/Outfit-VariableFont_wght.ttf"
           as="font"
           type="font/ttf"

@@ -1,6 +1,6 @@
-import useSWR from 'swr';
-import { useEffect } from 'react';
 import { animate } from 'motion';
+import { useEffect } from 'react';
+import useSWR from 'swr';
 
 import fetcher from 'lib/fetcher';
 import { NowPlayingSong } from 'lib/types';
@@ -57,7 +57,7 @@ function AnimatedBars() {
   }, []);
 
   return (
-    <div className="w-auto flex items-end overflow-hidden">
+    <div className="flex items-end w-auto overflow-hidden">
       <span
         id="bar1"
         className="w-1 mr-[3px] h-2 bg-gray-300 dark:bg-gray-500 opacity-75"
@@ -78,7 +78,7 @@ export default function NowPlaying() {
   const { data } = useSWR<NowPlayingSong>('/api/now-playing', fetcher);
 
   return (
-    <div className="flex flex-row-reverse items-center sm:flex-row mb-8 space-x-0 sm:space-x-2 w-full">
+    <div className="flex flex-row-reverse items-center w-full mb-8 space-x-0 sm:flex-row sm:space-x-2">
       {data?.songUrl ? (
         <AnimatedBars />
       ) : (
@@ -89,10 +89,10 @@ export default function NowPlaying() {
           />
         </svg>
       )}
-      <div className="inline-flex flex-col sm:flex-row w-full max-w-full truncate">
+      <div className="inline-flex flex-col w-full max-w-full truncate sm:flex-row">
         {data?.songUrl ? (
           <a
-            className="capsize text-gray-800 dark:text-gray-200 font-medium  max-w-max truncate"
+            className="font-medium text-gray-800 truncate capsize dark:text-gray-200 max-w-max"
             href={data.songUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -100,14 +100,14 @@ export default function NowPlaying() {
             {data.title}
           </a>
         ) : (
-          <p className="capsize text-gray-800 dark:text-gray-200 font-medium">
+          <p className="font-medium text-gray-800 capsize dark:text-gray-200">
             Not Playing
           </p>
         )}
-        <span className="capsize mx-2 text-gray-500 dark:text-gray-300 hidden sm:block">
+        <span className="hidden mx-2 text-gray-500 capsize dark:text-gray-300 sm:block">
           {' – '}
         </span>
-        <p className="capsize text-gray-500 dark:text-gray-300 max-w-max truncate">
+        <p className="text-gray-500 truncate capsize dark:text-gray-300 max-w-max">
           {data?.artist ?? 'Spotify'}
         </p>
       </div>
