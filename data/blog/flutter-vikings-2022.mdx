@@ -1,0 +1,103 @@
+---
+title: '💎 Sunstone at Flutter Vikings 2022 '
+publishedAt: '2022-09-14'
+summary: 'I built a tool to help me navigate the talks at Flutter Vikings 2022. In this post, I will explain how I made it.'
+image: '/static/images/flutter-vikings-2022/banner.webp'
+category: 'Flutter'
+---
+
+<Image
+  alt={`Sunstone`}
+  src={`/static/images/flutter-vikings-2022/banner.webp`}
+  width={1280}
+  height={640}
+  priority
+/>
+
+It was the weekend before Flutter Vikings 2022, and I was looking to plan my time at the conference. I hopped on the [site](https://fluttervikings.com/) and started to plan. After a few minutes of trying to build a schedule, I decided this was too difficult; there must be an easier way. Like a typical developer, I thought - "I know I'll build an app to plan my time". And so it began.
+
+# 👨🏻‍💻 Getting down to some coding
+As this was only for me, I decided I could make a quick web app. Being a web app comes with the benefit of no app store approval process, as I only had a few days before the conference started. 
+
+<ImageCenter
+  alt={`Ragnor using a sunstone in Vikings TV show`}
+  src={`/static/images/flutter-vikings-2022/Viking-Sunstone-Ragnor-600x390-600x390.jpeg`}
+  width={600}
+  height={390}
+  priority
+/>
+
+I remember watching the Vikings TV show where a sunstone was used to navigate the sea. I thought this was a great story and could use that as the item to navigate Flutter Vikings, so I purchased the domain name https://fluttersunstone.com and planned to deploy my app to it. 
+
+Usually, I would design the app first, but as the data was available, I thought it would be more sensible to start by seeing how easy it would be to model and import.
+
+## 💾 Getting the Data
+All of the data was on the official website, roughly 39 talks. I didn't think this was enough to write a scrapper or data gatherer. Also, modelling the data was relatively easy, as conference data is a typical example of data modelling. I created a couple of classes for the talk, location and speaker objects and constructed the data manually by copying and pasting the information into a static class. This process only took me about an hour, and in the end, I had what I needed to start building the app. I could move on to how I would display and interact with the data.
+
+## 📱Creating an app
+I had previously built a few Flutter web projects and remembered that path navigation and route guarding are essential in web apps. To help solve this, I used [auto-route](https://pub.dev/packages/auto_route) as I have used this in most of my apps and the routing guards. I planned the navigation flow as follows:
+1. View the home page or the schedule if the user has created one
+2. Select a talk for a given time, and repeat until the user has filled their schedule
+3. View the completed schedule or make changes
+
+For URL routes, it would redirect to the home page apart from talk selection pages, which the user could navigate to if they knew the time interval. Also, if the user had a saved schedule, the home page would redirect to the schedule page. This covered all the route cases so the user wouldn't end up in the wrong flow or mess up their schedule by accidentally going to the incorrect URLs.
+
+With the app nearly finished, it was time to look into how I would host it. I had never hosted a Flutter web app before but had used GitHub pages, but could I use Flutter with them? [Erick](https://twitter.com/CptPixel), the dude that made the flame engine, has created a GitHub action, [flutter-gh-pages](https://github.com/bluefireteam/flutter-gh-pages), that deploys your Flutter app to Github pages, Perfect! Flutter GH pages action was simple to use, but I also needed to set up my custom domain. 
+
+This required a few configuration changes to the GitHub action and adding a file named `CNAME` to the root and the web folder whose contents are my domain, i.e., `www.fluttersunstone.com`. I ran a few tests, and the Flutter web app was deployed successfully to the GitHub page.
+
+At this point, I moved to work on persisting the schedule. The data was simple, so I serialised it to json and saved it in secure storage. I also wanted a way to manage the app's state, so I decided I would try out [riverpod](https://riverpod.dev/). I hadn't used it in a while and wanted to see what had changed since I last used it. I found it straightforward to use, and I provided the saved schedule data and a timer to show a pointer to what was on. Now that the app was taking shape, I decided to move to the design side.
+
+<Alert type={`info`} icon={'💡'} title={'After being at the Conference'}>
+After attending Remi's talk on Riverpod 2.0 on the first day of the conference, I realised I could [simplify my code](https://github.com/b099l3/Sunstone/blob/master/lib/core/application/schedule_provider.dart#L11) further
+</Alert>
+
+## 🎨 Adding some style
+When starting with design, finding the right font is where I usually start. I found a free 'Norse' font that fitted the Viking theme, similar to the official site's font. At this point, I was boarding the plane to Oslo, so I decided to make the assets while flying. I quickly downloaded some gem and crystal reference images and boarded the flight. I like to use Figma to design, and it worked brilliantly offline. This was the result once I arrived in Oslo:
+
+
+<ImageCenter
+  alt={`The Sunstone icon`}
+  src={`/static/images/flutter-vikings-2022/sunstone.webp`}
+  width={189}
+  height={200}
+  priority
+/>
+
+All I had left was tidying up some of the code and adding more features and assets. Boom, it was done.
+
+# 💎 The final app
+I was pretty pleased with what I built in a couple of days:
+
+<ImageGridThree
+  alt1={`The home screen in the app`}
+  src1={`/static/images/flutter-vikings-2022/home-392x840.webp`}
+  width1={385}
+  height1={842}
+  alt2={`Selecting talks in the app`}
+  src2={`/static/images/flutter-vikings-2022/selection-386x839.webp`}
+  width2={385}
+  height2={839}
+  alt3={`The schedule view in the app`}
+  src3={`/static/images/flutter-vikings-2022/schedule-375x675.jpg`}
+  width3={375}
+  height3={675}
+  priority
+/>
+
+I added a feature that let you change your talk selection and had a marker to show what was on. I then tweeted to let others know there was a tool to help choose talks. 
+
+Finally, I thought it would be good to add a section in the app to let people know who I am, as I have never met anyone going to Flutter Vikings in real life.
+
+<ImageCenter
+  alt={`The get to know me feature in the app`}
+  src={`/static/images/flutter-vikings-2022/me-feature-385x840.webp`}
+  width={385}
+  height={840}
+  priority
+/>
+
+While at the conference, I saw people using it; it was a success. A group of friendly Swedish folks chatted to me about how they were using it and liked the UX of the app. 
+
+Building this quick app was fun, and I enjoyed the process and the feedback I got while at the conference. You can view the app's source code [here](https://github.com/b099l3/Sunstone). If you used the app or have feedback, let me know on Twitter.
+

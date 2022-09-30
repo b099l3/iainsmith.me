@@ -3,6 +3,7 @@ import Caption from 'components/Caption';
 import ConsCard from 'components/ConsCard';
 import CustomCodeBlock from 'components/CustomCodeBlock';
 import ImageCenter from 'components/ImageCenter';
+import ImageGridThree from 'components/ImageGridThree';
 import ImageWithTheme from 'components/ImageWithTheme';
 import Analytics from 'components/metrics/Analytics';
 import YouTubeCard from 'components/metrics/Youtube';
@@ -49,6 +50,7 @@ const MDXComponents = {
   Image: RoundedImage,
   ImageWithTheme: RoundedImageWithTheme,
   ImageCenter,
+  ImageGridThree,
   Callout,
   Caption,
   pre: CustomCodeBlock,
