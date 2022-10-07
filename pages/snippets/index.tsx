@@ -13,7 +13,7 @@ export default function Snippets({
       description="A collection of code snippets – including serverless functions, Node.js scripts, and CSS tricks."
     >
       <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
-        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
+        <h1 className="pb-4 mb-4 text-3xl font-bold tracking-tight text-transparent md:text-5xl bg-clip-text bg-gradient-to-r from-indigo-500 via-teal-500 to-indigo-500 animate-text">
           Code Snippets
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-400">

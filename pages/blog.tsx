@@ -22,7 +22,7 @@ export default function Blog({
         description="Thoughts on the software industry, programming, tech, videography, music, and my personal life."
       >
         <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">
-          <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
+          <h1 className="pb-4 mb-4 text-3xl font-bold tracking-tight text-transparent md:text-5xl bg-clip-text bg-gradient-to-r from-indigo-500 via-teal-500 to-indigo-500 animate-text">
             Blog
           </h1>
           <p className="mb-4 text-gray-600 dark:text-gray-400">
@@ -30,7 +30,7 @@ export default function Blog({
               In total, I've written ${posts.length} articles on my blog. I write to share what I learned.
               Use the search below to filter by title, category or sub text.`}
           </p>
-          <div className="relative w-full mb-4">
+          <div className="relative w-full mb-16">
             <input
               aria-label="Search articles"
               type="text"
@@ -62,9 +62,9 @@ export default function Blog({
             </>
           )} */}
           {/* <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white"> */}
-          <h3 className="mt-8 mb-4 text-2xl font-bold text-transparent md:text-4xl bg-clip-text bg-gradient-to-r from-indigo-500 via-teal-500 to-indigo-500 animate-text">
+          {/* <h3 className="mt-8 mb-4 text-2xl font-bold text-transparent md:text-4xl bg-clip-text bg-gradient-to-r from-indigo-500 via-teal-500 to-indigo-500 animate-text">
             All Posts
-          </h3>
+          </h3> */}
           {!filteredBlogPosts.length && (
             <p className="mb-4 text-gray-600 dark:text-gray-400">
               No posts found.
