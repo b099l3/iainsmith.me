@@ -1,6 +1,5 @@
 import BlogPost from 'components/BlogPost';
 import Container from 'components/Container';
-import TopBlogPosts from 'components/TopBlogPosts';
 import { allBlogs } from 'contentlayer/generated';
 import { pick } from 'lib/utils';
 import { InferGetStaticPropsType } from 'next';
@@ -54,15 +53,16 @@ export default function Blog({
               />
             </svg>
           </div>
-          {!searchValue && (
+          {/* {!searchValue && (
             <>
               <h3 className="mt-8 mb-4 text-2xl font-bold text-transparent md:text-4xl bg-clip-text bg-gradient-to-r from-indigo-500 via-teal-500 to-indigo-500 animate-text">
                 Most Popular
               </h3>
               <TopBlogPosts />
             </>
-          )}
-          <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
+          )} */}
+          {/* <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white"> */}
+          <h3 className="mt-8 mb-4 text-2xl font-bold text-transparent md:text-4xl bg-clip-text bg-gradient-to-r from-indigo-500 via-teal-500 to-indigo-500 animate-text">
             All Posts
           </h3>
           {!filteredBlogPosts.length && (
