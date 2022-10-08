@@ -29,10 +29,10 @@ function makeTimer(callback: () => void) {
 }
 
 function getLanguage(className: string) : string {
-  return className?.match(/(?<=language-)(\w.*?)\b/) != null
-  ? className.match(/(?<=language-)(\w.*?)\b/)[0]
+  var lang = className?.split('-')[1] != null
+  ? className.split('-')[1]
   : null;
-
+  return lang;
 }
 
 const CustomCodeBlock = (props) => {
