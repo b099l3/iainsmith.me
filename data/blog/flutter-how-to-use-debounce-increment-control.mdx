@@ -1,0 +1,134 @@
+---
+title: 'How to make your Flutter app feel extra smooth using debounce with BLoC'
+publishedAt: '2022-09-25'
+summary: 'In this post, I will use a reactive operator called debounce on an API-linked stepper control. Achieving a smoother and more user-friendly app.'
+image: '/static/images/banner.webp'
+category: 'Flutter'
+---
+
+Some controls in mobile development suit a more reactive nature to feel right when the user interacts with them. This reactive approach often prevents unwanted operations or calls to expensive, time-consuming resources like network or database calls. Reactive solutions are a valuable tool in any mobile developer's toolbox. This post will step through one case where a reactive solution is more suited.
+
+# The problem
+In this post, we will take an app that increments a number and sends this to an API (we will fake this by having a 1-second delay to mimic a real API call). You will know the traditional counter app example if you are familiar with Flutter. They are prevalent, but this one has a twist. You have a separate button to increment or decrement the counter. Let's take a look at the starter app, and you can find the code [here](https://github.com/b099l3/Examples/tree/debounce-start/flutter-how-to-use-debounce-increment-control/debounce_bloc):
+
+
+<ImageCenter
+  alt={`App without debounce`}
+  src={`/static/images/flutter-how-to-use-debounce-increment-control/app_no_debounce.gif`}
+  width={379}
+  height={757}
+  priority
+/>
+
+As you can see, this control works okay but is making alot of API calls in the background. The App performs an API call every time you hit the plus or minus buttons. This solution is very wasteful; if the user wants to go from 0 to 10, there will be 10 API calls. If we look at the log output, we can see this behaviour:
+
+```
+Making API call with value: 1 
+Making API call with value: 2 
+Making API call with value: 3 
+Making API call with value: 4 
+Received Response from API call of: 1 
+Making API call with value: 5 
+Received Response from API call of: 2 
+Making API call with value: 6 
+Received Response from API call of: 3 
+Making API call with value: 7 
+Received Response from API call of: 4 
+Making API call with value: 8 
+Received Response from API call of: 5 
+Making API call with value: 9 
+Received Response from API call of: 6 
+Received Response from API call of: 7 
+Received Response from API call of: 8 
+Making API call with value: 10 
+Received Response from API call of: 9 
+Received Response from API call of: 10
+```
+
+The log shows ten requests and ten responses. So how can we make a more optimal solution?
+
+# 🛠 The optimal solution
+
+Because Bloc uses streams for its incoming events, we can use reactive operations, such as [debounce](https://reactivex.io/documentation/operators/debounce.html). Debounce will emit an event from the stream after a particular timespan has passed without another event. Another way to think of it is a throttle with a timeout. The image below illustrates how this would work. 
+
+
+
+<ImageCenter
+  alt={`App without debounce`}
+  src={`/static/images/flutter-how-to-use-debounce-increment-control/debounce.png`}
+  width={960}
+  height={600}
+  priority
+/>
+
+You can see that the debounce emits the last value in the repeated events, which is ideal for limiting API calls.
+I will use a package created by the dart team called [stream_transform](https://pub.dev/packages/stream_transform) to provide the debounce operation, but you could easily switch this out for [RxDart](https://pub.dev/packages/rxdart) or an equivalent package. Below I have highlighted the changes to the original App to allow debouncing on the increment control:
+
+```diff
+import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
++import 'package:stream_transform/stream_transform.dart';
+
+part 'counter_bloc.freezed.dart';
+part 'counter_event.dart';
+part 'counter_state.dart';
+
+
++EventTransformer<Event> debounce<Event>({
++  Duration duration = const Duration(milliseconds: 300),
++}) {
++  return (events, mapper) => events.debounce(duration).switchMap(mapper);
++}
+
+class CounterBloc extends Bloc<CounterEvent, CounterState> {
+  CounterBloc({required int initialValue})
+      : super(CounterState.loaded(counter: initialValue)) {
+    on<CounterChanged>(
+      _onCounterChanged,
++      transformer: debounce(),
+    );
+  }
+
+  Future<void> _onCounterChanged(
+    CounterChanged event,
+    Emitter<CounterState> emit,
+  ) async {
+    emit(const CounterState.loading());
+    // FAKE API Call
+    print('Making API call with value: ${event.counter}');
+    await Future.delayed(const Duration(seconds: 1), () {
+      final response = event.counter;
+      print('Received Response from API call of: $response');
+      emit(CounterState.loaded(counter: response));
+    });
+  }
+}
+```
+Let's step through the changes:
+Import the stream_transform package, which provides the debounce method
+Add an Event Transformer, which changes how events are processed. We apply the `debounce` with a timeout to the incoming events. Then we add a `switchMap` that maps events to a Stream and emits values from the debounce stream. Essentially allows the original stream to continue being used by the UI.
+Pass the Event Transformer to the transformer parameter on the `on<CounterChanged>` function
+
+Now that we have it set up, let's see the improved App
+
+# 🏡 The result
+
+As you can now see, the App feels alot smoother. The user can increment the count to a value without having to see a loader until they stop interaction.
+
+<ImageCenter
+  alt={`App without debounce`}
+  src={`/static/images/flutter-how-to-use-debounce-increment-control/app_debounce.gif`}
+  width={379}
+  height={757}
+  priority
+/>
+
+We can also see from the log output that the App makes fewer API calls:
+
+```
+Making API call with value: 10 
+Received Response from API call of: 10
+```
+
+Perfect! Smooth UI and more efficient API calls. If you want the code, you can check it out on my GitHub [here](https://github.com/b099l3/Examples/tree/main/flutter-how-to-use-debounce-increment-control/debounce_bloc)
+
