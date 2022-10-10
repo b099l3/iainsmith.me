@@ -1,14 +1,14 @@
 ---
-title: 'How to make your Flutter app feel extra smooth using debounce with BLoC'
+title: '😏 How to make your Flutter app feel extra smooth using debounce with BLoC'
 publishedAt: '2022-10-10'
 summary: 'In this post, I will use a reactive operator called debounce on an API-linked stepper control. Achieving a smoother and more user-friendly app.'
 image: '/static/images/banner.webp'
 category: 'Flutter'
 ---
 
-Some controls in mobile development suit a more reactive nature to feel right when the user interacts with them. This reactive approach often prevents unwanted operations or calls to expensive, time-consuming resources like network or database calls. Reactive solutions are a valuable tool in any mobile developer's toolbox. This post will step through one case where a reactive solution is more suited.
+Some controls in mobile development suit a more reactive nature to feel right when the user interacts with them. This reactive approach often prevents unwanted operations or calls to expensive, time-consuming resources like network or database calls. Reactive solutions are a valuable tool in any mobile developer's toolbox 🧰. This post will step through one case where a reactive solution is more suited.
 
-# The problem
+# 😩 The problem
 In this post, we will take an app that increments a number and sends this to an API (we will fake this by having a 1-second delay to mimic a real API call). You will know the traditional counter app example if you are familiar with Flutter. They are prevalent, but this one has a twist. You have a separate button to increment or decrement the counter. Let's take a look at the starter app, and you can find the code [here](https://github.com/b099l3/Examples/tree/debounce-start/flutter-how-to-use-debounce-increment-control/debounce_bloc):
 
 
@@ -47,7 +47,7 @@ Received Response from API call of: 10
 
 The log shows ten requests and ten responses. So how can we make a more optimal solution?
 
-# 🛠 The optimal solution
+# 💡 The optimal solution
 
 Because Bloc uses streams for its incoming events, we can use reactive operations, such as [debounce](https://reactivex.io/documentation/operators/debounce.html). Debounce will emit an event from the stream after a particular timespan has passed without another event. Another way to think of it is a throttle with a timeout. The image below illustrates how this would work. 
 
@@ -109,9 +109,9 @@ Let's step through the changes:
 2. Add an Event Transformer, which changes how events are processed. We apply the `debounce` with a timeout to the incoming events. Then we add a `switchMap` that maps events to a Stream and emits values from the debounce stream. Essentially allows the original stream to continue being used by the UI.
 3. Pass the Event Transformer to the transformer parameter on the `on<CounterChanged>` function
 
-Now that we have it set up, let's see the improved App
+Now that we have it set up, let's see the improved App.
 
-# 🏡 The result
+# 😍 The result
 
 As you can now see, the App feels alot smoother. The user can increment the count to a value without having to see a loader until they stop interaction.
 
@@ -130,5 +130,5 @@ Making API call with value: 10
 Received Response from API call of: 10
 ```
 
-Perfect! Smooth UI and more efficient API calls. If you want the code, you can check it out on my GitHub [here](https://github.com/b099l3/Examples/tree/main/flutter-how-to-use-debounce-increment-control/debounce_bloc)
+Perfect! Smooth UI and more efficient API calls. If you want the code, you can check it out on my GitHub [here](https://github.com/b099l3/Examples/tree/main/flutter-how-to-use-debounce-increment-control/debounce_bloc) Or if you want to chat about it hit me up on Twitter.
 
