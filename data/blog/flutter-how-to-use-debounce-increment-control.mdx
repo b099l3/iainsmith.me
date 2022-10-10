@@ -1,6 +1,6 @@
 ---
 title: 'How to make your Flutter app feel extra smooth using debounce with BLoC'
-publishedAt: '2022-09-25'
+publishedAt: '2022-10-10'
 summary: 'In this post, I will use a reactive operator called debounce on an API-linked stepper control. Achieving a smoother and more user-friendly app.'
 image: '/static/images/banner.webp'
 category: 'Flutter'
@@ -105,9 +105,9 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
 }
 ```
 Let's step through the changes:
-Import the stream_transform package, which provides the debounce method
-Add an Event Transformer, which changes how events are processed. We apply the `debounce` with a timeout to the incoming events. Then we add a `switchMap` that maps events to a Stream and emits values from the debounce stream. Essentially allows the original stream to continue being used by the UI.
-Pass the Event Transformer to the transformer parameter on the `on<CounterChanged>` function
+1. Import the stream_transform package, which provides the debounce method
+2. Add an Event Transformer, which changes how events are processed. We apply the `debounce` with a timeout to the incoming events. Then we add a `switchMap` that maps events to a Stream and emits values from the debounce stream. Essentially allows the original stream to continue being used by the UI.
+3. Pass the Event Transformer to the transformer parameter on the `on<CounterChanged>` function
 
 Now that we have it set up, let's see the improved App
 
