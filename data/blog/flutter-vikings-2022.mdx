@@ -32,13 +32,13 @@ I remember watching the Vikings TV show where a sunstone was used to navigate th
 Usually, I would design the app first, but as the data was available, I thought it would be more sensible to start by seeing how easy it would be to model and import.
 
 ## 💾 Getting the Data
-All of the data was on the official website, roughly 39 talks. I didn't think this was enough to write a scrapper or data gatherer. Also, modelling the data was relatively easy, as conference data is a typical example of data modelling. I created a couple of classes for the talk, location and speaker objects and constructed the data manually by copying and pasting the information into a static class. This process only took me about an hour, and in the end, I had what I needed to start building the app. I could move on to how I would display and interact with the data.
+The data was on the official website, with roughly 39 talks. I didn't think this was enough to write a scrapper or data gatherer. Also, modelling the data was relatively easy, as conference data is a typical example of data modelling. I created a couple of classes for the talk, location and speaker objects and constructed the data manually by copying and pasting the information into a static class. This process only took me about an hour, and in the end, I had what I needed to start building the app. I could move on to how I would display and interact with the data.
 
 ## 📱Creating an app
-I had previously built a few Flutter web projects and remembered that path navigation and route guarding are essential in web apps. To help solve this, I used [auto-route](https://pub.dev/packages/auto_route) as I have used this in most of my apps and the routing guards. I planned the navigation flow as follows:
-1. View the home page or the schedule if the user has created one
-2. Select a talk for a given time, and repeat until the user has filled their schedule
-3. View the completed schedule or make changes
+I had previously built a few Flutter web projects and remembered that path navigation and route guarding are essential in web apps. To help solve this, I used [auto-route](https://pub.dev/packages/auto_route), as I have used this in most of my apps. I planned the navigation as follows:
+1. The first page is the home page; however, if the user has selected talks, then the schedule page will show
+2. After hitting the gem on the home page, the user can select a talk for a given time and repeat until the schedule is filled 
+3. The final page will allow the user to view the completed schedule, reset or make changes
 
 For URL routes, it would redirect to the home page apart from talk selection pages, which the user could navigate to if they knew the time interval. Also, if the user had a saved schedule, the home page would redirect to the schedule page. This covered all the route cases so the user wouldn't end up in the wrong flow or mess up their schedule by accidentally going to the incorrect URLs.
 
@@ -90,7 +90,7 @@ I added a feature that let you change your talk selection and had a marker to sh
 Finally, I thought it would be good to add a section in the app to let people know who I am, as I have never met anyone going to Flutter Vikings in real life.
 
 <ImageCenter
-  alt={`The get to know me feature in the app`}
+  alt={`The get to know Iain feature in the app`}
   src={`/static/images/flutter-vikings-2022/me-feature-385x840.webp`}
   width={385}
   height={840}
@@ -100,4 +100,5 @@ Finally, I thought it would be good to add a section in the app to let people kn
 While at the conference, I saw people using it; it was a success. A group of friendly Swedish folks chatted to me about how they were using it and liked the UX of the app. 
 
 Building this quick app was fun, and I enjoyed the process and the feedback I got while at the conference. You can view the app's source code [here](https://github.com/b099l3/Sunstone). If you used the app or have feedback, let me know on Twitter.
+
 
