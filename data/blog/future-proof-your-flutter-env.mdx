@@ -231,6 +231,7 @@ We want a standardised version manager that can easily add new tools/languages/f
 ### asdf-vm
 
 [Asdf](https://asdf-vm.com/) is similar to the version managers we have talked about but with one big difference. It can manage multiple tools runtime versions on a per-project basis. Asdf also uses shims to select the version you are using. Shims are lightweight executables that pass your command along to asdf. They are at the start of your `PATH`, so the command execution will search them first when running a command. Once we have installed Flutter through asdf, I will show how powerful shims can be.
+
 You first install asdf and then install a plugin for your selected tool. For example, I will set up Flutter to show the benefits asdf has over other solutions.
 
 <ImageCenter
@@ -340,6 +341,19 @@ like this:
 
 ```bash copy
 export FLUTTER_ROOT="$(asdf where flutter)
+```
+
+</Alert>
+
+<Alert
+  type={`info`}
+  title={`Project already has a .tool-versions file?`}
+>
+  
+If you have a project that already uses asdf you can run the following to get the supported tool versions:
+
+```bash copy
+asdf install
 ```
 
 </Alert>
