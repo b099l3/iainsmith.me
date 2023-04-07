@@ -1,0 +1,20 @@
+---
+title: 'Checking widget tree for a BLoC'
+description: 'This checks if a BLoC is in the widget tree, so you can call methods on it, kinda weird to be doing it but...'
+logo: 'flutter.svg'
+---
+
+I have come across this a couple of times, when BLoCs are being reused. Not very common and I bet there is a nicer way to solve this but keeping it as a snippet just in case it comes up again. 
+
+``` dart copy showLineNumbers
+TheCubit? theCubit;
+final hasTheCubit = context.findAncestorWidgetOfExactType<
+    BlocProvider<TheCubit>>();
+if (hasTheCubit != null) {
+  theCubit = context.read<TheCubit>();
+}
+  if (theCubit != null) {
+    theCubit.methodOnCubit(param);
+  }
+```
+
