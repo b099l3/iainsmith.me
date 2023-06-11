@@ -1,9 +1,14 @@
 import BlogPost from 'components/BlogPost';
 import Container from 'components/Container';
-import { allBlogs } from 'contentlayer/generated';
+import type { Blog, Category as BlogCategory } from 'contentlayer/generated';
+import { allBlogs, allCategories } from 'contentlayer/generated';
 import { pick } from 'lib/utils';
 import { InferGetStaticPropsType } from 'next';
 import { Suspense, useState } from 'react';
+
+export interface BlogWithCategories extends Blog {
+  postCategories: BlogCategory[];
+}
 
 export default function Blog({
   posts
@@ -12,7 +17,7 @@ export default function Blog({
   const filteredBlogPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase()) ||
     post.summary.toLowerCase().includes(searchValue.toLowerCase()) ||
-    post.category.toLowerCase().includes(searchValue.toLowerCase())
+    post.categories.includes(searchValue.toLowerCase())
   );
 
   return (
@@ -71,7 +76,7 @@ export default function Blog({
             </p>
           )}
           {filteredBlogPosts.map((post) => (
-            <BlogPost key={post.title} {...post} />
+            <BlogPost key={post.title} {...post}/>
           ))}
         </div>
       </Container>
@@ -81,11 +86,20 @@ export default function Blog({
 
 export function getStaticProps() {
   const posts = allBlogs
-    .map((post) => pick(post, ['slug', 'title', 'category', 'summary', 'publishedAt']))
+  .filter((post) => !post.categories.includes('draft'))
+  .map((post) => {
+    const postCategories = post.categories.map((cat) => {
+      return allCategories.find((category) => category.slug === cat);
+    });
+    return {
+      ...post,
+      postCategories: postCategories || [],
+    };
+  })
+    .map((post) => pick(post, ['slug', 'title', 'categories', 'summary', 'publishedAt', 'postCategories']))
     .sort(
       (a, b) =>
         Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
     );
-
   return { props: { posts } };
 }

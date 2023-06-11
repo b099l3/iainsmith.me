@@ -1,7 +1,7 @@
 import Category from 'components/Category';
 import Container from 'components/Container';
 import ViewCounter from 'components/ViewCounter';
-import type { Blog } from 'contentlayer/generated';
+import type { Blog, Category as BlogCategory } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import type { PropsWithChildren } from 'react';
@@ -17,12 +17,14 @@ const discussUrl = (slug) =>
 
 export default function BlogLayout({
   children,
-  post
-}: PropsWithChildren<{ post: Blog }>) {
+  post,
+  categories
+}: PropsWithChildren<{ post: Blog, categories: BlogCategory[] }>) {
+  
+  const categoriesUI = categories.map((category) => <Category key={category.slug} category={category}/>);
   return (
     <Container
       title={`${post.title} – Iain Smith`}
-      category={post.category}
       description={post.summary}
       image={`https://iainsmith.me${post.image}`}
       date={new Date(post.publishedAt).toISOString()}
@@ -32,7 +34,6 @@ export default function BlogLayout({
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
           {post.title}
         </h1>
-        <Category category={post.category}/>
         <div className="flex flex-col items-start justify-between w-full mt-2 md:flex-row md:items-center">
           <div className="flex items-center">
             <Image
@@ -52,6 +53,9 @@ export default function BlogLayout({
             {` • `}
             <ViewCounter slug={post.slug} />
           </p>
+        </div>
+        <div className="flex flex-row items-start justify-start w-full mt-2 space-x-2">
+          {categoriesUI}
         </div>
         <div className="w-full mt-4 prose dark:prose-dark max-w-none">
           {children}

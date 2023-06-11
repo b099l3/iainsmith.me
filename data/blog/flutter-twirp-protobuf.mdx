@@ -1,0 +1,70 @@
+---
+title: '🤝 Twirp and Protobuf: A Recipe for Success when Cooking up Flutter Mobile Apps'
+publishedAt: '2023-05-18'
+summary: "Boost your Flutter mobile app development with Twirp, the solution that brings lightning-fast API development and optimised performance to new heights."
+image: '/static/images/flutter-twirp-protobuf/banner.webp'
+categories: ['draft', 'flutter']
+---
+
+[created by Twitch](https://blog.twitch.tv/en/2018/01/16/twirp-a-sweet-new-rpc-framework-for-go-5f2febbf35f/)
+[benfits](https://cloud.google.com/blog/products/application-development/rest-vs-rpc-what-problems-are-you-trying-to-solve-with-your-apis)
+[Christian](https://twitter.com/cga1123?lang=en)
+
+Boost your Flutter mobile app development with Twirp, the solution that brings lightning-fast API development and optimised performance to new heights.
+
+In this post, we'll look at the benefits of using a Twirp API for your Flutter mobile app and explain how it works. We'll look specifically at Protocol Buffers, aka Protobuf, their efficiency, and the convenience and simplicity of using Twirp as an RPC framework.
+
+In an upcoming post, I'll show how to integrate a Twirp API with a Flutter app. But first, let's define them and the benefits they offer.
+
+## Understanding Twirp and Protobuf
+
+Twirp is an RPC framework that simplifies building efficient APIs for mobile and web apps. It was [created by Twitch](https://blog.twitch.tv/en/2018/01/16/twirp-a-sweet-new-rpc-framework-for-go-5f2febbf35f/) and designed to be easy, fast, and language-agnostic. RPC (Remote Procedure Call) APIs are not built in the same way as RESTful APIs. Instead of using HTTP methods and endpoints to interact with resources, RPC APIs use functions or methods that are remotely called.
+
+### RESTful vs RPC APIs
+To explain the difference between RESTful and RPC APIs, let's take a shopping cart API as an example. In the RESTful version, we define the shopping cart and the products that can be added as resources, leading to endpoints like:
+- `/cart`
+- `/cart/products`
+- `/cart/product/{id}`
+
+Each endpoint would have HTTP methods that can be used to perform operations on the resources. For example, you could use the POST method on the `/cart` endpoint to add a product to the cart, and each endpoint would have its own request and response formats.
+
+On the other hand, the shopping cart RPC API would define the actions on the shopping cart, such as adding, removing, and updating products. To add products to the shopping cart, you would call the `add_to_cart` method, which takes the product IDs to be added as input parameters and returns the shopping cart. The method signatures and protocols would be defined upfront.
+
+Both approaches have [benefits](https://cloud.google.com/blog/products/application-development/rest-vs-rpc-what-problems-are-you-trying-to-solve-with-your-apis) and can utilise various protocols, e.g., JSON or Protobuf. REST APIs typically use JSON, and RPC uses Protobuf.
+
+### The Advantages of Protobuf
+Protobuf is designed to be language-agnostic and in a platform-neutral format for high performance and efficiency. Compared to traditional data serialisation formats like JSON, Protobuf provides significant advantages in size and speed by using a binary format, making them ideal for mobile and web apps where network performance is critical. It's also type-safe and allows for creating a schema (or blueprint) for the data, making it easier to build and maintain sizeable structured data systems. One downside is that they are not human-readable, so debugging can be tricky. Various RPC frameworks use them by default, but Twirp and gRPC are the leading ones.
+
+### Choosing Between Twirp and gRPC
+The choice between Twirp and gRPC often comes down to the specific needs of a project. Twirp's simplicity makes it an excellent choice for projects requiring straightforward, efficient communication between services. It has a simpler API definition and error-handling model. And because it supports HTTP/1.1, you can use standard HTTP tools to inspect traffic. It also supports Protobuf and JSON for message serialisation and works with HTTP/1.1 and HTTP/2. This makes Twirp more flexible and compatible with a broader range of existing systems and tools.
+
+At the same time, gRPC, developed by Google, has additional features that can be a deciding factor for projects requiring more complex communication patterns. It supports both unary (request-response) and streaming communication. Streaming communication can be server-side, client-side, or bidirectional. This is particularly beneficial for use cases where you want to maintain a live connection and continuously send or receive data.
+
+Regardless, both frameworks help develop performant, scalable APIs that leverage the efficiency of Protobuf. They simplify API development and provide high performance and scalability for any project requiring straightforward or complex communication patterns.
+
+## 🌉 Bridging the Gap: Simplifying API Development
+
+API development for mobile apps can be tricky, especially when there are language and priority differences between mobile and backend engineers. This might slow down communication and make it harder to find common ground. However, with solutions like Twirp, it is possible to bridge the gap and establish a pleasant environment for API development. It's like creating the ideal fusion of two delicious meals - a friendly, efficient, and enjoyable mix for everyone involved!
+
+At Lollipop, a meal-planning software that provides a variety of tasty meals, we just migrated to Twirp as our primary API architectural style. Our backend engineer [Christian](https://twitter.com/cga1123?lang=en) recommended this tweak to boost our development speed. Previously, we relied on REST APIs, but Twirp greatly enhanced the speed and efficiency of our API development. It provides a straightforward way to define a service using a `.proto` file, and from this, it generates server and client code in multiple languages. This allows for seamless communication between different services, whether they are written in the same language or not.
+
+It first allowed Mobile or Backend Engineers to create the `.proto` file. This allowed for easier communication where both sides could design the API and an excellent opportunity to pair-program. This means that whichever engineer is available to start work can lead on creating an API call. There is no need to wait for the API; mobile developers can help stub out the API. 
+
+Additionally, our client and server code is now generated and has a much lower maintenance cost. We no longer require deserialisation code, where you would typically be deserialising and serialising JSON objects or annotating domain models. We could keep our models cleaner. Likewise, we no longer needed to store the various endpoints of the API, as this was all handled in the generation. We could still pass in the base URL and then use the methods provided on the client object. 
+
+This allowed for easier changes as our code was 
+
+Error responses were also easier to handle as Twirp has a standardised error format. There is no need to redefine
+
+
+
+
+
+
+
+## Conclusion
+Recap of the benefits of using Twirp and Protobuf in Flutter mobile app development
+Encouragement to try out Twirp and Protobuf in your next Flutter project
+Additional resources for learning more about Twirp, Protobuf, and Flutter.
+
+

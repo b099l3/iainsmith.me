@@ -39,19 +39,19 @@ export default function Home() {
           <div className="flex flex-col gap-6 md:flex-row">
             <BlogPostCard
               title="The future-proof solution to manage your Flutter versions: global, FVM, or asdf-vm?"
-              category="Flutter"
+              categories="Flutter"
               slug="future-proof-your-flutter-env"
               gradient="from-[#D8B4FE] to-[#818CF8]"
             />
             <BlogPostCard
               title="Flutter Hackathon #Hack20"
-              category="Flutter"
+              categories="Flutter"
               slug="flutter-hackathon-hack20"
               gradient="from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"
             />
             <BlogPostCard
               title="Flutter - a modern declarative UI toolkit"
-              category="Flutter"
+              categories="Flutter"
               slug="flutter-declarative-ui-toolkit"
               gradient="from-[#FDE68A] via-[#FCA5A5] to-[#FECACA]"
             />

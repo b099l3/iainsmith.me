@@ -33,6 +33,16 @@ const computedFields: ComputedFields = {
   }
 };
 
+const Category = defineDocumentType(() => ({
+  name: 'Category',
+  filePathPattern: 'category/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+  },
+  computedFields
+}));
+
 const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/*.mdx',
@@ -42,7 +52,7 @@ const Blog = defineDocumentType(() => ({
     publishedAt: { type: 'string', required: true },
     summary: { type: 'string', required: true },
     image: { type: 'string', required: true },
-    category: { type: 'string', required: true }
+    categories:{ type: 'list', of: { type: 'string' }, required: true },
   },
   computedFields
 }));
@@ -84,7 +94,7 @@ const OtherPage = defineDocumentType(() => ({
 
 const contentLayerConfig = makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Newsletter, Snippet, OtherPage],
+  documentTypes: [Blog, Newsletter, Snippet, OtherPage, Category],
   mdx: {
     remarkPlugins: [
       remarkMdxCodeMeta,

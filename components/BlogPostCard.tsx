@@ -3,13 +3,13 @@ import fetcher from 'lib/fetcher';
 import { Views } from 'lib/types';
 import Link from 'next/link';
 import useSWR from 'swr';
-import Category from './Category';
 
 
 
-export default function BlogPostCard({ title, category, slug, gradient }) {
+export default function BlogPostCard({ title, categories, slug, gradient }) {
   const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
   const views = data?.total;
+ // const categoriesUI = categories.map((category) => <Category category={category}/>);
 
   return (
     <Link href={`/blog/${slug}`}>
@@ -28,7 +28,7 @@ export default function BlogPostCard({ title, category, slug, gradient }) {
           </div>
           <div className="flex flex-col justify-between">
           <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
-          <Category category={category}/>
+          {/* {categoriesUI} */}
           </div>
           <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
             <span className="inline-flex items-center py-1 text-sm leading-none text-gray-800 dark:text-gray-200">

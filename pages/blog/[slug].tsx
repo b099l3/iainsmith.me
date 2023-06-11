@@ -1,12 +1,12 @@
-import { useMDXComponent } from 'next-contentlayer/hooks';
-import { getTweets } from 'lib/twitter';
 import components from 'components/MDXComponents';
-import BlogLayout from 'layouts/blog';
 import Tweet from 'components/Tweet';
-import { allBlogs } from 'contentlayer/generated';
 import type { Blog } from 'contentlayer/generated';
+import { allBlogs, allCategories } from 'contentlayer/generated';
+import BlogLayout from 'layouts/blog';
+import { getTweets } from 'lib/twitter';
+import { useMDXComponent } from 'next-contentlayer/hooks';
 
-export default function Post({ post, tweets }: { post: Blog; tweets: any[] }) {
+export default function Post({ post, tweets, categories }: { post: Blog; tweets: any[]; categories:any[] }) {
   const Component = useMDXComponent(post.body.code);
   const StaticTweet = ({ id }) => {
     const tweet = tweets.find((tweet) => tweet.id === id);
@@ -14,7 +14,7 @@ export default function Post({ post, tweets }: { post: Blog; tweets: any[] }) {
   };
 
   return (
-    <BlogLayout post={post}>
+    <BlogLayout post={post} categories={categories}>
       <Component
         components={
           {
@@ -29,14 +29,14 @@ export default function Post({ post, tweets }: { post: Blog; tweets: any[] }) {
 
 export async function getStaticPaths() {
   return {
-    paths: allBlogs.map((p) => ({ params: { slug: p.slug } })),
+    paths: allBlogs.map((post) => ({ params: { slug: post.slug } })),
     fallback: false
   };
 }
 
 export async function getStaticProps({ params }) {
   const post = allBlogs.find((post) => post.slug === params.slug);
+  const categories = allCategories.filter((cat) => post.categories.includes(cat.slug));
   const tweets = await getTweets(post.tweetIds);
-
-  return { props: { post, tweets } };
+  return { props: { post, tweets, categories } };
 }
