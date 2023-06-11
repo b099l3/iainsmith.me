@@ -1,4 +1,20 @@
 {
+  "new category": {
+    "prefix": [
+      "newcat",
+    ],
+    "body": [
+      "---",
+      "title: '${1:title}'",
+      "---",
+      "",
+      "${2:description}",
+      "Add the colors in components/Category.tsx",
+      "",
+
+    ],
+    "description": "new category"
+  },
   "new blog post": {
     "prefix": [
       "newpost",
@@ -9,7 +25,7 @@
       "publishedAt: '$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE'",
       "summary: '${2:summary}'",
       "image: '/static/images/$TM_FILENAME_BASE/banner.webp'",
-      "category: '${3|Flutter,Raspberry Pi,Xamarin|}'",
+      "categories: ['${3|flutter,raspberry-pi,xamarin|}']",
       "---",
       "",
       "${4:content}",
