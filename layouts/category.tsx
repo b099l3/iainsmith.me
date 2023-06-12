@@ -12,9 +12,6 @@ export default function CategoryLayout({
             <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
               {category.title}
             </h1>
-            <p className="text-gray-700 dark:text-gray-300">
-              {category.description}
-            </p>
           </div>
         </div>
         <div className="w-full prose dark:prose-dark">{children}</div>
