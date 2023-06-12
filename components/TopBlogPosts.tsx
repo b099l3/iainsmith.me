@@ -1,7 +1,8 @@
 import BlogPost from 'components/BlogPost';
-import { allBlogs } from 'contentlayer/generated';
+import { allBlogs, allCategories } from 'contentlayer/generated';
 import fetcher from 'lib/fetcher';
 import { TopPostViews } from 'lib/types';
+import { pick } from 'lib/utils';
 import useSWR from 'swr';
 import LoadingSpinner from './LoadingSpinner';
 
@@ -12,9 +13,21 @@ export default function TopblogPosts() {
   if (!data) {
     return <LoadingSpinner/>;
   }
-
+ 
   const topBlogPosts = data.topViews.map(topView => {
-    return allBlogs.find(blog => blog.slug.toLowerCase() === topView.slug.toLowerCase())
+    return allBlogs
+    .map((post) => {
+      const postCategories = post.categories.map((cat) => {
+        return allCategories.find((category) => category.slug === cat);
+      });
+      return {
+        ...post,
+        postCategories: postCategories || [],
+      };
+    })
+      .map((post) => pick(post, ['slug', 'title', 'categories', 'summary', 'publishedAt', 'postCategories']))
+      .find(blog => blog.slug.toLowerCase() === topView.slug.toLowerCase())
+      
   });
 
   return (
@@ -24,4 +37,25 @@ export default function TopblogPosts() {
       ))}
     </>
   );
+}
+
+
+export function getStaticProps() {
+  const posts = allBlogs
+  .filter((post) => !post.categories.includes('draft'))
+  .map((post) => {
+    const postCategories = post.categories.map((cat) => {
+      return allCategories.find((category) => category.slug === cat);
+    });
+    return {
+      ...post,
+      postCategories: postCategories || [],
+    };
+  })
+    .map((post) => pick(post, ['slug', 'title', 'categories', 'summary', 'publishedAt', 'postCategories']))
+    .sort(
+      (a, b) =>
+        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
+    );
+  return { props: { posts } };
 }
