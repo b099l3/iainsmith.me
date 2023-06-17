@@ -1,8 +1,8 @@
-import LoadingSpinner from 'components/LoadingSpinner';
 import MetricCard from 'components/metrics/Card';
 import fetcher from 'lib/fetcher';
 import { Strava } from 'lib/types';
 import useSWR from 'swr';
+import SkeletonCard from './SkeletonCard';
 
 function getMiles(i: number) {
   return i*0.000621371192;
@@ -11,9 +11,21 @@ function getMiles(i: number) {
 export default function StravaCard() {
   const { data } = useSWR<Strava>('/api/runs', fetcher);
 
-
   if (!data) {
-    return <LoadingSpinner/>;
+    return <div className="grid w-full grid-cols-1 gap-4 my-2 sm:grid-cols-2">
+    <SkeletonCard
+      header="Runs in the last 4 weeks"
+    />
+    <SkeletonCard
+      header="Distance in the last 4 weeks"
+    />
+    <SkeletonCard
+      header="Runs in the year"
+    />
+    <SkeletonCard
+      header="Distance in the year"
+    />
+  </div>;
   }
 
   const recentRuns = new Number(data?.recentRuns);

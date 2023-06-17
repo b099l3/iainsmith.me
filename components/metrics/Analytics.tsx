@@ -1,15 +1,16 @@
-import LoadingSpinner from 'components/LoadingSpinner';
 import MetricCard from 'components/metrics/Card';
 import fetcher from 'lib/fetcher';
 import { Views } from 'lib/types';
 import useSWR from 'swr';
+import SkeletonCard from './SkeletonCard';
 
 
 export default function AnalyticsCard() {
   const { data } = useSWR<Views>('/api/views', fetcher);
 
   if (!data) {
-    return <LoadingSpinner/>;
+    return <SkeletonCard 
+    header="All-Time Views"/>;
   }
   
   const pageViews = new Number(data?.total);
