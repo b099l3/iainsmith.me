@@ -1,7 +1,6 @@
 import Container from 'components/Container';
 import Analytics from 'components/metrics/Analytics';
 import GitHub from 'components/metrics/Github';
-import Newsletter from 'components/metrics/Newsletter';
 import Strava from 'components/metrics/Strava';
 import TopTracks from 'components/TopTracks';
 
@@ -30,9 +29,6 @@ export default function Dashboard() {
         <div className="grid w-full grid-cols-1 gap-4 my-2 sm:grid-cols-2">
           <Analytics />
           <GitHub />
-        </div>
-        <div className="grid w-full grid-cols-1 gap-4 my-2 sm:grid-cols-2">
-          <Newsletter />
         </div>
         <h2 className="mt-16 mb-4 text-3xl font-bold tracking-tight text-black dark:text-white">
           Top Tracks
