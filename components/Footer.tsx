@@ -23,39 +23,24 @@ export default function Footer() {
           <Link href="/">
             <a className="text-gray-500 transition hover:text-gray-600">Home</a>
           </Link>
-          <Link href="/about">
-            <a className="text-gray-500 transition hover:text-gray-600">
-              About
-            </a>
-          </Link>
-          <Link href="/newsletter">
-            <a className="text-gray-500 transition hover:text-gray-600">
-              Newsletter
-            </a>
-          </Link>
-        </div>
-        <div className="flex flex-col space-y-4">
-          <ExternalLink href="https://twitter.com/b099l3">
-            Twitter
-          </ExternalLink>
-          <ExternalLink href="https://github.com/b099l3">GitHub</ExternalLink>
-          <ExternalLink href="https://stackoverflow.com/users/1107580/iain-smith">
-            StackOverflow
-          </ExternalLink>
-        </div>
-        <div className="flex flex-col space-y-4">
-          <Link href="/uses">
-            <a className="text-gray-500 transition hover:text-gray-600">Setup</a>
-          </Link>
           <Link href="/snippets">
-            <a className="text-gray-500 transition hover:text-gray-600">
-              Snippets
-            </a>
+            <a className="text-gray-500 transition hover:text-gray-600">Snippets</a>
+          </Link>
+        </div>
+        <div className="flex flex-col space-y-4">
+          <Link href="/blog">
+            <a className="text-gray-500 transition hover:text-gray-600">Blog</a>
+          </Link>
+          <Link href="/about">
+            <a className="text-gray-500 transition hover:text-gray-600">About</a>
+          </Link>
+        </div>
+        <div className="flex flex-col space-y-4">
+          <Link href="/dashboard">
+            <a className="text-gray-500 transition hover:text-gray-600">Dashboard</a>
           </Link>
           <Link href="/now">
-            <a className="text-gray-500 transition hover:text-gray-600">
-              Now
-            </a>
+            <a className="text-gray-500 transition hover:text-gray-600">Now</a>
           </Link>
         </div>
       </div>

@@ -83,26 +83,18 @@ export default function MobileMenu() {
           </li>
           <li
             className="text-sm font-semibold text-gray-900 border-b border-gray-300 dark:border-gray-700 dark:text-gray-100"
+            style={{ transitionDelay: '275ms' }}
+          >
+            <Link href="/about">
+              <a className="flex w-auto pb-4">About</a>
+            </Link>
+          </li>
+          <li
+            className="text-sm font-semibold text-gray-900 border-b border-gray-300 dark:border-gray-700 dark:text-gray-100"
             style={{ transitionDelay: '250ms' }}
           >
             <Link href="/now">
               <a className="flex w-auto pb-4">Now</a>
-            </Link>
-          </li>
-          <li
-            className="text-sm font-semibold text-gray-900 border-b border-gray-300 dark:border-gray-700 dark:text-gray-100"
-            style={{ transitionDelay: '275ms' }}
-          >
-            <Link href="/newsletter">
-              <a className="flex w-auto pb-4">Newsletter</a>
-            </Link>
-          </li>
-          <li
-            className="text-sm font-semibold text-gray-900 border-b border-gray-300 dark:border-gray-700 dark:text-gray-100"
-            style={{ transitionDelay: '325ms' }}
-          >
-            <Link href="/uses">
-              <a className="flex w-auto pb-4">Setup</a>
             </Link>
           </li>
         </ul>
