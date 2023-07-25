@@ -5,72 +5,151 @@ summary: 'Understanding the main ingredients - Protobuf, Twirp, and buf.build - 
 image: '/static/images/flutter-twirp-buf-protobuf-1/banner.webp'
 categories: ['draft', 'flutter']
 ---
+When venturing into Flutter mobile app development, selecting the right tools can significantly impact your app and development experience. At Lollipop, we used a REST API like most companies until our backend developer, [Christian](https://github.com/CGA1123), introduced us to Twirp, a simple RPC framework. This began our journey to switch from REST to RPC using Twirp.
 
-When venturing into Flutter mobile app development, selecting the right tools can significantly impact both your app and your development experience. At Lollipop, we used a REST API like most companies until our backend developer, Christian, introduced us to Twirp for internal APIs. This marked the beginning of our journey to switch from REST to RPC using Twirp.
+In this first part of this two-part blog series, we'll discuss three key ingredients that made API development at Lollipop easier:
+1. We'll explore Protocol Buffers, Google's method for serialising structured data and enabling efficient communication between your API and mobile app.
+2. We'll delve into Twirp, a straightforward RPC framework developed by Twitch.
+3. We'll introduce buf.build, a management system for Protocol Buffers that ensures consistency in your Protobuf schemas.
 
-In this first part of this two-part blog series, we'll discuss three key components that made API development at Lollipop easier. First, we'll explore Protocol Buffers, which are Google's method for serializing structured data and enabling efficient communication between your API and mobile app. Next, we'll delve into Twirp, a straightforward RPC framework developed by Twitch. Lastly, we'll introduce buf.build, a management system for Protocol Buffers that ensures consistency in your Protobuf schemas.
+This blog will provide an overview of how these technologies synergise and work together, shedding light on their integrated workflow. Additionally, we'll explain why and how we chose to use them and discuss alternative options.
 
-This blog will provide an overview of how these technologies synergize and work together, shedding light on their integrated workflow. Additionally, we'll explain why and how we chose to use them and discuss alternative options.
+Stay tuned for the second part, where we'll provide a step-by-step tutorial on integrating these concepts into a Flutter app. Let's get started!
 
-Make sure to stay tuned for the second part, where we'll provide a step-by-step guide on integrating these concepts into a Flutter app. Let's get started!
+# Protocol Buffers: Structuring the Conversation
+
+When we started to look into Twirp the first new concept was Protocol Buffers, aka Protobuf. When learning a new tool or language it can be useful to know why it was developed and how it it used today. 
+
+## The origin story: Why Google created Protocol Buffers
+
+Google started developing Protobufs in the early 2000s. They were searching for a more efficient way to drive their internal services at scale. The primary goals were to create a format that was simple, smaller in size, faster to serialize/deserialize than XML, and language-agnostic. 
+
+In 2008, Google decided to open-source Protocol Buffers. The first public release, `Proto1`, provided support for generating code from Protobuf schemas in several languages. It was a significant contribution to the open-source community and became a popular choice for inter-service communication in microservices architecture.
+
+Over time, Protobufs have become a fundamental component of many systems inside Google and in the broader community, providing a robust and efficient mechanism for data serialization. They are widely used for communication and storage purposes and have gained popularity in microservices architectures due to their efficiency and language neutrality.
+
+## A quick look at what Protocol Buffers are
+
+So you might be thinking Protobuf is just a simpler, smaller and faster version of XML or JSON. While this is true it also has another benefit, it is an Interface Definition Languages, IDL. This means that while they still define the structure of the data they also define the functionally of the service, i.e., the methods you can call on the service. To illustrate this lets look at the following protobuf:
+
+``` protobuf copy
+syntax = "proto3";
+
+package icecreamshop;
+
+// The IceCream message represents an ice cream in our system.
+message IceCream {
+  string flavor = 1;
+  string size = 2;
+  repeated string toppings = 3;
+}
+
+// The Order message represents an order in our system.
+message Order {
+  int32 order_id = 1;
+  IceCream ice_cream = 2;
+  bool ready = 3;  // Is the order ready for pickup?
+}
+
+// The IceCreamService provides operations for managing orders.
+service IceCreamService {
+  // Creates a new order.
+  rpc CreateOrder (IceCream) returns (Order) {}
+  
+  // Fetches details about an order.
+  rpc GetOrderDetails (GetOrderDetailsRequest) returns (Order) {}
+
+  // Marks an order as ready.
+  rpc MarkOrderReady (MarkOrderReadyRequest) returns (Order) {}
+}
+
+// The GetOrderDetailsRequest represents a request to fetch details about an order.
+message GetOrderDetailsRequest {
+  int32 order_id = 1;
+}
+
+// The MarkOrderReadyRequest represents a request to mark an order as ready.
+message MarkOrderReadyRequest {
+  int32 order_id = 1;
+}
+
+```
 
 
-## 🍱 The Main Ingredients
-Mobile app development is all about the tools and technologies you utilize. Here, we're going to explore three main ingredients that can revolutionize your Flutter development process. We'll kick things off with Google's Protocol Buffers, or Protobuf for short.
 
-### Protobuf
-Protocol Buffers (Protobuf) is a method developed by Google for serializing structured data. Think of it as XML or JSON but smaller, faster, and simpler. You define how you want your data to be structured once, and then use special generated source code to read and write your structured data to and from a variety of data streams and using a variety of languages.
+A. The Basics of Protocol Buffers
+- 
+- 
+B. Value of Protocol Buffers in Mobile App Development
+- Exploring how Protocol Buffers streamline communication between APIs and mobile apps
+- Discussing why Protocol Buffers was our choice over other data serialization methods
+C. Comparative Look at Protocol Buffers
+- Comparing Protocol Buffers with other data serialization alternatives
 
-#### What is Protobuf and What are its Uses?
-Protobuf is a binary serialization format from Google. It's used to structure and serialize your data in an efficient and scalable manner. Protobuf messages are schema-driven: you define the fields of your message in a language-neutral form, and Protobuf takes care of the rest. This makes it an excellent tool for creating data APIs.
 
-#### The Role of Protobuf in Flutter Mobile Apps Development
-In Flutter mobile app development, Protobuf is commonly used to create data structures for your app's network layer. With Protobuf, you can create clear and efficient APIs for your app, ensuring smooth data transmission between your backend and your Flutter app.
 
-#### Advantages of Using Protobuf
+
+Now, let's see how Twirp uses Protobufs
+
+
+
+ ---------
+ ---------
+
+Garbage and notes below
+
+ --------
+ --------
+
+
+
+### Advantages of Using Protobuf
 The advantages of using Protobuf are numerous. It's highly efficient in terms of size and speed, offering significantly faster serialization and deserialization than other formats like JSON. It's language-neutral and platform-neutral, meaning you can use it across different programming languages and platforms. Moreover, it offers backward and forward compatibility, ensuring that your APIs stay robust even as your data structures evolve.
 
-Now, let's move on to the next component - Twirp.
 
-### Twirp
+
+
+
+
+## Twirp
 As we move forward in our journey, the next tool to unpack is Twirp, a simple RPC (Remote Procedure Call) framework created by Twitch. It provides a structured way for frontend and backend to communicate, simplifying the creation of services that your Flutter app can seamlessly interact with.
 
-#### What is Twirp and What are its Uses?
+### What is Twirp and What are its Uses?
 Twirp is a framework for service-to-service communication, allowing different parts of your application to talk to each other efficiently. It was designed to be simple and straightforward, combining the ease of HTTP/JSON APIs with the advantages of gRPC-like Protobuf services.
 
-#### The Role of Twirp in Flutter Mobile Apps Development
+### The Role of Twirp in Flutter Mobile Apps Development
 In Flutter development, Twirp plays an essential role in creating efficient, reliable communication between different parts of your application. By using Protobuf to define service APIs, Twirp helps to maintain consistency across your codebase, simplifying the process of service interaction and making your Flutter app more robust and easier to maintain.
 
-#### Advantages of Using Twirp
+### Advantages of Using Twirp
 Twirp's primary advantage lies in its simplicity and efficiency. By utilizing Protobuf, it allows for precise service definitions, reducing the risk of communication errors. Twirp supports both Protobuf and JSON serialization, giving you the flexibility to choose the one that fits your needs best. Additionally, Twirp is language-agnostic, which means you can use it across different programming languages.
 
-### buf.build
+## buf.build
 The final ingredient in our toolkit is buf.build. As a Protobuf management tool, buf.build aids in making your Protobuf schemas clean, consistent, and efficient.
 
-#### What is buf.build and What is its Purpose?
+### What is buf.build and What is its Purpose?
 buf.build is a Protobuf tool that helps developers maintain high-quality Protobuf schemas. It provides features like linting and breaking change detection to keep your schemas clean and consistent.
 
-#### The Contribution of buf.build to Flutter Apps
+### The Contribution of buf.build to Flutter Apps
 In Flutter app development, buf.build can ensure your Protobuf schemas stay clear and error-free, leading to more efficient and reliable apps. It assists with schema management, reduces the risk of breaking changes, and helps enforce best practices.
 
-#### Benefits of buf.build Usage in Development
+### Benefits of buf.build Usage in Development
 buf.build offers several advantages. It promotes Protobuf best practices, detects breaking changes before they become a problem, and encourages consistency across your schemas. It also integrates well with existing CI/CD pipelines, helping to automate and streamline your development process.
 
 Each of these components plays a vital role in Flutter mobile app development. In the next section, we'll explore how they work together to provide a seamless and efficient development process.
 
 By understanding these key components individually, we can better appreciate how they come together to create a robust, efficient, and effective Flutter mobile app development process. But how do they work together? Let's explore that next.
 
-## How Twirp, buf.build, and Protobuf Work Together
+# How Twirp, buf.build, and Protobuf Work Together
 Understanding how Protobuf, Twirp, and buf.build work in isolation is only half the story. When combined, they make a powerful toolset that can supercharge your Flutter development process.
 
-### Overview of the Integration Process
+## Overview of the Integration Process
 The integration process of Protobuf, Twirp, and buf.build revolves around the idea of using Protobuf to define your application's data structure and services. Protobuf schemas serve as the single source of truth that dictates how your application's services communicate.
 
 Twirp uses these Protobuf definitions to provide a simple, straightforward RPC framework that your application can use to facilitate communication between different services.
 
 Meanwhile, buf.build ensures that these Protobuf schemas remain clean, consistent, and maintainable. It helps enforce best practices, detects breaking changes early, and even assists in automating parts of your development process through CI/CD integration.
 
-### Explanation of How Twirp, buf.build, and Protobuf Complement Each Other
+## Explanation of How Twirp, buf.build, and Protobuf Complement Each Other
 Twirp, buf.build, and Protobuf are designed to work together seamlessly:
 
 Protobuf provides a way to define your application's data structures and services clearly and efficiently.
@@ -78,19 +157,19 @@ Twirp provides an RPC framework that uses these Protobuf definitions, allowing y
 buf.build takes care of the management of your Protobuf schemas, ensuring they adhere to best practices, remain consistent, and evolve without introducing breaking changes.
 This harmony enables the creation of robust, efficient, and scalable Flutter applications.
 
-### Details of the Unified Workflow
+## Details of the Unified Workflow
 The unified workflow begins with defining your Protobuf schemas. These schemas outline the structure of the data your application will use and the services that will manipulate this data. Once these definitions are in place, Twirp uses them to facilitate communication between services, ensuring that each service understands exactly how to interact with others.
 
 buf.build enters the workflow by taking on the responsibility of maintaining your Protobuf schemas. It lints your schemas against configurable rules, warns of any breaking changes, and can even publish your schemas to a buf.build registry, making it easier to share them across your team.
 
 Together, Protobuf, Twirp, and buf.build offer a unified and efficient workflow for building APIs form your Flutter mobile apps.
 
-## Conclusion
+# Conclusion
 In this first part of our exploration, we have unpacked the what, why, and how of Protobuf, Twirp, and buf.build in the realm of Flutter mobile app development. These powerful tools, when combined, offer an efficient, scalable, and robust way to build superior APIs for mobile applications.
 
 But our journey doesn't end here. In the next part, we will move from theory to practice, showcasing how to put these ingredients into action through a step-by-step guide to building a Flutter mobile app. We'll see you there!
 
-## References
+# References
 A. Links and references to key resources and further reading
 - [Twitches introduction article for Twirp](https://blog.twitch.tv/en/2018/01/16/twirp-a-sweet-new-rpc-framework-for-go-5f2febbf35f/)
 - [Twirp GitHub](https://github.com/twitchtv/twirp)
@@ -117,5 +196,4 @@ A. Links and references to key resources and further reading
 - very interesting as a means for having more structured but flexible APIs with less of the faff.
 
 - buf manages our schema and code generators, twirp is one of those generators, taking the service definitions in our schema and generating client and server stubs
-
 - The automatic documentation is pretty cool and it pull in additional doc comments from the definition file as well if you add some, very discoverable.
