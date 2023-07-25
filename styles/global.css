@@ -28,6 +28,34 @@ html {
   scroll-behavior: smooth;
 }
 
+.prose .anchor {
+  @apply absolute invisible no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose a {
+  @apply transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+}
+
+.prose .anchor:after {
+  @apply text-neutral-300 dark:text-neutral-700;
+  content: '#';
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+
 #__next {
   @apply bg-gray-50 dark:bg-gray-900;
   display: flex;
@@ -61,24 +89,6 @@ html {
     backdrop-filter: none;
     @apply bg-opacity-100;
   }
-}
-
-.prose .anchor {
-  @apply absolute invisible no-underline;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
-}
-
-.anchor:hover {
-  @apply visible;
-}
-
-.prose a {
-  @apply transition-all;
 }
 
 .prose pre {
@@ -178,4 +188,49 @@ table {
     rgba(0, 0, 0, 1) 10px,
     rgba(0, 0, 0, 1) 20px
   );
+}
+
+
+.btn-hover-effect {
+  @apply relative;
+}
+
+
+.btn-hover-effect::before,
+.btn-hover-effect::after,
+.btn-hover-effect-border::before,
+.btn-hover-effect-border::after {
+  @apply absolute inset-0 border-current content-[''] duration-200;
+}
+
+/* Setup Top */
+.btn-hover-effect::before {
+  @apply transition-all origin-top-right scale-x-0 border-t-2;
+}
+
+/* Setup Bottom */
+.btn-hover-effect::after {
+  @apply transition-all origin-bottom-left scale-x-0 border-b-2;
+}
+
+/* Setup Left */
+.btn-hover-effect-border::before {
+  @apply transition-all delay-200 origin-top-left scale-y-0 border-l-2;
+}
+
+/* Setup Right */
+.btn-hover-effect-border::after {
+  @apply transition-all delay-200 origin-bottom-right scale-y-0 border-r-2;
+}
+
+/* Hover X */
+.btn-hover-effect:hover::before,
+.btn-hover-effect:hover::after {
+  @apply scale-x-100;
+}
+
+/* Hover Y */
+.btn-hover-effect:hover .btn-hover-effect-border::before,
+.btn-hover-effect:hover .btn-hover-effect-border::after {
+  @apply scale-y-100;
 }

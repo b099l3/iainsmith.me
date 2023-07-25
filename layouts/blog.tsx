@@ -7,7 +7,6 @@ import Image from 'next/image';
 import type { PropsWithChildren } from 'react';
 import { BsArrowUpCircle } from "react-icons/bs";
 
-
 const editUrl = (slug) =>
   `https://github.com/b099l3/iainsmith.me/edit/main/data/blog/${slug}.mdx`;
 const discussUrl = (slug) =>
@@ -22,6 +21,7 @@ export default function BlogLayout({
 }: PropsWithChildren<{ post: Blog, categories: BlogCategory[] }>) {
   
   const categoriesUI = categories.map((category) => <Category key={category.slug} category={category}/>);
+
   return (
     <Container
       title={`${post.title} – Iain Smith`}
@@ -60,10 +60,6 @@ export default function BlogLayout({
         <div className="w-full mt-4 prose dark:prose-dark max-w-none">
           {children}
         </div>
-        {/* Disabling this till I start a newsletter */}
-        {/* <div className="w-full mt-8">
-          <Subscribe />
-        </div> */}
         <div className="flex flex-row justify-between w-full my-16 text-sm text-gray-700 dark:text-gray-300">
         <div><a
             className="flex flex-row space-x-8"

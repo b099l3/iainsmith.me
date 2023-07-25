@@ -5,14 +5,13 @@ import CustomCodeBlock from 'components/CustomCodeBlock';
 import ImageCenter from 'components/ImageCenter';
 import ImageGridThree from 'components/ImageGridThree';
 import ImageWithTheme from 'components/ImageWithTheme';
-import Analytics from 'components/metrics/Analytics';
-import YouTubeCard from 'components/metrics/Youtube';
 import ProsCard from 'components/ProsCard';
 import Step from 'components/Step';
 import YouTube from 'components/YouTube';
+import Analytics from 'components/metrics/Analytics';
+import YouTubeCard from 'components/metrics/Youtube';
 import Image from 'next/image';
 import Link from 'next/link';
-
 
 const CustomLink = (props) => {
   const href = props.href;
@@ -61,7 +60,7 @@ const MDXComponents = {
   ProsCard,
   Step,
   YouTubeCard,
-  YouTube
+  YouTube,
 };
 
 export default MDXComponents;
