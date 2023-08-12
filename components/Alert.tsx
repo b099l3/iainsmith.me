@@ -2,7 +2,7 @@ export default function es({ type, icon = null, title, children }) {
   switch (type) {
     case 'info':
       return (
-        <div className="w-full p-5 my-0 border-2 border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-900/50 rounded-xl">
+        <div className="w-full p-5 my-10 border-2 border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-900/50 rounded-xl">
           <div className="flex items-start mb-2 font-medium">
             <div className="w-6 h-6 mr-4">
               {icon === null 
@@ -23,7 +23,7 @@ export default function es({ type, icon = null, title, children }) {
       );
       case 'warn':
       return (
-        <div className="w-full p-5 my-0 border-2 border-orange-200 dark:border-orange-900 bg-orange-50 dark:bg-orange-900/50 rounded-xl">
+        <div className="w-full p-5 my-10 border-2 border-orange-200 dark:border-orange-900 bg-orange-50 dark:bg-orange-900/50 rounded-xl">
           <div className="flex items-start mb-2 font-medium">
             <div className="w-6 h-6 mr-4">
             {icon === null ?
@@ -44,7 +44,7 @@ export default function es({ type, icon = null, title, children }) {
       );
       case 'success':
       return (
-        <div className="w-full p-5 my-4 border-2 border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-900/50 rounded-xl">
+        <div className="w-full p-5 my-10 border-2 border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-900/50 rounded-xl">
           <div className="flex items-start mb-2 font-medium">
             <div className="w-6 h-6 mr-4">
             {icon === null ?
@@ -65,7 +65,7 @@ export default function es({ type, icon = null, title, children }) {
       );
       case 'failure':
       return (
-        <div className="w-full p-5 my-4 border-2 border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-900/50 rounded-xl">
+        <div className="w-full p-5 my-10 border-2 border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-900/50 rounded-xl">
           <div className="flex items-start mb-2 font-medium">
             <div className="w-6 h-6 mr-4">
             {icon === null ?
