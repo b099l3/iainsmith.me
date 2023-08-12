@@ -96,7 +96,7 @@ And finally, we have defined the data types for this service:
 - `GetOrderDetailsRequest`
 - `MarkOrderReadyRequest`
 
-With this definition, we can generate a client or server using the command `protoc` in our preferred language. For Dart, this would look like this to create the dart file from the .proto file in the same directory:
+With this definition, we can generate a client or server using the command `protoc` in our preferred language. To generate the files in Dart from the .proto file in the same directory, the command would be:
 ``` bash copy
 protoc --dart_out=grpc:./ -I=./ ./icecreamshop.proto
 ```
@@ -140,7 +140,7 @@ Now that we know what protobufs are, the next step in our secret recipe is chang
 As we move forward in our recipe for success, the next ingredient is Twirp, a simple RPC (Remote Procedure Call) framework created by Twitch. Similar to gRPC, it provides a structured way for client and server to communicate, simplifying the creation of services that your Flutter app can seamlessly interact with. But again lets look into why it was created.
 
 ## The origin story: Why Twitch Created Twirp
-The best place to understand why Twitch created Twirp, is to look at their 2018 [introduction article for Twirp](https://blog.twitch.tv/en/2018/01/16/twirp-a-sweet-new-rpc-framework-for-go-5f2febbf35f/).
+The best place to understand why Twitch created Twirp, is to look at their 2018 [introduction article for Twirp](https://blog.twitch.tv/en/2018/01/16/twirp-a-sweet-new-rpc-framework-for-go-5f2febbf35f/) that introduced Twirp to the world.
 
 
 
