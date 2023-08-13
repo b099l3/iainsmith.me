@@ -6,6 +6,7 @@ const { withContentlayer } = require('next-contentlayer');
 module.exports = withContentlayer({
   reactStrictMode: true,
   images: {
+    formats: ['image/avif', 'image/webp'],
     domains: [
       'i.scdn.co', // Spotify Album Art
       'pbs.twimg.com' // Twitter Profile Picture
