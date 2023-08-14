@@ -20,11 +20,11 @@ This blog will provide an overview of how these technologies synergise and work 
   title={`RPC - Remote Procedure Call - What is dis?`}
 >
   
-I wont go into details of what RPC is and how it compares to HTTP or REST. A great article written by Google covers this way better than I could: [REST vs RPC: What problems are you trying to solve with your APIs?](https://cloud.google.com/blog/products/application-development/rest-vs-rpc-what-problems-are-you-trying-to-solve-with-your-apis). 
+I won't explain RPC and how it compares to HTTP or REST. A great article written by Google covers this way better than I could: [REST vs RPC: What problems are you trying to solve with your APIs?](https://cloud.google.com/blog/products/application-development/rest-vs-rpc-what-problems-are-you-trying-to-solve-with-your-apis). 
 
 In simple terms:
-- RPC calls a function on a server. You tell it exactly what you want, and it gives you an answer. Like calling a local function.
-- REST sends a message to a particular URL. You can ask for information or actions using different request methods like "GET" "POST" "PUT" or "DELETE" and the server sends back the data you need.
+- RPC calls a function on a server. You tell it precisely what you want, and it gives you an answer. Like calling a local function.
+- REST sends a message to a particular URL. You can ask for information or actions using different request methods, i.e., GET, POST, PUT, or DELETE, and the server sends back the data you need.
 
 </Alert>
 
@@ -32,9 +32,17 @@ Stay tuned for the second part, where we'll provide a step-by-step tutorial on i
 
 # 💬 Protocol Buffers: Structuring the Conversation
 
+
+<ImageCenter
+  alt={`Twirp!`}
+  src={`/static/images/flutter-twirp-buf-protobuf-1/protobuf.png`}
+  width={1134}
+  height={425}
+/>
+
 When we started to look into Twirp, the first new concept was Protocol Buffers, aka Protobuf. When learning a new tool or language, knowing why it was developed and how it is used today can be helpful. So let's start with a history lesson.
 
-## The origin story: Why Google Created Protocol Buffers
+## The Origin Story: Why Google Created Protocol Buffers
 
 Google started developing Protobufs in the early 2000s. They were searching for a more efficient way to drive their internal services at scale. The primary goals were to create a simple, smaller format, faster to serialise/deserialise than XML, and language-agnostic. 
 
@@ -121,7 +129,7 @@ protoc --dart_out=grpc:./ -I=./ ./icecreamshop.proto
   title={"Instaling `protoc` and the dart protoc plugin"}
 >
   
-This will be in the next blog post, you can see the files [here](https://github.com/b099l3/twirp-flutter-example/tree/master/proto) but if you want to generate the files, you can install `protoc` via brew and the dart plugin with these two commands:
+This will be in the next blog post, you can see the files [here](https://github.com/b099l3/twirp-flutter-example/tree/master/proto), but if you want to generate the files, you can install `protoc` via brew and the dart plugin with these two commands:
 
 ``` bash copy
 brew install protobuf
@@ -132,7 +140,7 @@ dart pub global activate protoc_plugin
 
 This will create the following files:
 - [icecreamshop.pb.dart](https://github.com/b099l3/twirp-flutter-example/blob/master/proto/icecreamshop.pb.dart)
-  - Contains the Dart classes that correspond to the messages defined in our .proto file. This includes properties for each field and methods for serialisation and deserialisation to and from binary.
+  - Contains the Dart classes corresponding to the messages defined in our .proto file. This includes properties for each field and methods for serialisation and deserialisation to and from binary.
 
 - [icecreamshop.pbenum.dart](https://github.com/b099l3/twirp-flutter-example/blob/master/proto/icecreamshop.pbenum.dart)
   - Contains the enums from the .proto file. We don't have any, so this file is empty.
@@ -143,10 +151,10 @@ This will create the following files:
 - [icecreamshop.pbgrpc.dart](https://github.com/b099l3/twirp-flutter-example/blob/master/proto/icecreamshop.pbgrpc.dart)
   - Contains the Dart classes for the gRPC services defined in our .proto file. This includes the client `IceCreamServiceClient` and the server-side `IceCreamServiceBase`, allowing you to call or implement the services using gRPC in Dart. This file is generated because we specified `gRPC` in our `protoc` command. 
 
-We now have a client and service generated from the .proto file and need to implement them. The nice thing about them is that they communicate using a binary format, one of the massive advantages of using an RPC service. Lets see the other advantages Protobuf can bring us.
+We now have a client and service generated from the .proto file and need to implement them. The nice thing about them is that they communicate using a binary format, one of the massive advantages of using an RPC service. Let us see the other advantages Protobuf can bring us.
 
 ## Advantages of Using Protobuf
-The advantages of using Protobuf are numerous. It's highly efficient in size and speed, offering significantly faster serialisation and deserialisation than other formats like JSON. It can be ~3-10 times smaller than XML/JSON and anywhere from 20-100 times faster. Ideal for Mobile apps as we want to transfer as small a data payload as possible. 
+The advantages of using Protobuf are numerous. It's highly efficient in size and speed, offering significantly faster serialisation and deserialisation than other formats like JSON. It can be ~3-10 times smaller than XML/JSON and anywhere from 20-100 times faster. It is ideal for Mobile apps as we want to transfer a small data payload as quickly as possible. 
 
 It's language-neutral and platform-neutral, meaning you can use it across different programming languages and platforms. If we wanted to create the server in Go, we could regenerate the client and server using the Go plugin for `protoc` and voilà!; we have the start of the Go Server that can communicate with our Dart client. 
 
@@ -155,24 +163,41 @@ Moreover, it offers backward and forward compatibility, ensuring your APIs stay 
 Now that we know what protobufs are, the next step in our secret recipe is changing the type of RPC framework we use. The example above used gRPC, but we will explore Twirp and the advantages it brings to the table.
 
 # 💆 Twirp: gRPC but without the headaches
-As we move forward in our recipe for success, the next ingredient is Twirp, a simple RPC (Remote Procedure Call) framework created by Twitch. Similar to gRPC, it provides a structured way for client and server to communicate, simplifying the creation of services that your Flutter app can seamlessly interact with. But again lets look into why it was created.
-
-## The origin story: Why Twitch Created Twirp
-The best place to understand why Twitch created Twirp, is to look at their 2018 [introduction article for Twirp](https://blog.twitch.tv/en/2018/01/16/twirp-a-sweet-new-rpc-framework-for-go-5f2febbf35f/). You can tell that the main issue they were trying to address was the pain points of gRPC, such as: 
-- Google introducing breaking changes
-- A hard HTTP/2 requirement 
-- Complexities of Error handlings
 
 <ImageCenter
-  alt={`WOW!`}
+  alt={`Twirp!`}
+  src={`/static/images/flutter-twirp-buf-protobuf-1/twirp-logo.avif`}
+  width={1131}
+  height={606}
+/>
+
+As we progress in our recipe for success, the next ingredient is [Twirp](https://github.com/twitchtv/twirp), a simple RPC (Remote Procedure Call) framework created by Twitch. Like gRPC, it provides a structured way for clients and servers to communicate, simplifying the creation of services that your Flutter app can seamlessly interact with. But again, let us look into why it was created.
+
+## The Origin story: Why Twitch Created Twirp
+The best place to understand why Twitch created Twirp is to look at their 2018 [introduction article for Twirp](https://blog.twitch.tv/en/2018/01/16/twirp-a-sweet-new-rpc-framework-for-go-5f2febbf35f/). This article shows that the main reason for Twirp's creation was to address the pain points of gRPC, such as: 
+- Lack of HTTP 1.1 support - Issue with load balancers and other tools
+- Google introducing breaking changes without warning
+- Complexities of having an HTTP/2 handler
+- Difficulties with binary protobuf for debugging - *tho this might be different now that [Postman supports gRPC](https://blog.postman.com/how-we-built-it-grpc-support/)*
+
+So, some issues with gRPC at the time caused Twitch enough pain to create its own RPC framework. Also, from the [tweet](https://twitter.com/fatih/status/1399655049995993091) below from [Fatih Arslan](https://github.com/fatih), that even in 2021, there were some issues with gRPC.
+<ImageCenter
+  alt={`Fatih Arslan showing the success that GitHub had with Twirp!`}
   src={`/static/images/flutter-twirp-buf-protobuf-1/grpc-issues.png`}
   width={1222}
   height={1096}
 />
 <Caption
-  caption={`WOW`}
+  caption={`Fatih Arslan showing the success that GitHub had with Twirp!`}
 />
 
+ I do not have a lot of experience in writing the backend code, but it seems that their has been some pain point in using gRPC. 
+ 
+ One aspect that gRPC has that Twirp doesn't is full-duplex streams, where the server or client can receive or send streams of data. This may be of benefit to some APIs but for our usecase at Lollipop it was not. There is also an alternative that we will show in the conclusion. Now that we know why Twipr was create lets look at what other benfits it brings.
+
+## A quick look at what Twirp is
+
+## Advantages of Using Protobuf
 
 
 
@@ -183,15 +208,6 @@ Garbage and notes below
 
  --------
  --------
-
-### What is Twirp and What are its Uses?
-Twirp is a framework for service-to-service communication, allowing different parts of your application to talk to each other efficiently. It was designed to be simple and straightforward, combining the ease of HTTP/JSON APIs with the advantages of gRPC-like Protobuf services.
-
-### The Role of Twirp in Flutter Mobile Apps Development
-In Flutter development, Twirp plays an essential role in creating efficient, reliable communication between different parts of your application. By using Protobuf to define service APIs, Twirp helps to maintain consistency across your codebase, simplifying the process of service interaction and making your Flutter app more robust and easier to maintain.
-
-### Advantages of Using Twirp
-Twirp's primary advantage lies in its simplicity and efficiency. By utilising Protobuf, it allows for precise service definitions, reducing the risk of communication errors. Twirp supports both Protobuf and JSON serialisation, giving you the flexibility to choose the one that fits your needs best. Additionally, Twirp is language-agnostic, which means you can use it across different programming languages.
 
 
 
@@ -247,7 +263,6 @@ But our journey doesn't end here. In the next part, we will move from theory to 
 # References
 A. Links and references to key resources and further reading
 - [Twirp GitHub](https://github.com/twitchtv/twirp)
-- [Fatih Tweet from Github](https://twitter.com/fatih/status/1399655049995993091)
 - [buf.connect](https://connect.build/)
 - [buf.connect reddit post](https://www.reddit.com/r/golang/comments/v2l7w9/connect_a_better_grpc/)
 - [buf.build introduction blog post for Connect](https://buf.build/blog/connect-a-better-grpc)
