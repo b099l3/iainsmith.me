@@ -1,14 +1,11 @@
 import cn from 'classnames';
-import fetcher from 'lib/fetcher';
-import { Views } from 'lib/types';
 import Link from 'next/link';
-import useSWR from 'swr';
 
 
 
 export default function BlogPostCard({ title, categories, slug, gradient }) {
-  const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
-  const views = data?.total;
+  // const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);
+  // const views = data?.total;
  // const categoriesUI = categories.map((category) => <Category category={category}/>);
 
   return (
@@ -30,7 +27,7 @@ export default function BlogPostCard({ title, categories, slug, gradient }) {
           <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
           {/* {categoriesUI} */}
           </div>
-          <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
+          {/* <div className="flex items-center text-gray-800 dark:text-gray-200 capsize">
             <span className="inline-flex items-center py-1 text-sm leading-none text-gray-800 dark:text-gray-200">
             <svg className="w-4 h-4 mr-2" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -38,7 +35,7 @@ export default function BlogPostCard({ title, categories, slug, gradient }) {
             </svg>
             {views ? new Number(views).toLocaleString() : '–––'}
           </span>
-          </div>
+          </div> */}
         </div>
         </div>
       </a>
