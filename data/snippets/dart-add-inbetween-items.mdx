@@ -11,26 +11,36 @@ This will add items inbetween items in a lists, e.g.:
 Can be useful for adding spaces or seperators inbetween widgets.
 
 ``` dart copy
+extension IterableAddInBetween<T> on Iterable<T> {
+  Iterable<T> addInBetween(
+    T inBetweenElement,
+  ) sync* {
+    var index = 0;
+    for (final element in this) {
+      yield element;
+
+      // Only adding if there is more that one and
+      // it is not the last one
+      if (length > 1 && index != length - 1) {
+        yield inBetweenElement;
+      }
+      index++;
+    }
+  }
+}
+
+```
+
+this extension can then be used like so:
+
+``` dart copy
 import 'package:collection/collection.dart';
 
 final items = ['1','1','1','1','1'];
 
 void main() {  
-  final itemsWith = items.expandIndexed(addInbetween).toList();
+  final itemsWith = items.addInBetween('x').toList();
   print(itemsWith);
-}
-
-Iterable<String> addInbetween(
-  int index, 
-  String item,
-  ) sync* {
-  yield item;
-
-  // Only add a space if there is more that one and
-  // it is not the last one
-  if (items.length > 1 && index != items.length - 1) {
-    yield 'x';
-  }
 }
 
 ```
