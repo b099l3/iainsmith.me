@@ -356,6 +356,20 @@ If you have a project that already uses asdf you can run the following to get th
 asdf install
 ```
 
+If you see this error about jq:
+```bash
+~/.asdf/plugins/flutter/bin/install: line 25: jq: command not found
+~/.asdf/plugins/flutter/bin/install: line 26: jq: command not found
+~/.asdf/plugins/flutter/bin/install: line 27: [: -gt: unary operator expected 
+```
+
+You will need to install jq
+```bash copy
+brew install jq
+```
+
+
+
 </Alert>
 
 ## 👨‍🌾 Final thoughts and recommendations
