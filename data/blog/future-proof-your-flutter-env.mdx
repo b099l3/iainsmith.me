@@ -248,6 +248,11 @@ Asdf has a good [setup guide](http://asdf-vm.com/guide/getting-started.html#_1-i
 brew install asdf
 ```
 
+Also install jq as it is needed for the Flutter asdf plugin
+```bash copy
+brew install jq
+```
+
 The next steps depend on what shell you use. I use [Oh My Zsh](https://ohmyz.sh/), but if you use bash or other, you can check the steps in the [official guide](http://asdf-vm.com/guide/getting-started.html#_3-install-asdf). Add the following to your `.zshrc` file. The order is important:
 
 ``` bash copy
@@ -373,9 +378,6 @@ You will need to install jq
 ```bash copy
 brew install jq
 ```
-
-
-
 </Alert>
 
 ## 👨‍🌾 Final thoughts and recommendations
@@ -384,71 +386,56 @@ I want to run through some of the pros and cons of each of the setups:
 
 ### Standard Install
 
-<ProsCard
-  title="The Standard Install is best suited when you..."
-  pros={[
-    `only want to try out Flutter`,
-    `only have one project`,
-    `want an easy install`
-  ]}
-/>
+<ProsCard title="Standard Install advantages">
+  - Only want to try out Flutter
+  - Only have one project
+  - Want an easy install
+</ProsCard>
 
-<ConsCard
-  title="The Standard Install is difficult to ..."
-  cons={[`change versions`, `track what version multiple projects use`]}
-/>
+<ConsCard title="Standard Install disadvantages">
+  - Change versions
+  - Track what version multiple projects use
+</ConsCard>
 
 ### FVM
 
 This setup would be sufficient if you intend only to install Flutter and don't plan
 to use other tools.
 
-<ProsCard
-  title="FVM has..."
-  pros={[
-    'A slightly more user-friendly installation and operation',
-    'Good Docs for VSCode / Android Studio integration',
-    '[Project flavours](https://fvm.app/docs/guides/project_flavors) - I have never used this but maybe for larger projects',
-    'A [docker image with FVM](https://hub.docker.com/r/leoafarias/fvm)',
-    'A GUI version, [SideKick](https://github.com/leoafarias/sidekick)',
-    'Support for MacOS, Linux and Windows'
-  ]}
-/>
+<ProsCard title="FVM advantages">
+  - A slightly more user-friendly installation and operation
+  - Good Docs for VSCode / Android Studio integration
+  - [Project flavours](https://fvm.app/docs/guides/project_flavors) - I have never used this but maybe for larger projects
+  - A [docker image with FVM](https://hub.docker.com/r/leoafarias/fvm)
+  - A GUI version, [SideKick](https://github.com/leoafarias/sidekick)
+  - Support for MacOS, Linux and Windows
+</ProsCard>
 
-<ConsCard
-  title="Some problems FVM has..."
-  cons={[
-    `Need to add to the .gitignore file to ignore the .fvm folder to your project`,
-    `Not much CI support; need to install FVM manually or use the docker image`,
-    `Need to add fvm to the start of commands`,
-    `Extra commands that you might not used; spawn, flavour, etc`
-  ]}
-/>
+<ConsCard title="FVM disadvantages">
+  - Need to add to the .gitignore file to ignore the .fvm folder to your project
+  - Not much CI support; need to install FVM manually or use the docker image
+  - Need to add fvm to the start of commands
+  - Extra commands that you might not used; spawn, flavour, etc
+</ConsCard>
 
 ### ASDF
 
 If you will use multiple tools and versions and don't want to remember custom commands, this is the setup for you. It is very flexible for future tools, and the version switching using the directory path is lovely and seamless.
 
-<ProsCard
-  title="The reasons you would use ASDF..."
-  pros={[
-    `You can use it for all other tools and libraries - CocoaPods, Ruby, Node, etc`,
-    `Only adds a .tool-versions file to the project`,
-    `Has its own [GitHub action](https://github.com/asdf-vm/actions)`,
-    `Has lots of Docker images for CI/CD`,
-    `Version is tracked by directory using .tool-versions or global`,
-    `No need to change VSCode / Android Studio settings`,
-    `You don't need to learn multiple version managers with custom commands`
-  ]}
-/>
+<ProsCard title="ASDF advantages">
+  - You can use it for all other tools and libraries - CocoaPods, Ruby, Node, etc
+  - Only adds a .tool-versions file to the project
+  - Has its own [GitHub action](https://github.com/asdf-vm/actions)
+  - Has lots of Docker images for CI/CD
+  - Version is tracked by directory using .tool-versions or global
+  - No need to change VSCode / Android Studio settings
+  - You don't need to learn multiple version managers with custom commands
+</ProsCard>
 
-<ConsCard
-  title="Some problems ASDF has..."
-  cons={[
-    `Complicated initial setup with OhMyZsh`,
-    `For Windows you must install using [WSL](https://docs.microsoft.com/en-us/windows/wsl/about)`
-  ]}
-/>
+<ConsCard title="ASDF disadvantages">
+  - Complicated initial setup with OhMyZsh
+  - For Windows you must install using [WSL](https://docs.microsoft.com/en-us/windows/wsl/about)
+</ConsCard>
 
 I would highly recommend using asdf to manage your tools versions.
 
