@@ -3,8 +3,7 @@
 # iainsmith.me
 
 - **Framework**: [Next.js](https://nextjs.org/)
-- **Database**: [PlanetScale](https://planetscale.com)
-- **ORM**: [Prisma](https://prisma.io/)
+- **Database**: [Vercel Storage](https://vercel.com/storage/postgres)
 - **Deployment**: [Vercel](https://vercel.com)
 - **Content**: [MDX](https://github.com/mdx-js/mdx)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
