@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
+    "@vercel/postgres": "^0.7.2",
     "big.js": "6.1.1",
     "classnames": "^2.3.1",
     "contentlayer": "^0.2.9",
