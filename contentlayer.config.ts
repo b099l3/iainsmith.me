@@ -10,8 +10,6 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
-
-
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   wordCount: {
@@ -39,7 +37,7 @@ const Category = defineDocumentType(() => ({
   filePathPattern: 'category/*.mdx',
   contentType: 'mdx',
   fields: {
-    title: { type: 'string', required: true },
+    title: { type: 'string', required: true }
   },
   computedFields
 }));
@@ -53,7 +51,7 @@ const Blog = defineDocumentType(() => ({
     publishedAt: { type: 'string', required: true },
     summary: { type: 'string', required: true },
     image: { type: 'string', required: true },
-    categories:{ type: 'list', of: { type: 'string' }, required: true },
+    categories: { type: 'list', of: { type: 'string' }, required: true }
   },
   computedFields
 }));
@@ -97,10 +95,7 @@ const contentLayerConfig = makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Newsletter, Snippet, OtherPage, Category],
   mdx: {
-    remarkPlugins: [
-      remarkMdxCodeMeta,
-      remarkGfm
-    ],
+    remarkPlugins: [remarkMdxCodeMeta, remarkGfm],
     rehypePlugins: [
       rehypeSlug,
       rehypePrism,
