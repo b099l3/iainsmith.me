@@ -2,6 +2,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "prebuild": "contentlayer build || true",
     "build": "next build",
     "postinstall": "prisma generate",
     "postbuild": "node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs",
