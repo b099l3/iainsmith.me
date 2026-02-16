@@ -22,7 +22,7 @@ export type TopViews = {
 };
 
 export type Views = {
-  total: number;
+  total: string;
 };
 
 export type TopPostViews = {
@@ -58,8 +58,8 @@ export type Strava = {
   recentDistance: number;
   ytdRuns: number;
   ytdDistance: number;
-  totalRuns: number;
-  totalDistance: number;
+  totalRuns?: number;
+  totalDistance?: number;
 };
 
 export type GitHub = {

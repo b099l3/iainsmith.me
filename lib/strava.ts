@@ -5,8 +5,8 @@ const refresh_token = process.env.STRAVA_REFRESH_TOKEN;
 const TOKEN_ENDPOINT = `https://www.strava.com/oauth/token`;
 const ATHLETE_ENDPOINT = `https://www.strava.com/api/v3/athlete`;
 const ATHLETE_STATS_ENDPOINT = (id: string): string => {
-  return `https://www.strava.com/api/v3/athletes/${ id }/stats`;
-}
+  return `https://www.strava.com/api/v3/athletes/${id}/stats`;
+};
 
 const getAccessToken = async () => {
   const response = await fetch(TOKEN_ENDPOINT, {
@@ -22,30 +22,41 @@ const getAccessToken = async () => {
     })
   });
 
-  return response.json();
+  if (!response.ok) {
+    throw new Error('Unable to refresh Strava token');
+  }
+
+  const data = await response.json();
+  if (!data?.access_token) {
+    throw new Error('Invalid Strava token response');
+  }
+
+  return data.access_token as string;
 };
 
-const getAthlete = async () => {
-  const { access_token } = await getAccessToken();
-  
+const getAthlete = async (accessToken: string) => {
   const response = await fetch(ATHLETE_ENDPOINT, {
     headers: {
-      Authorization: `Bearer ${access_token}`
+      Authorization: `Bearer ${accessToken}`
     }
   });
-  
+
+  if (!response.ok) {
+    throw new Error('Unable to fetch Strava athlete');
+  }
+
   return response.json();
 };
 
 export const getAthleteStats = async () => {
-  const { access_token } = await getAccessToken();
-  const { id } = await getAthlete();
+  const accessToken = await getAccessToken();
+  const athlete = await getAthlete(accessToken);
 
-  const url = ATHLETE_STATS_ENDPOINT(id);
-  
+  const url = ATHLETE_STATS_ENDPOINT(String(athlete.id));
+
   return fetch(url, {
     headers: {
-      Authorization: `Bearer ${access_token}`
+      Authorization: `Bearer ${accessToken}`
     }
   });
 };

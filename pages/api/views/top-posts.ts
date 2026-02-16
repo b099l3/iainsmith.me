@@ -1,19 +1,29 @@
 import prisma from 'lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-(BigInt.prototype as any).toJSON = function () {
-  return this.toString();
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const topViews = await prisma.views.findMany({ take: 3, orderBy: {count: 'desc'}, });
+    if (req.method !== 'GET') {
+      res.setHeader('Allow', ['GET']);
+      return res.status(405).json({ message: 'Method not allowed' });
+    }
 
-    return res.status(200).json({ topViews: topViews.map((v) => ({slug: v.slug, views: v.count})) });
+    const topViews = await prisma.views.findMany({
+      take: 3,
+      orderBy: { count: 'desc' }
+    });
+
+    return res.status(200).json({
+      topViews: topViews.map((v) => ({
+        slug: v.slug,
+        views: v.count.toString()
+      }))
+    });
   } catch (e) {
-    return res.status(500).json({ message: e.message });
+    const message = e instanceof Error ? e.message : 'Internal server error';
+    return res.status(500).json({ message });
   }
 }

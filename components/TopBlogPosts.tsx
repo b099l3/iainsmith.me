@@ -14,8 +14,7 @@ export default function TopblogPosts() {
     return <LoadingSpinner/>;
   }
  
-  const topBlogPosts = data.topViews.map(topView => {
-    return allBlogs
+  const blogLookup = allBlogs
     .map((post) => {
       const postCategories = post.categories.map((cat) => {
         return allCategories.find((category) => category.slug === cat);
@@ -25,10 +24,27 @@ export default function TopblogPosts() {
         postCategories: postCategories || [],
       };
     })
-      .map((post) => pick(post, ['slug', 'title', 'categories', 'summary', 'publishedAt', 'postCategories']))
-      .find(blog => blog.slug.toLowerCase() === topView.slug.toLowerCase())
-      
-  });
+    .map((post) =>
+      pick(post, [
+        'slug',
+        'title',
+        'categories',
+        'summary',
+        'publishedAt',
+        'postCategories'
+      ])
+    );
+
+  const topViews = Array.isArray(data.topViews) ? data.topViews : [];
+  const topBlogPosts = topViews
+    .map((topView) => {
+      if (typeof topView?.slug !== 'string') {
+        return null;
+      }
+
+      return blogLookup.find((blog) => blog.slug.toLowerCase() === topView.slug.toLowerCase());
+    })
+    .filter(Boolean);
 
   return (
     <>

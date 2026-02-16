@@ -2,8 +2,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "prebuild": "contentlayer build || true",
-    "build": "next build",
+    "prebuild": "node ./scripts/contentlayer-build.mjs --clearCache",
+    "build": "CONTENTLAYER_PREBUILT=1 next build",
     "postinstall": "prisma generate",
     "postbuild": "node ./scripts/generate-rss.mjs && node ./scripts/generate-sitemap.mjs",
     "dev": "next dev",

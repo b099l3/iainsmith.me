@@ -1,6 +1,7 @@
 import { writeFileSync } from 'fs';
 import { globby } from 'globby';
 import prettier from 'prettier';
+import allBlogs from '../.contentlayer/generated/Blog/_index.json' with { type: 'json' };
 
 async function generate() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
@@ -12,6 +13,11 @@ async function generate() {
     '!pages/api',
     '!pages/404.tsx'
   ]);
+  const draftBlogRoutes = new Set(
+    allBlogs
+      .filter((post) => post.categories.includes('draft'))
+      .map((post) => `/blog/${post.slug}`)
+  );
 
   const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
@@ -25,11 +31,16 @@ async function generate() {
               .replace('.mdx', '');
             const route = path === '/index' ? '' : path;
 
+            return route;
+          })
+          .filter((route) => route !== '/category/draft')
+          .filter((route) => !draftBlogRoutes.has(route))
+          .map((route) => {
             return `
-              <url>
-                  <loc>${`https://iainsmith.me${route}`}</loc>
-              </url>
-            `;
+                <url>
+                    <loc>${`https://iainsmith.me${route}`}</loc>
+                </url>
+              `;
           })
           .join('')}
     </urlset>

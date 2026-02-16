@@ -10,6 +10,10 @@ export default function Post({ post, tweets, categories }: { post: Blog; tweets:
   const Component = useMDXComponent(post.body.code);
   const StaticTweet = ({ id }) => {
     const tweet = tweets.find((tweet) => tweet.id === id);
+    if (!tweet) {
+      return null;
+    }
+
     return <Tweet {...tweet} />;
   };
 
@@ -36,7 +40,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const post = allBlogs.find((post) => post.slug === params.slug);
+  if (!post) {
+    return { notFound: true };
+  }
+
   const categories = allCategories.filter((cat) => post.categories.includes(cat.slug));
-  const tweets = await getTweets(post.tweetIds);
+  const tweets = await getTweets(post.tweetIds).catch(() => []);
   return { props: { post, tweets, categories } };
 }

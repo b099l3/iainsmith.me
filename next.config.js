@@ -3,7 +3,7 @@ const { withContentlayer } = require('next-contentlayer');
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = withContentlayer({
+const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -24,7 +24,12 @@ module.exports = withContentlayer({
       }
     ];
   }
-});
+};
+
+module.exports =
+  process.env.CONTENTLAYER_PREBUILT === '1'
+    ? nextConfig
+    : withContentlayer(nextConfig);
 
 // https://nextjs.org/docs/advanced-features/security-headers
 const ContentSecurityPolicy = `

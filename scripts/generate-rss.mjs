@@ -9,14 +9,16 @@ async function generate() {
     feed_url: 'https://iainsmith.me/feed.xml'
   });
 
-  allBlogs.map((post) => {
+  allBlogs
+    .filter((post) => !post.categories.includes('draft'))
+    .forEach((post) => {
     feed.item({
       title: post.title,
       url: `https://iainsmith.me/blog/${post.slug}`,
       date: post.publishedAt,
       description: post.summary
     });
-  });
+    });
 
   writeFileSync('./public/feed.xml', feed.xml({ indent: true }));
 }

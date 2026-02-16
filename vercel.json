@@ -60,11 +60,11 @@
     },
     {
       "source": "/future-proof-your-flutter-env",
-      "destination": "blog/future-proof-your-flutter-env"
+      "destination": "/blog/future-proof-your-flutter-env"
     },
     {
-      "source": "flutter-hackathon-hack20",
-      "destination": "blog/flutter-hackathon-hack20"
+      "source": "/flutter-hackathon-hack20",
+      "destination": "/blog/flutter-hackathon-hack20"
     }
     ]
 }
