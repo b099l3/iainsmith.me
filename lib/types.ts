@@ -62,6 +62,20 @@ export type Strava = {
   totalDistance?: number;
 };
 
+export type StravaLatestActivity = {
+  id: number;
+  name: string;
+  type: string;
+  distance: number;
+  movingTime: number;
+  elapsedTime: number;
+  totalElevationGain: number;
+  averageSpeed: number;
+  startDate: string;
+  startDateLocal: string;
+  url: string;
+};
+
 export type GitHub = {
   stars: number;
 };

@@ -1,6 +1,7 @@
 import {
   ComputedFields,
   defineDocumentType,
+  defineNestedType,
   makeSource
 } from 'contentlayer/source-files';
 import readingTime from 'reading-time';
@@ -81,9 +82,43 @@ const Snippet = defineDocumentType(() => ({
   computedFields
 }));
 
+const LinkItem = defineNestedType(() => ({
+  name: 'LinkItem',
+  fields: {
+    label: { type: 'string', required: true },
+    url: { type: 'string', required: true },
+    description: { type: 'string', required: false },
+    featured: { type: 'boolean', required: false },
+    active: { type: 'boolean', required: false }
+  }
+}));
+
+const SocialItem = defineNestedType(() => ({
+  name: 'SocialItem',
+  fields: {
+    label: { type: 'string', required: true },
+    url: { type: 'string', required: true },
+    active: { type: 'boolean', required: false }
+  }
+}));
+
+const LinksPage = defineDocumentType(() => ({
+  name: 'LinksPage',
+  filePathPattern: 'links.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    bio: { type: 'string', required: true },
+    avatar: { type: 'string', required: false },
+    links: { type: 'list', of: LinkItem, required: true },
+    socials: { type: 'list', of: SocialItem, required: false }
+  },
+  computedFields
+}));
+
 const OtherPage = defineDocumentType(() => ({
   name: 'OtherPage',
-  filePathPattern: '*.mdx',
+  filePathPattern: '{now,uses}.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true }
@@ -93,7 +128,7 @@ const OtherPage = defineDocumentType(() => ({
 
 const contentLayerConfig = makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Newsletter, Snippet, OtherPage, Category],
+  documentTypes: [Blog, Newsletter, Snippet, LinksPage, OtherPage, Category],
   mdx: {
     remarkPlugins: [remarkMdxCodeMeta, remarkGfm],
     rehypePlugins: [

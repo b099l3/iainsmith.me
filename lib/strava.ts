@@ -4,11 +4,20 @@ const refresh_token = process.env.STRAVA_REFRESH_TOKEN;
 
 const TOKEN_ENDPOINT = `https://www.strava.com/oauth/token`;
 const ATHLETE_ENDPOINT = `https://www.strava.com/api/v3/athlete`;
+const ATHLETE_ACTIVITIES_ENDPOINT = `https://www.strava.com/api/v3/athlete/activities`;
 const ATHLETE_STATS_ENDPOINT = (id: string): string => {
   return `https://www.strava.com/api/v3/athletes/${id}/stats`;
 };
 
+function assertStravaConfig() {
+  if (!client_id || !client_secret || !refresh_token) {
+    throw new Error('Missing Strava credentials');
+  }
+}
+
 const getAccessToken = async () => {
+  assertStravaConfig();
+
   const response = await fetch(TOKEN_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -59,4 +68,43 @@ export const getAthleteStats = async () => {
       Authorization: `Bearer ${accessToken}`
     }
   });
+};
+
+export type StravaActivity = {
+  id: number;
+  name: string;
+  type: string;
+  distance: number;
+  moving_time: number;
+  elapsed_time: number;
+  total_elevation_gain: number;
+  average_speed: number;
+  start_date: string;
+  start_date_local: string;
+};
+
+export const getLatestActivity = async (): Promise<StravaActivity | null> => {
+  const accessToken = await getAccessToken();
+  const url = `${ATHLETE_ACTIVITIES_ENDPOINT}?per_page=1&page=1`;
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error('Unable to fetch Strava activities');
+  }
+
+  const data = await response.json();
+  if (!Array.isArray(data)) {
+    throw new Error('Invalid Strava activities response');
+  }
+
+  if (data.length === 0) {
+    return null;
+  }
+
+  return data[0] as StravaActivity;
 };
