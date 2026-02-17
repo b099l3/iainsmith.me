@@ -34,6 +34,10 @@ export default async function handler(
       elapsedTime: Number(activity.elapsed_time || 0),
       totalElevationGain: Number(activity.total_elevation_gain || 0),
       averageSpeed: Number(activity.average_speed || 0),
+      averageHeartRate: activity.average_heartrate
+        ? Number(activity.average_heartrate)
+        : null,
+      sufferScore: activity.suffer_score ? Number(activity.suffer_score) : null,
       startDate: activity.start_date,
       startDateLocal: activity.start_date_local,
       url: `https://www.strava.com/activities/${activity.id}`

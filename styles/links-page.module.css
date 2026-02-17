@@ -2,8 +2,9 @@
   position: relative;
   min-height: 100vh;
   overflow-x: clip;
-  background: linear-gradient(180deg, #f2eee7 0%, #e8e4dc 100%);
-  font-family: 'Arial Narrow', 'Helvetica Neue', 'Outfit', Arial, sans-serif;
+  background: linear-gradient(180deg, #f4f1eb 0%, #ece8e0 100%);
+  font-family: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 450;
 }
 
 .page::before {
@@ -11,11 +12,11 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.14;
   background-image:
-    linear-gradient(rgba(20, 20, 20, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20, 20, 20, 0.03) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(rgba(20, 20, 20, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 20, 0.02) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
 
 .page::after {
@@ -25,7 +26,7 @@
   pointer-events: none;
   background: radial-gradient(
     circle at 16% 2%,
-    rgba(255, 120, 40, 0.14),
+    rgba(255, 120, 40, 0.08),
     transparent 30%
   );
 }
@@ -36,9 +37,9 @@
 }
 
 .heroPanel {
-  border: 1px solid rgba(24, 24, 27, 0.24);
+  border: 1px solid rgba(24, 24, 27, 0.28);
   background: #fdfcf9;
-  box-shadow: 0 18px 34px rgba(15, 15, 17, 0.08);
+  box-shadow: 0 10px 22px rgba(15, 15, 17, 0.06);
 }
 
 .heroMedia {
@@ -46,6 +47,20 @@
   overflow: hidden;
   aspect-ratio: 4 / 5;
   border-bottom: 1px solid rgba(24, 24, 27, 0.18);
+}
+
+.heroMedia::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.065;
+  background-image:
+    radial-gradient(rgba(17, 17, 17, 0.72) 0.45px, transparent 0.45px),
+    radial-gradient(rgba(17, 17, 17, 0.35) 0.35px, transparent 0.35px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 1px;
 }
 
 .heroImageLink {
@@ -60,30 +75,47 @@
   height: 100%;
   object-fit: cover;
   filter: contrast(1.03) saturate(0.95);
-  animation: heroReveal 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroReveal 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .heroTag {
   position: absolute;
+  z-index: 3;
   top: 0.75rem;
   left: 0.75rem;
   padding: 0.28rem 0.5rem;
   border: 1px solid rgba(245, 245, 244, 0.75);
   background: rgba(17, 17, 17, 0.62);
   color: #fafaf9;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
+  font-weight: 560;
   font-family: 'Victor Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  opacity: 0;
+  transform: scale(0.98) translateY(-2px);
+  animation: stampIn 180ms cubic-bezier(0.22, 1, 0.36, 1) 340ms forwards;
 }
 
 .heroInfo {
   padding: 1rem;
 }
 
+.metaRow {
+  margin: 0 0 0.45rem;
+  color: #63636b;
+  font-size: 0.66rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-weight: 520;
+  font-family: 'Victor Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
 .sectionKicker {
   position: absolute;
+  z-index: 3;
   left: 0.75rem;
   bottom: 0.75rem;
   margin: 0;
@@ -91,19 +123,23 @@
   border: 1px solid rgba(245, 245, 244, 0.76);
   background: rgba(17, 17, 17, 0.62);
   color: #fafaf9;
-  font-size: 1.02rem;
+  font-size: 0.96rem;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-weight: 650;
   font-family: 'Victor Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  opacity: 0;
+  transform: scale(0.98) translateY(2px);
+  animation: stampIn 180ms cubic-bezier(0.22, 1, 0.36, 1) 420ms forwards;
 }
 
 .profileBio {
   margin-top: 0.1rem;
-  color: #52525b;
-  font-size: 0.93rem;
-  line-height: 1.45;
+  color: #4b5563;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  font-weight: 430;
 }
 
 .socialRow {
@@ -122,17 +158,17 @@
 
 .notesCard {
   margin-top: 1rem;
-  border: 1px solid rgba(24, 24, 27, 0.2);
+  border: 1px solid rgba(24, 24, 27, 0.22);
   background: #fdfcf9;
-  box-shadow: 0 16px 30px rgba(15, 15, 17, 0.07);
+  box-shadow: 0 8px 18px rgba(15, 15, 17, 0.05);
   padding: 0.95rem;
 }
 
 .bottomImagePanel {
   margin-top: 1rem;
-  border: 1px solid rgba(24, 24, 27, 0.24);
+  border: 1px solid rgba(24, 24, 27, 0.22);
   background: #fdfcf9;
-  box-shadow: 0 16px 30px rgba(15, 15, 17, 0.07);
+  box-shadow: 0 8px 18px rgba(15, 15, 17, 0.05);
 }
 
 .bottomImageLink {
@@ -146,13 +182,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform-origin: 50% 36%;
+  animation: bottomKenBurns 6s ease-out 1 forwards;
   filter: contrast(1.04) saturate(0.94);
 }
 
 .cardEnter {
   opacity: 0;
   transform: translateY(12px);
-  animation: cardIn 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: cardIn 460ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .socialEnter {
@@ -164,11 +202,18 @@
 @keyframes heroReveal {
   0% {
     opacity: 0;
-    transform: scale(1.02);
+    transform: scale(1.015);
   }
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes stampIn {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
@@ -186,9 +231,23 @@
   }
 }
 
+@keyframes bottomKenBurns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.03);
+  }
+}
+
 @media (max-width: 420px) {
   .heroInfo {
     padding: 0.9rem;
+  }
+
+  .metaRow {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
   }
 
   .sectionKicker {
@@ -205,6 +264,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .heroImage,
+  .heroTag,
+  .sectionKicker,
+  .bottomImage,
   .cardEnter,
   .socialEnter {
     animation: none;

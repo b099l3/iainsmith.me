@@ -1,5 +1,5 @@
 import type { StravaLatestActivity } from 'lib/types';
-import { FiActivity, FiArrowUpRight, FiClock } from 'react-icons/fi';
+import { FiActivity, FiArrowUpRight, FiClock, FiHeart, FiZap } from 'react-icons/fi';
 import type { ReactNode } from 'react';
 import useSWR from 'swr';
 
@@ -20,14 +20,30 @@ type LatestActivityApiResponse = {
 
 async function fetchLatestActivity(
   url: string
-): Promise<StravaLatestActivity | null> {
+): Promise<LatestActivityApiResponse> {
   const response = await fetch(url);
   if (!response.ok) {
-    return null;
+    return { activity: null };
   }
 
-  const data: LatestActivityApiResponse = await response.json();
-  return data.activity || null;
+  return (await response.json()) as LatestActivityApiResponse;
+}
+
+function getUnavailableMessage(apiMessage?: string): string {
+  if (!apiMessage) {
+    return 'Latest activity is temporarily unavailable.';
+  }
+
+  const normalized = apiMessage.toLowerCase();
+  if (normalized.includes('activity:read_permission')) {
+    return 'Reconnect Strava with activity:read permission to show latest activity.';
+  }
+
+  if (normalized.includes('missing strava credentials')) {
+    return 'Missing Strava credentials in env config.';
+  }
+
+  return 'Latest activity is temporarily unavailable.';
 }
 
 function formatDistance(distanceInMeters: number): string {
@@ -90,9 +106,17 @@ function formatDate(dateIso: string): string {
   });
 }
 
+function formatHeartRate(heartRate: number | null): string | null {
+  if (!heartRate || heartRate <= 0) {
+    return null;
+  }
+
+  return `${Math.round(heartRate)} bpm`;
+}
+
 function CardShell({ children }: { children: ReactNode }) {
   return (
-    <section className="mt-3 border border-zinc-900/20 bg-white p-4 shadow-[0_8px_18px_rgba(0,0,0,0.06)]">
+    <section className="mt-3 border border-zinc-900/20 bg-white p-4 shadow-[0_5px_12px_rgba(0,0,0,0.04)]">
       {children}
     </section>
   );
@@ -102,7 +126,7 @@ export default function LatestActivityCard({
   athleteUrl,
   onClick
 }: LatestActivityCardProps) {
-  const { data, error } = useSWR<StravaLatestActivity | null>(
+  const { data, error } = useSWR<LatestActivityApiResponse>(
     '/api/strava/latest-activity',
     fetchLatestActivity,
     {
@@ -125,7 +149,9 @@ export default function LatestActivityCard({
     );
   }
 
-  if (error || data === null) {
+  if (error || !data?.activity) {
+    const unavailableMessage = getUnavailableMessage(data?.message);
+
     return (
       <CardShell>
         <p
@@ -134,13 +160,13 @@ export default function LatestActivityCard({
         >
           [Latest Activity]
         </p>
-        <p className="mt-2 text-sm text-zinc-600">Latest activity is temporarily unavailable.</p>
+        <p className="mt-2 text-sm font-[440] text-zinc-600">{unavailableMessage}</p>
         <a
           href={athleteUrl}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => onClick('strava-profile', athleteUrl)}
-          className="mt-3 inline-flex items-center gap-1 text-sm font-medium uppercase tracking-[0.06em] text-zinc-900 transition-colors hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900"
+          className="mt-3 inline-flex items-center gap-1 text-sm font-[560] uppercase tracking-[0.08em] text-zinc-900 transition-colors hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900"
         >
           [Open Strava Profile]
           <FiArrowUpRight className="h-4 w-4" />
@@ -149,9 +175,15 @@ export default function LatestActivityCard({
     );
   }
 
-  const pace = formatPace(data.type, data.distance, data.movingTime);
-  const dateLabel = formatDate(data.startDateLocal || data.startDate);
-  const activityName = data.name || `${data.type} activity`;
+  const activity = data.activity;
+  const pace = formatPace(activity.type, activity.distance, activity.movingTime);
+  const dateLabel = formatDate(activity.startDateLocal || activity.startDate);
+  const activityName = activity.name || `${activity.type} activity`;
+  const averageHeartRate = formatHeartRate(activity.averageHeartRate);
+  const sufferScore =
+    activity.sufferScore && activity.sufferScore > 0
+      ? Math.round(activity.sufferScore)
+      : null;
 
   return (
     <CardShell>
@@ -163,36 +195,48 @@ export default function LatestActivityCard({
       </p>
 
       <a
-        href={data.url}
+        href={activity.url}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => onClick('latest-strava-activity', data.url)}
-        className="mt-2 block border border-transparent p-1 -m-1 transition-colors hover:border-zinc-900/25 focus:outline-none focus-visible:border-zinc-900/35"
+        onClick={() => onClick('latest-strava-activity', activity.url)}
+        className="mt-2 block border border-transparent p-1 -m-1 transition-colors hover:border-zinc-900/20 focus:outline-none focus-visible:border-zinc-900/35"
       >
-        <p className="text-base font-semibold uppercase tracking-[0.04em] text-zinc-900">
+        <p className="text-base font-[650] uppercase tracking-[0.06em] text-zinc-900">
           {activityName}
         </p>
-        <p className="mt-1 text-sm text-zinc-600">
-          [{data.type}] [{dateLabel}]
+        <p className="mt-1 text-sm font-[440] text-zinc-600">
+          [{activity.type}] [{dateLabel}]
         </p>
 
         <div className="mt-3 flex flex-wrap gap-2">
           <span className="inline-flex items-center gap-1 border border-zinc-900/20 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-800">
             <FiActivity className="h-3.5 w-3.5" />
-            {formatDistance(data.distance)}
+            {formatDistance(activity.distance)}
           </span>
           <span className="inline-flex items-center gap-1 border border-zinc-900/20 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-800">
             <FiClock className="h-3.5 w-3.5" />
-            {formatDuration(data.movingTime)}
+            {formatDuration(activity.movingTime)}
           </span>
           {pace ? (
             <span className="inline-flex items-center border border-zinc-900/20 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-800">
               {pace}
             </span>
           ) : null}
+          {averageHeartRate ? (
+            <span className="inline-flex items-center gap-1 border border-zinc-900/20 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-800">
+              <FiHeart className="h-3.5 w-3.5" />
+              {averageHeartRate}
+            </span>
+          ) : null}
+          {sufferScore ? (
+            <span className="inline-flex items-center gap-1 border border-zinc-900/20 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-800">
+              <FiZap className="h-3.5 w-3.5" />
+              Suffer {sufferScore}
+            </span>
+          ) : null}
         </div>
 
-        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium uppercase tracking-[0.06em] text-zinc-900 transition-colors hover:text-zinc-700">
+        <span className="mt-3 inline-flex items-center gap-1 text-sm font-[560] uppercase tracking-[0.08em] text-zinc-900">
           [View On Strava]
           <FiArrowUpRight className="h-4 w-4" />
         </span>

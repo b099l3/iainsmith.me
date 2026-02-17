@@ -71,6 +71,8 @@ export type StravaLatestActivity = {
   elapsedTime: number;
   totalElevationGain: number;
   averageSpeed: number;
+  averageHeartRate: number | null;
+  sufferScore: number | null;
   startDate: string;
   startDateLocal: string;
   url: string;

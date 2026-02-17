@@ -9,6 +9,27 @@ const ATHLETE_STATS_ENDPOINT = (id: string): string => {
   return `https://www.strava.com/api/v3/athletes/${id}/stats`;
 };
 
+async function formatStravaError(
+  response: Response,
+  fallback: string
+): Promise<string> {
+  try {
+    const data = await response.json();
+    const message = data?.message ? String(data.message) : fallback;
+    const errors = Array.isArray(data?.errors)
+      ? data.errors
+          .map((error: { field?: string; code?: string }) =>
+            [error.field, error.code].filter(Boolean).join(':')
+          )
+          .filter(Boolean)
+      : [];
+
+    return errors.length > 0 ? `${message} (${errors.join(', ')})` : message;
+  } catch {
+    return fallback;
+  }
+}
+
 function assertStravaConfig() {
   if (!client_id || !client_secret || !refresh_token) {
     throw new Error('Missing Strava credentials');
@@ -79,6 +100,8 @@ export type StravaActivity = {
   elapsed_time: number;
   total_elevation_gain: number;
   average_speed: number;
+  average_heartrate?: number;
+  suffer_score?: number;
   start_date: string;
   start_date_local: string;
 };
@@ -94,7 +117,11 @@ export const getLatestActivity = async (): Promise<StravaActivity | null> => {
   });
 
   if (!response.ok) {
-    throw new Error('Unable to fetch Strava activities');
+    const message = await formatStravaError(
+      response,
+      'Unable to fetch Strava activities'
+    );
+    throw new Error(message);
   }
 
   const data = await response.json();
