@@ -16,6 +16,15 @@ const nextConfig = {
     legacyBrowsers: false,
     browsersListForSwc: true
   },
+  async redirects() {
+    return [
+      {
+        source: '/shopping-list',
+        destination: '/shop',
+        permanent: true
+      }
+    ];
+  },
   async headers() {
     return [
       {

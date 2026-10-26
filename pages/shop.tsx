@@ -409,9 +409,38 @@ export default function ShoppingList() {
           </summary>
           <div className={styles.mealGrid}>
             {mealIdeas.map((meal) => (
-              <article key={meal.name}>
+              <article
+                key={meal.name}
+                className={meal.recipe ? styles.recipe : undefined}
+              >
                 <h3>{meal.name}</h3>
                 <p>{meal.ingredients}</p>
+                {meal.recipe && (
+                  <>
+                    <div className={styles.recipeMeta}>
+                      <span>{meal.recipe.servings}</span>
+                      <span>{meal.recipe.time}</span>
+                    </div>
+                    <div className={styles.recipeColumns}>
+                      <section aria-label={`${meal.name} ingredients`}>
+                        <h4>Ingredients</h4>
+                        <ul>
+                          {meal.recipe.ingredients.map((ingredient) => (
+                            <li key={ingredient}>{ingredient}</li>
+                          ))}
+                        </ul>
+                      </section>
+                      <section aria-label={`${meal.name} method`}>
+                        <h4>Method</h4>
+                        <ol>
+                          {meal.recipe.steps.map((step) => (
+                            <li key={step}>{step}</li>
+                          ))}
+                        </ol>
+                      </section>
+                    </div>
+                  </>
+                )}
               </article>
             ))}
           </div>

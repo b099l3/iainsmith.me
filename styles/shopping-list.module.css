@@ -399,6 +399,60 @@
   font-size: 0.85rem;
   margin-top: 0.35rem;
 }
+.recipe {
+  grid-column: 1 / -1;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.25rem;
+  background: var(--paper);
+}
+.recipe h3 {
+  font-size: 1.15rem;
+}
+.recipeMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.recipeMeta span {
+  border-radius: 99px;
+  padding: 0.3rem 0.65rem;
+  background: var(--soft);
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.recipeColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.5rem;
+}
+.recipeColumns h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.recipeColumns ul,
+.recipeColumns ol {
+  padding-left: 1.15rem;
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.recipeColumns ul {
+  list-style: disc;
+}
+.recipeColumns ol {
+  list-style: decimal;
+}
+.recipeColumns li + li {
+  margin-top: 0.65rem;
+}
+.recipeColumns li::marker {
+  color: var(--green);
+  font-weight: 600;
+}
 .meals > p {
   margin-bottom: 0.75rem;
 }
@@ -461,6 +515,13 @@
   }
   .mealGrid {
     grid-template-columns: 1fr;
+  }
+  .recipe {
+    padding: 1rem;
+  }
+  .recipeColumns {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
   .listFooter {
     flex-direction: column;

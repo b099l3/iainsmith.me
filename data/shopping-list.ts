@@ -31,6 +31,13 @@ export const shoppingItems: ShoppingItem[] = [
     group: 'Fruit & vegetables'
   },
   {
+    id: 'cucumber',
+    name: 'Cucumber',
+    quantity: '1',
+    group: 'Fruit & vegetables',
+    note: 'Half for the tuna pasta salad; use the rest in sandwiches or as a side.'
+  },
+  {
     id: 'yogurt',
     name: '0% Greek yogurt',
     quantity: '4 × 500 g tubs',
@@ -76,7 +83,20 @@ export const shoppingItems: ShoppingItem[] = [
     quantity: '500 g',
     group: 'Freezer'
   },
-  { id: 'tuna', name: 'Tuna', quantity: '4 tins', group: 'Cupboard' },
+  {
+    id: 'tuna',
+    name: 'Tuna',
+    quantity: '4 tins',
+    group: 'Cupboard',
+    note: 'Two tins for the pasta salad; keep two for extra meals.'
+  },
+  {
+    id: 'sweetcorn',
+    name: 'Tinned sweetcorn',
+    quantity: '1 small tin (about 200 g)',
+    group: 'Cupboard',
+    note: 'For the tuna pasta salad.'
+  },
   {
     id: 'tomatoes',
     name: 'Chopped tomatoes',
@@ -190,6 +210,13 @@ export const shoppingItems: ShoppingItem[] = [
     checkFirst: true
   },
   {
+    id: 'diluting-juice',
+    name: 'Diluting juice',
+    quantity: '1 bottle',
+    group: 'Cupboard',
+    checkFirst: true
+  },
+  {
     id: 'beans-sausages',
     name: 'Baked beans & sausages',
     quantity: '1 tin',
@@ -275,7 +302,18 @@ export const shoppingItems: ShoppingItem[] = [
   }
 ];
 
-export const mealIdeas = [
+type MealIdea = {
+  name: string;
+  ingredients: string;
+  recipe?: {
+    servings: string;
+    time: string;
+    ingredients: string[];
+    steps: string[];
+  };
+};
+
+export const mealIdeas: MealIdea[] = [
   {
     name: 'Usual breakfast',
     ingredients:
@@ -288,12 +326,50 @@ export const mealIdeas = [
   },
   {
     name: 'Turkey & bean chilli',
-    ingredients:
-      'Mince, kidney beans, a tin of tomatoes, onions and chilli seasoning. Serve with rice; makes two portions.'
+    ingredients: 'A simple one-pan chilli with rice. Beef mince works too.',
+    recipe: {
+      servings: '2 portions',
+      time: 'About 35 minutes',
+      ingredients: [
+        '500 g turkey mince',
+        '150 g frozen diced onions',
+        '1 × 400 g tin chopped tomatoes',
+        '1 × 400 g tin kidney beans, drained and rinsed',
+        'Chilli seasoning — the packet amount for 500 g mince',
+        '1 tsp cooking oil',
+        '100 ml water, plus a splash more if needed',
+        '200 g dry basmati rice, to serve'
+      ],
+      steps: [
+        'Heat the oil in a large saucepan over a medium heat. Add the frozen onions and cook for about 5 minutes, stirring, until softened.',
+        'Add the mince. Break it up with a spoon and cook for 8–10 minutes, stirring regularly, until browned all over.',
+        'Stir in the chilli seasoning, tomatoes, drained kidney beans and water. Bring to a gentle bubble, then simmer for 15–20 minutes. Stir occasionally and add a splash of water if it gets too thick. The mince should be cooked through and the chilli piping hot throughout.',
+        'While the chilli simmers, cook the rice following the packet instructions. Divide the rice and chilli between two portions.'
+      ]
+    }
   },
   {
-    name: 'Tuna tomato pasta',
+    name: 'Tuna pasta salad',
     ingredients:
-      'Tuna, pasta, a tin of tomatoes and vegetables. Four tins of tuna make two substantial portions.'
+      'Tuna, sweetcorn and cucumber with a quick yogurt-and-mayo dressing.',
+    recipe: {
+      servings: '2 portions',
+      time: 'About 20 minutes',
+      ingredients: [
+        '200 g dry pasta',
+        '2 tins tuna (about 100–120 g drained per tin), drained',
+        '1 small tin sweetcorn (about 200 g), drained',
+        '½ cucumber, diced',
+        '2 tbsp mayonnaise',
+        '2 tbsp Greek yogurt',
+        'A small pinch of salt, if needed'
+      ],
+      steps: [
+        'Cook the pasta following the packet instructions. Drain, rinse under cold running water until cool, then drain well again.',
+        'While the pasta cooks, drain the tuna and sweetcorn and dice the cucumber.',
+        'Mix the mayonnaise and yogurt in a large bowl. Flake in the tuna, then add the sweetcorn and cucumber.',
+        'Fold in the cooled pasta until everything is coated. Taste, add a little salt only if needed, and divide into two portions.'
+      ]
+    }
   }
 ];
