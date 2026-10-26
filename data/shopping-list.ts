@@ -210,6 +210,13 @@ export const shoppingItems: ShoppingItem[] = [
     checkFirst: true
   },
   {
+    id: 'diluting-juice',
+    name: 'Diluting juice',
+    quantity: '1 bottle',
+    group: 'Cupboard',
+    checkFirst: true
+  },
+  {
     id: 'beans-sausages',
     name: 'Baked beans & sausages',
     quantity: '1 tin',
