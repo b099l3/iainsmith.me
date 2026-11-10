@@ -1,44 +1,64 @@
 import { writeFileSync } from 'fs';
 import { globby } from 'globby';
 import prettier from 'prettier';
+import { getCanonicalUrl } from '../lib/seo.mjs';
 import allBlogs from '../.contentlayer/generated/Blog/_index.json' with { type: 'json' };
 
 async function generate() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
   const pages = await globby([
-    'pages/*.tsx',
+    'pages/**/*.tsx',
     'data/**/*.mdx',
     '!data/*.mdx',
-    '!pages/_*.tsx',
-    '!pages/api',
-    '!pages/404.tsx'
+    '!pages/**/_*.tsx',
+    '!pages/api/**',
+    '!pages/404.tsx',
+    '!pages/500.tsx'
   ]);
-  const draftBlogRoutes = new Set(
-    allBlogs
-      .filter((post) => post.categories.includes('draft'))
-      .map((post) => `/blog/${post.slug}`)
+  const publishedBlogs = allBlogs.filter(
+    (post) => !post.categories.includes('draft')
   );
+  const publishedBlogRoutes = new Set(
+    publishedBlogs.map((post) => `/blog/${post.slug}`)
+  );
+  const populatedCategoryRoutes = new Set(
+    publishedBlogs.flatMap((post) =>
+      post.categories.map((category) => `/category/${category}`)
+    )
+  );
+
+  const routes = [
+    ...new Set(
+      pages
+        // Dynamic templates are represented by their concrete MDX routes below.
+        .filter((page) => !page.includes('['))
+        .map(
+          (page) =>
+            page
+              .replace(/^(pages|data)/, '')
+              .replace(/\.(tsx|mdx)$/, '')
+              .replace(/\/index$/, '') || '/'
+        )
+        .filter(
+          (route) =>
+            !route.startsWith('/blog/') || publishedBlogRoutes.has(route)
+        )
+        .filter(
+          (route) =>
+            !route.startsWith('/category/') ||
+            populatedCategoryRoutes.has(route)
+        )
+    )
+  ].sort();
 
   const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        ${pages
-          .map((page) => {
-            const path = page
-              .replace('pages', '')
-              .replace('data', '')
-              .replace('.tsx', '')
-              .replace('.mdx', '');
-            const route = path === '/index' ? '' : path;
-
-            return route;
-          })
-          .filter((route) => route !== '/category/draft')
-          .filter((route) => !draftBlogRoutes.has(route))
+        ${routes
           .map((route) => {
             return `
                 <url>
-                    <loc>${`https://iainsmith.me${route}`}</loc>
+                    <loc>${getCanonicalUrl(route)}</loc>
                 </url>
               `;
           })

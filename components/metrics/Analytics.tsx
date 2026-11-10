@@ -14,7 +14,7 @@ export default function AnalyticsCard() {
   }
   
   const pageViews = new Number(data?.total);
-  const link = 'https://iainsmith.me';
+  const link = '/';
 
   return (
     <MetricCard

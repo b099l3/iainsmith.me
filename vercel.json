@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "codex/seo-fixes": false
+    }
+  },
   "cleanUrls": true,
   "headers": [
     {

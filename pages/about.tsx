@@ -23,7 +23,7 @@ export default function About() {
             </li>
             <li>
               Website:{' '}
-              <Link href="https://iainsmith.me">
+              <Link href="/">
                 <a>https://iainsmith.me</a>
               </Link>
             </li>

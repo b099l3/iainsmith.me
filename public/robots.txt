@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://iainsmith.me/sitemap.xml
+Sitemap: https://www.iainsmith.me/sitemap.xml

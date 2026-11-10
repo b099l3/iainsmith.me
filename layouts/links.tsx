@@ -3,6 +3,7 @@ import LinkCard from 'components/links/LinkCard';
 import SocialIconLink from 'components/links/SocialIconLink';
 import type { LinksPage } from 'contentlayer/generated';
 import Head from 'next/head';
+import { getCanonicalUrl, SITE_ORIGIN } from 'lib/seo.mjs';
 import Image from 'next/image';
 import {
   Fragment,
@@ -70,14 +71,14 @@ export default function LinksLayout({
   linksPage,
   onTrackLinkClick
 }: PropsWithChildren<LinksLayoutProps>) {
-  const canonicalUrl = 'https://iainsmith.me/links';
+  const canonicalUrl = getCanonicalUrl('/links');
   const heroImage = '/static/images/links/hero-portrait.jpg';
   const bottomImageWebp = '/static/images/links/bottom-editorial.webp';
   const bottomImageJpg = '/static/images/links/bottom-editorial.jpg';
   const [bottomImageSrc, setBottomImageSrc] = useState(bottomImageWebp);
   const [updatedAt, setUpdatedAt] = useState('--:--');
   const [updatedCity, setUpdatedCity] = useState('LOCAL');
-  const openGraphImage = `https://iainsmith.me${heroImage}`;
+  const openGraphImage = `${SITE_ORIGIN}${heroImage}`;
   const activeLinks = linksPage.links.filter((link) => link.active !== false);
   const activeSocials = (linksPage.socials || []).filter(
     (social) => social.active !== false
