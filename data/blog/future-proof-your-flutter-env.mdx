@@ -43,7 +43,7 @@ installed Flutter three times. I recommend only installing one solution.
 
 ## 🌱 Working with one tool version
 
-Most Flutter developers start with the standard install by following the official Flutter.dev [getting starting guide](https://docs.flutter.dev/get-started/install). This guide installs the most recent stable version of Flutter in a location of your choice, as well as all dependencies needed to run a project. You can build and run Flutter projects with the same version, which is good enough for most developers. The problems begin when you:
+Most Flutter developers start with the standard install by following the official Flutter.dev [getting starting guide](https://docs.flutter.dev/install). This guide installs the most recent stable version of Flutter in a location of your choice, as well as all dependencies needed to run a project. You can build and run Flutter projects with the same version, which is good enough for most developers. The problems begin when you:
 
 - 👯‍♀️ Start working in a team and want a consistent environment
 - 🙏 Start looking into contributing to open source projects that have different Flutter versions
@@ -84,7 +84,7 @@ Managing the versions more efficiently is the second step in the dev environment
 
 ### What is a Version Manager?
 
-Almost all languages and frameworks nowadays have a version manager. If you have used Ruby, you might be familiar with using [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv) or [frum](https://github.com/tako8ki/frum) to manage your versions, or if you use Node, it has a similar list; [nvm](https://github.com/nvm-sh/nvm), [nodist](https://github.com/nullivex/nodist) and [n](https://github.com/tj/n). A Version Manager is usually a CLI tool that will typically control:
+Almost all languages and frameworks nowadays have a version manager. If you have used Ruby, you might be familiar with using [rvm](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv) or [frum](https://github.com/tako8ki/frum) to manage your versions, or if you use Node, it has a similar list; [nvm](https://github.com/nvm-sh/nvm), [nodist](https://github.com/nodists/nodist) and [n](https://github.com/tj/n). A Version Manager is usually a CLI tool that will typically control:
 
 - The download and caching of the tool versions
 - The mechanism to allow for swapping versions
@@ -95,7 +95,7 @@ So with a Version Manager, you could easily swap between all the versions you wa
 
 ### FVM - flutter Version Manager
 
-To install FVM, you can follow the [getting started guide](https://fvm.app/docs/getting_started/installation) on the FVM site. I would follow the standalone setup, as recommended in the guide. I am going to run through how you install on macOS, start by installing FVM with these commands:
+To install FVM, you can follow the [getting started guide](https://fvm.app/documentation/getting-started/installation) on the FVM site. I would follow the standalone setup, as recommended in the guide. I am going to run through how you install on macOS, start by installing FVM with these commands:
 
 ```bash copy
 brew tap leoafarias/fvm
@@ -242,7 +242,7 @@ You first install asdf and then install a plugin for your selected tool. For exa
 />
 <Caption caption={`asdf is where the real magic is ✨`} />
 
-Asdf has a good [setup guide](http://asdf-vm.com/guide/getting-started.html#_1-install-dependencies), and like before; I will show the setup for macOS. Start by installing asdf with this command:
+Asdf has a good [setup guide](https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies), and like before; I will show the setup for macOS. Start by installing asdf with this command:
 
 ```bash copy
 brew install asdf
@@ -253,7 +253,7 @@ Also install jq as it is needed for the Flutter asdf plugin
 brew install jq
 ```
 
-The next steps depend on what shell you use. I use [Oh My Zsh](https://ohmyz.sh/), but if you use bash or other, you can check the steps in the [official guide](http://asdf-vm.com/guide/getting-started.html#_3-install-asdf). Add the following to your `.zshrc` file. The order is important:
+The next steps depend on what shell you use. I use [Oh My Zsh](https://ohmyz.sh/), but if you use bash or other, you can check the steps in the [official guide](https://asdf-vm.com/guide/getting-started.html#_3-install-asdf). Add the following to your `.zshrc` file. The order is important:
 
 ``` bash copy
 # Add this near the top of the file
@@ -269,7 +269,7 @@ unset ASDF_DIR
 source $(brew --prefix asdf)/libexec/asdf.sh
 ```
 
-Now asdf is installed, we can add the [Flutter plugin](https://github.com/oae/asdf-flutter). This plugin includes both Flutter and Dart. There are plugins for most libraries or frameworks, and if there isn't, you can create a plugin. For Flutter, we need to run:
+Now asdf is installed, we can add the [Flutter plugin](https://github.com/asdf-community/asdf-flutter). This plugin includes both Flutter and Dart. There are plugins for most libraries or frameworks, and if there isn't, you can create a plugin. For Flutter, we need to run:
 
 ```bash copy
 asdf plugin-add flutter
@@ -405,7 +405,7 @@ to use other tools.
 <ProsCard title="FVM advantages">
   - A slightly more user-friendly installation and operation
   - Good Docs for VSCode / Android Studio integration
-  - [Project flavours](https://fvm.app/docs/guides/project_flavors) - I have never used this but maybe for larger projects
+  - [Project flavours](https://fvm.app/documentation/guides/project-flavors) - I have never used this but maybe for larger projects
   - A [docker image with FVM](https://hub.docker.com/r/leoafarias/fvm)
   - A GUI version, [SideKick](https://github.com/leoafarias/sidekick)
   - Support for MacOS, Linux and Windows
@@ -434,7 +434,7 @@ If you will use multiple tools and versions and don't want to remember custom co
 
 <ConsCard title="ASDF disadvantages">
   - Complicated initial setup with OhMyZsh
-  - For Windows you must install using [WSL](https://docs.microsoft.com/en-us/windows/wsl/about)
+  - For Windows you must install using [WSL](https://learn.microsoft.com/en-us/windows/wsl/about)
 </ConsCard>
 
 I would highly recommend using asdf to manage your tools versions.

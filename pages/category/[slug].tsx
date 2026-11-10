@@ -18,6 +18,7 @@ export default function CategoryPage({
     <Suspense fallback={null}>
       <Container 
         title={`${category.title} posts by – Iain Smith`}
+        noIndex={category.slug === 'draft' || posts.length === 0}
       >
         <div className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16">  
         <CategoryLayout category={category}>

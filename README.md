@@ -53,6 +53,17 @@ $ yarn dev
 
 Create a `.env` file similar to [`.env.example`](https://github.com/b099l3/iainsmith.me/blob/main/.env.example).
 
+## SEO checks
+
+Run `yarn lint`, `yarn build`, then `yarn test:seo`. The SEO checks inspect the
+production HTML, sitemap and RSS feed for canonical consistency, broken internal
+links and accidental indexing of draft previews or empty categories.
+
+For browser verification, open `/blog?utm_source=test` and an article with a
+tracking query, then follow one of its heading links. The canonical and `og:url`
+should remain the clean `https://www.iainsmith.me` page URL after hydration and
+navigation. Draft URLs remain accessible with `noindex, follow`.
+
 ## Cloning / Forking
 
 Please review the [license](https://github.com/b099l3/iainsmith.me/blob/main/LICENSE.txt) and remove all of my personal information (resume, blog posts, images, etc.).

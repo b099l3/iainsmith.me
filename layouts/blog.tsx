@@ -6,12 +6,13 @@ import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import type { PropsWithChildren } from 'react';
 import { BsArrowUpCircle } from "react-icons/bs";
+import { getCanonicalUrl, SITE_ORIGIN } from 'lib/seo.mjs';
 
 const editUrl = (slug) =>
   `https://github.com/b099l3/iainsmith.me/edit/main/data/blog/${slug}.mdx`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://iainsmith.me/blog/${slug}`
+    getCanonicalUrl(`/blog/${slug}`)
   )}`;
 
 export default function BlogLayout({
@@ -26,9 +27,10 @@ export default function BlogLayout({
     <Container
       title={`${post.title} – Iain Smith`}
       description={post.summary}
-      image={`https://iainsmith.me${post.image}`}
+      image={`${SITE_ORIGIN}${post.image}`}
       date={new Date(post.publishedAt).toISOString()}
       type="article"
+      noIndex={post.categories.includes('draft')}
     >
       <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white">
